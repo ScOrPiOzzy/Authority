@@ -1,4 +1,5 @@
 package com.cas.lock;
+
 import java.security.MessageDigest;
 
 import javax.crypto.KeyGenerator;
@@ -6,13 +7,11 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * 基础加密组件
  * 
- * @author 梁栋
  * @version 1.0
  * @since 1.0
  */
@@ -32,28 +31,6 @@ public abstract class Coder {
 	 * </pre>
 	 */
 	public static final String KEY_MAC = "HmacMD5";
-
-	/**
-	 * BASE64解密
-	 * 
-	 * @param key
-	 * @return
-	 * @throws Exception
-	 */
-	public static byte[] decryptBASE64(String key) throws Exception {
-		return (new BASE64Decoder()).decodeBuffer(key);
-	}
-
-	/**
-	 * BASE64加密
-	 * 
-	 * @param key
-	 * @return
-	 * @throws Exception
-	 */
-	public static String encryptBASE64(byte[] key) throws Exception {
-		return (new BASE64Encoder()).encodeBuffer(key);
-	}
 
 	/**
 	 * MD5加密
@@ -97,7 +74,7 @@ public abstract class Coder {
 		KeyGenerator keyGenerator = KeyGenerator.getInstance(KEY_MAC);
 
 		SecretKey secretKey = keyGenerator.generateKey();
-		return encryptBASE64(secretKey.getEncoded());
+		return Base64.encodeBase64String(secretKey.getEncoded());
 	}
 
 	/**
@@ -110,7 +87,7 @@ public abstract class Coder {
 	 */
 	public static byte[] encryptHMAC(byte[] data, String key) throws Exception {
 
-		SecretKey secretKey = new SecretKeySpec(decryptBASE64(key), KEY_MAC);
+		SecretKey secretKey = new SecretKeySpec(Base64.decodeBase64(key), KEY_MAC);
 		Mac mac = Mac.getInstance(secretKey.getAlgorithm());
 		mac.init(secretKey);
 
