@@ -1,16 +1,9 @@
 package com.cas.lock;
 
-import java.io.DataInputStream;
-import java.io.InputStream;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
-import sun.net.www.protocol.https.Handler;
 
 @Path("/authority")
 public class Authority {
@@ -74,25 +67,6 @@ public class Authority {
 		System.err.println("状态:\r" + status);
 		// assertTrue(status);
 
-	}
-
-	public static void main(String[] args) throws Exception {
-		String addr = "http://localhost:8080/AuthorityWebservice/rest/authority/1232222";
-		URL url = new URL(null, addr, new Handler());
-		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-
-		InputStream is = conn.getInputStream();
-		System.out.println(is);
-
-		int length = conn.getContentLength();
-
-		DataInputStream dis = new DataInputStream(is);
-		byte[] data = new byte[length];
-		dis.readFully(data);
-
-		dis.close();
-		conn.disconnect();
-		System.err.println(new String(data));
 	}
 
 	/**
