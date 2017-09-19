@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -25,8 +24,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
-
-import org.glassfish.jersey.internal.util.collection.ImmutableMultivaluedMap;
 
 @Path("/hello")
 public class HelloService {
@@ -58,7 +55,7 @@ public class HelloService {
 
 	/*
 	 * get {} request
-	 * http://houfeng:8080/jerseyWebServiceTest/services/hello/age/houfeng
+	 * http://localhost:8080/AuthorityWebservice/rest/hello/age/houfeng
 	 */
 	@GET
 	@Path("age/{name}")
@@ -69,7 +66,7 @@ public class HelloService {
 
 	/*
 	 * get {} request
-	 * http://houfeng:8080/jerseyWebServiceTest/services/hello/223232323
+	 * http://localhost:8080/AuthorityWebservice/rest/hello/223232323
 	 */
 	@GET
 	@Path("{id}")
@@ -173,62 +170,62 @@ public class HelloService {
 		// get
 		Response response = resource.request().get();
 		String result = response.readEntity(String.class);
-		System.out.println(result);
+//		System.out.println(result);
 
-		// get param
-		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/sex");
+//		// get param
+//		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/sex");
+//		System.out.println(u);
+//		resource = client.target(u);
+		MultivaluedHashMap<String, String> params = new MultivaluedHashMap<String, String>();
+//		params.add("name", "houfeng");
+//		response = resource.request().post(Entity.form(params));
+//		result = response.readEntity(String.class);
+//		System.out.println(result);
+
+		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/test_get");
 		System.out.println(u);
 		resource = client.target(u);
-		MultivaluedHashMap<String, String> params = new MultivaluedHashMap<String, String>();
+		params = new MultivaluedHashMap<String, String>();
 		params.add("name", "houfeng");
-		response = resource.request().post(Entity.form(params));
-		result = response.readEntity(String.class);
+		result = resource.request().post(Entity.form(params)).readEntity(String.class);
 		System.out.println(result);
 
-//		u = new URI("http://houfeng:8080/jerseyWebServiceTest/services/hello/test_get");
+//		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/test_get2");
 //		System.out.println(u);
 //		resource = client.target(u);
-//		params = new MultivaluedMapImpl();
+//		params = new MultivaluedHashMap<String, String>();
 //		params.add("name", "houfeng");
-//		result = resource.queryParams(params).get(String.class);
+//		result = resource.request().post(Entity.form(params)).readEntity(String.class);
 //		System.out.println(result);
 //
-//		u = new URI("http://houfeng:8080/jerseyWebServiceTest/services/hello/test_get2");
+//		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/test_post1");
 //		System.out.println(u);
 //		resource = client.target(u);
-//		params = new MultivaluedMapImpl();
+//		params = new MultivaluedHashMap<String, String>();
 //		params.add("name", "houfeng");
-//		result = resource.queryParams(params).get(String.class);
+//		result = resource.request(MediaType.APPLICATION_FORM_URLENCODED).post(Entity.form(params)).readEntity(String.class);
 //		System.out.println(result);
 //
-//		u = new URI("http://houfeng:8080/jerseyWebServiceTest/services/hello/test_post1");
+//		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/test_post2");
 //		System.out.println(u);
 //		resource = client.target(u);
-//		params = new MultivaluedMapImpl();
+//		params = new MultivaluedHashMap<String, String>();
 //		params.add("name", "houfeng");
-//		result = resource.type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class, params);
+//		result = resource.request(MediaType.APPLICATION_FORM_URLENCODED).post(Entity.form(params)).readEntity(String.class);
 //		System.out.println(result);
 //
-//		u = new URI("http://houfeng:8080/jerseyWebServiceTest/services/hello/test_post2");
+//		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/test_post3");
 //		System.out.println(u);
 //		resource = client.target(u);
-//		params = new MultivaluedMapImpl();
-//		params.add("name", "houfeng");
-//		result = resource.queryParams(params).type(MediaType.APPLICATION_FORM_URLENCODED).post(String.class);
+//		result = resource.request().post(Entity.text("hello")).readEntity(String.class);
 //		System.out.println(result);
-//
-//		u = new URI("http://houfeng:8080/jerseyWebServiceTest/services/hello/test_post3");
-//		System.out.println(u);
-//		resource = client.target(u);
-//		result = resource.entity("hello").post(String.class);
-//		System.out.println(result);
-//
-//		u = new URI("http://houfeng:8080/jerseyWebServiceTest/services/hello/test_post4");
+
+//		u = new URI("http://localhost:8080/AuthorityWebservice/rest/hello/test_post4");
 //		System.out.println(u);
 //		resource = client.target(u);
 //		String buf = "inputstream content.";
 //		ByteArrayInputStream bais = new ByteArrayInputStream(buf.getBytes());
-//		result = resource.entity(bais).post(String.class);
+//		resource.request().get
 //		System.out.println(result);
 	}
 }
