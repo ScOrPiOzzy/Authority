@@ -33,6 +33,7 @@ final class Consts {
 	public static final Integer AUTHORITY_FILE_UNPITCH = 600;
 
 	public static final String BASE_SERVER_URI = "http://localhost:8080/AuthorityWebservice/rest/authority/";
+
 	public static final String SERVER_URI_REG = "reg";
 	public static final String SERVER_URI_VALIDATE = "validate";
 

@@ -4,7 +4,6 @@
 	<groupId>com.cas.security</groupId>
 	<artifactId>Authority-Client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/com.github.oshi/oshi-core -->
 		<dependency>
@@ -17,7 +16,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -30,7 +28,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-common -->
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
@@ -49,7 +46,6 @@
 			<artifactId>jersey-client</artifactId>
 			<version>2.26</version>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
 		<dependency>
 			<groupId>cglib</groupId>

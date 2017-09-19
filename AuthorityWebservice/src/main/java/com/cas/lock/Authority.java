@@ -1,6 +1,7 @@
 package com.cas.lock;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -85,26 +86,25 @@ public class Authority {
 		boolean avalid = validate(regCode);
 
 		if (!avalid) {
-			return "";
+			return "invalid";
 		}
-		
-		
-		
+
 		return regCode;
 	}
-
+	
 	private boolean validate(String registCode) {
 		if (registCode == null) {
 			return false;
 		}
-		byte[] decrypt = null;
-		try {
-			decrypt = CertificateCoder.decryptByPrivateKey(registCode.getBytes("UTF-8"), keyStorePath, alias, password);
-			String outputStr = new String(decrypt);
-			System.out.println("解密后：" + outputStr);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// byte[] decrypt = null;
+		// try {
+		// decrypt = CertificateCoder.decryptByPrivateKey(registCode.getBytes("UTF-8"),
+		// keyStorePath, alias, password);
+		// String outputStr = new String(decrypt);
+		// System.out.println("解密后：" + outputStr);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 
 		return false;
 	}
