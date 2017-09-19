@@ -7,7 +7,6 @@ public class TimerClock implements Runnable {
 		// Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(command,
 		// initialDelay, delay, unit);
 		// TODO 将当前系统时间保存到文件中
-
 	}
 
 }

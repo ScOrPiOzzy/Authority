@@ -5,6 +5,8 @@ final class Consts {
 	}
 
 	public static final String AUTHORITY_FILE = "./cas.authority";
+	public static final String ACCOUNT_BOOK = "./cas.account";
+
 	/**
 	 * 有效的授权文件。
 	 */
