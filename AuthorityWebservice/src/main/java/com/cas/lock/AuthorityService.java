@@ -9,7 +9,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/authority")
-public class Authority {
+public class AuthorityService {
 
 	private String password = "cas123";
 	private String alias = "www.wxcas.com";
