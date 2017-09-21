@@ -7,6 +7,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.cas.encrypt.KeyStoreUtil;
+import com.cas.encrypt.RSAUtil;
+import com.cas.lock.entiry.AuthorityEntity;
+
 @Path("/authority")
 public class AuthorityService {
 
@@ -16,18 +20,35 @@ public class AuthorityService {
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("reg")
-	@Produces("text/plain;charset=UTF-8")
-	public String generateAuthorityFile(@FormParam("regCode") String regCode) {
-
-		System.out.println("收到客户注册码:" + regCode);
-		// 验证注册码
-		boolean avalid = validate(regCode);
-
-		if (!avalid) {
-			return "invalid";
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public AuthorityEntity generateAuthorityFile(@FormParam("regCode") String regCode) {
+		// 收到客户请求的注册码
+		// String ciphertext = regCode;
+		// System.err.println(ciphertext);
+		try {
+			regCode = RSAUtil.descryptByPrivateKey(
+					KeyStoreUtil.getPrivateKey("D:/cas.keystore", "www.wxcas.com", "cas123", "cas123"), regCode);
+			System.out.println("收到客户注册码:" + regCode);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		return regCode;
+		// 开始验证注册码
+		boolean avalid = validate(regCode);
+
+		AuthorityEntity entity = new AuthorityEntity();
+		entity.setRegCode(regCode);
+		entity.setCpuSer("111");
+		entity.setHddSer("222");
+		entity.setFromDate("333");
+		entity.setEndDate("4444");
+		entity.setProductID("555");
+
+		// if (!avalid) {
+		// return null;
+		// }
+
+		return entity;
 	}
 
 	private boolean validate(String registCode) {

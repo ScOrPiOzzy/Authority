@@ -8,6 +8,8 @@ import java.security.cert.Certificate;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.cas.encrypt.KeyStoreUtil;
+
 /**
  * @author Administrator 使用以下命令生成keystore文件 alias:别名csdn keypass:别名密码 123456
  *         storepass:秘钥库的密码:888999 keytool -genkey -alias csdn -keypass 123456
@@ -31,6 +33,11 @@ public class TestKeyStore {
 		// 读取公钥对象
 		PublicKey publicKey = certificate.getPublicKey();
 		System.out.println("提取的公钥为___:\n" + Base64.encodeBase64String(publicKey.getEncoded()));
+
+		String key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAonlrDPO0urPt/iRdz7h/4mzNhonNHbKReZDt+EBe6+ytzkKQ69ECqia5I1vY0VpVRXik2SorbKneyY70JBCarlkNPOupNpxsEVDE7mp2AW3V+tdGyxS+Iel3KwtCpd5o38/VrS8ODZoRLcOyKFhMcND86opnnhV8TUg3yDDlaUAtTDlOCdRI6GyBC5Q2L4Z9T1LpGjkc/QLWTqFDZZZkE6mgjr1iZWRbXgyA1I5CyC8A5K6VJhL0RrFb4PdLGZ+s9BHSbfO+WSgu6bSDMWeaZ/Y7YoHd99D5S18Yc4WTa+dfG5yXbHPcLZivGGMap1PepiAkjtEkfGomEhSdi5WUAQIDAQAB";
+		PublicKey pubkey = KeyStoreUtil.getPublicKey(key);
+
+		System.out.println(publicKey.equals(pubkey));
 		// 读取私钥对象
 		PrivateKey privateKey = (PrivateKey) keyStore.getKey(alias, keypass.toCharArray());
 		System.out.println("提取的私钥为___:\n" + Base64.encodeBase64String(privateKey.getEncoded()));

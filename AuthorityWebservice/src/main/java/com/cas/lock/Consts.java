@@ -4,7 +4,9 @@ public final class Consts {
 	private Consts() {
 	}
 
+	public static final String RECEIPT_FILE = "./cas.receipt";
 	public static final String AUTHORITY_FILE = "./cas.authority";
+	public static final String KYESTORE_FILE = "./cas.cer";
 	public static final String ACCOUNT_BOOK = "./cas.account";
 
 	/**
