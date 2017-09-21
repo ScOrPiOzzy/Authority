@@ -22,6 +22,7 @@ import org.apache.commons.io.IOUtils;
 import com.cas.encrypt.KeyStoreUtil;
 import com.cas.encrypt.RSAUtil;
 import com.cas.lock.Consts;
+import com.cas.lock.EntityUtil;
 import com.cas.lock.entiry.AuthorityEntity;
 
 import javafx.event.ActionEvent;
@@ -78,24 +79,8 @@ public class RegisterEventHandler implements EventHandler<ActionEvent> {
 			// 用户收到的证书信息：
 			System.out.println("用户收到的证书信息：" + entity);
 
-			// 4-1、保存证书
-			try (PrintWriter out = new PrintWriter(new FileOutputStream(authorityFile));) {
-				// 会自动关闭流
-				// 证书基本内容
-				out.println("公司：无锡凯数科技有限公司");
-				out.println("产品注册码：" + entity.getRegCode());
-				out.println("硬件A：" + entity.getHddSer());
-				out.println("硬件B：" + entity.getCpuSer());
-				out.println("产品代码：" + entity.getProductID());
-				out.println("生产日期：" + entity.getFromDate());
-				out.println("有效期至：" + entity.getEndDate());
-				// siga:
-				out.println("SIGN-A：" + DigestUtils.sha256Hex(entity.toString()));
-				// 2、保存公司公钥
-				out.println("PUB-KEY：" + Base64.encodeBase64String(pubKey.getEncoded()));
-			} catch (IOException e) {
-				throw new RuntimeException("");
-			}
+			EntityUtil.saveEntity(entity, authorityFile);
+
 			// 4-2、保存收据receipt
 			File receipt = new File(Consts.RECEIPT_FILE);
 			try (PrintWriter out = new PrintWriter(new FileOutputStream(receipt));) {

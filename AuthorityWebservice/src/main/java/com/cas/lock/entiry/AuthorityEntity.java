@@ -13,6 +13,8 @@ public class AuthorityEntity {
 	private String fromDate;
 	// 过期时间(格式：yyyy-MM-dd)
 	private String endDate;
+	// 数字签名
+	private String sign;
 
 	public String getRegCode() {
 		return regCode;
@@ -60,6 +62,14 @@ public class AuthorityEntity {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getSign() {
+		return sign;
+	}
+
+	public void setSign(String sign) {
+		this.sign = sign;
 	}
 
 	@Override
