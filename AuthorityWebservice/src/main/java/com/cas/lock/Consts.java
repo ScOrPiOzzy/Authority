@@ -1,6 +1,6 @@
 package com.cas.lock;
 
-final class Consts {
+public final class Consts {
 	private Consts() {
 	}
 

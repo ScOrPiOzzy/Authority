@@ -25,7 +25,7 @@ import org.apache.commons.codec.binary.Base64;
  * @version 1.0
  * @since 1.0
  */
-public class CertificateUtil extends Coder {
+public class CertificateUtil {
 	/**
 	 * Java密钥库(Java Key Store，JKS)KEY_STORE
 	 */
