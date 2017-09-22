@@ -2,17 +2,27 @@ package com.cas.lock;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.cas.encrypt.KeyStoreUtil;
-import com.cas.encrypt.RSAUtil;
+import com.cas.lock.encrypt.KeyStoreUtil;
+import com.cas.lock.encrypt.RSAUtil;
 import com.cas.lock.entiry.AuthorityEntity;
 
 @Path("/authority")
 public class AuthorityService {
+
+	/**
+	 * 生成证书
+	 */
+	@GET
+	@Path("time")
+	public Long getServerTime() {
+		return System.currentTimeMillis();
+	}
 
 	/**
 	 * 生成证书
@@ -27,22 +37,26 @@ public class AuthorityService {
 		// System.err.println(ciphertext);
 		try {
 			regCode = RSAUtil.descryptByPrivateKey(
-					KeyStoreUtil.getPrivateKey("D:/cas.keystore", "www.wxcas.com", "cas123", "cas123"), regCode);
+					KeyStoreUtil.getPrivateKey(AuthorityService.class.getResourceAsStream(Consts.FILE_KYESTORE),
+							"www.wxcas.com", "cas123", "cas123"),
+					regCode);
 			System.out.println("收到客户注册码:" + regCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		// 开始验证注册码
-		boolean avalid = validate(regCode);
+		boolean valid = validate(regCode);
 
 		AuthorityEntity entity = new AuthorityEntity();
 		entity.setRegCode(regCode);
-		entity.setCpuSer("111");
-		entity.setHddSer("222");
-		entity.setFromDate("333");
-		entity.setEndDate("4444");
+		// 客户端记录硬件信息
+		// entity.setCpuSer("111");
+		// entity.setHddSer("222");
+		entity.setFromDate("2017-09-22");
+		entity.setEndDate("2018-09-22");
 		entity.setProductID("555");
+		entity.setNode(5);
 
 		// if (!avalid) {
 		// return null;

@@ -1,7 +1,7 @@
 package com.cas.lock;
 
-import com.cas.encrypt.KeyStoreUtil;
-import com.cas.encrypt.RSAUtil;
+import com.cas.lock.encrypt.KeyStoreUtil;
+import com.cas.lock.encrypt.RSAUtil;
 
 public class TestDemo {
 

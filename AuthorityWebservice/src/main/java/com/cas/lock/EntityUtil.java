@@ -13,7 +13,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import com.cas.lock.entiry.AuthorityEntity;
 
-public class EntityUtil {
+public final class EntityUtil {
+	private EntityUtil() {
+	}
+
 	public static AuthorityEntity parseEntity(File file) {
 		AuthorityEntity entity = new AuthorityEntity();
 		try (BufferedReader br = new BufferedReader(
@@ -21,19 +24,21 @@ public class EntityUtil {
 			// 公司信息
 			br.readLine();
 			// 产品注册码
-			entity.setRegCode(br.readLine());
+			entity.setRegCode(br.readLine().split("：")[1]);
 			// 硬件A序列号
-			entity.setHddSer(br.readLine());
+			entity.setHddSer(br.readLine().split("：")[1]);
 			// 硬件B序列号
-			entity.setCpuSer(br.readLine());
+			entity.setCpuSer(br.readLine().split("：")[1]);
 			// 产品代号
-			entity.setProductID(br.readLine());
+			entity.setProductID(br.readLine().split("：")[1]);
 			// 生产日期
-			entity.setFromDate(br.readLine());
+			entity.setFromDate(br.readLine().split("：")[1]);
 			// 结束日期
-			entity.setEndDate(br.readLine());
+			entity.setEndDate(br.readLine().split("：")[1]);
+			// 节点数
+			entity.setNode(Integer.parseInt(br.readLine().split("：")[1]));
 			// 数字签名
-			entity.setSign(br.readLine());
+			entity.setSign(br.readLine().split("：")[1]);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,6 +57,7 @@ public class EntityUtil {
 			out.println("产品代码：" + entity.getProductID());
 			out.println("生产日期：" + entity.getFromDate());
 			out.println("有效期至：" + entity.getEndDate());
+			out.println("节点数：" + entity.getNode());
 			// siga:
 			out.println("SIGN-A：" + DigestUtils.sha256Hex(entity.toString()));
 			// // 2、保存公司公钥

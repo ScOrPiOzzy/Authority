@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.Date;
 import java.util.concurrent.Callable;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -14,8 +13,6 @@ import org.apache.commons.io.IOUtils;
 import com.cas.lock.entiry.AuthorityEntity;
 
 import oshi.SystemInfo;
-import oshi.hardware.HWDiskStore;
-import oshi.hardware.HWPartition;
 
 /**
  * 验证证书的有效性
@@ -25,9 +22,17 @@ import oshi.hardware.HWPartition;
  */
 public class ValidateThread implements Callable<Integer> {
 
+	private String productID;
+
+	private AuthorityEntity entity;
+
+	public ValidateThread(String productID) {
+		this.productID = productID;
+	}
+
 	@Override
 	public Integer call() throws Exception {
-		File authorityFile = new File(Consts.AUTHORITY_FILE);
+		File authorityFile = new File(Consts.FILE_AUTHORITY);
 		// 判断授权文件是否存在
 		if (!authorityFile.exists()) {
 			return Consts.AUTHORITY_FILE_NOT_FOUNT;
@@ -37,7 +42,7 @@ public class ValidateThread implements Callable<Integer> {
 		String md5 = DigestUtils.md5Hex(IOUtils.toByteArray(fis));
 		fis.close();
 		// 检查授权文件MD5，判断是否被篡改。
-		File receiptFile = new File(Consts.RECEIPT_FILE);
+		File receiptFile = new File(Consts.FILE_RECEIPT);
 		try (BufferedReader br = new BufferedReader(
 				new InputStreamReader(new BufferedInputStream(new FileInputStream(receiptFile))))) {
 
@@ -55,7 +60,7 @@ public class ValidateThread implements Callable<Integer> {
 			}
 		}
 
-		AuthorityEntity entity = EntityUtil.parseEntity(authorityFile);
+		entity = EntityUtil.parseEntity(authorityFile);
 		// 验证文件的数字签名
 		String sign = DigestUtils.sha256Hex(entity.toString());
 		if (!sign.equals(entity.getSign())) {
@@ -64,57 +69,30 @@ public class ValidateThread implements Callable<Integer> {
 		}
 		// 从本机获取硬盘信息
 		SystemInfo systemInfo = new SystemInfo();
-		String hddSer = getHDDSer(systemInfo);
+		String hddSer = HardDriveUtil.getHDDSer(systemInfo);
 		// 从授权文件中获取硬盘信息
 		String hddSerA = entity.getHddSer();
 		if (!hddSerA.equals(hddSer)) {
 			return Consts.AUTHORITY_FILE_COPY;
 		}
 		// 从本机获取CPU信息
-		String cpuSer = getCPUSer(systemInfo);
+		String cpuSer = HardDriveUtil.getCPUSer(systemInfo);
 		// 从授权文件中获取CPU信息
 		String cpuSerA = entity.getCpuSer();
 		if (!cpuSerA.equals(cpuSer)) {
 			return Consts.AUTHORITY_FILE_COPY;
 		}
-//		// 获取本机时间
-//		Date d = new Date();
-//		// 读取授权周期
-//		Date dA = new Date();
-//		// 验证日期
-//		if (d.after(dA)) {
-//			return Consts.AUTHORITY_FILE_EXPIRED;
-//		}
 		// 获取产品ID
-		String productId = "";
 		// 读取授权产品ID
 		String productIdA = entity.getProductID();
 		// 验证产品ID
-		if (productIdA.equals(productId)) {
+		if (!productIdA.equals(productID)) {
 			return Consts.AUTHORITY_FILE_UNPITCH;
 		}
 		return Consts.AUTHORITY_FILE_AVAILABLE;
 	}
 
-	private String getHDDSer(SystemInfo systemInfo) {
-		HWDiskStore[] diskStores = systemInfo.getHardware().getDiskStores();
-		String result = null;
-
-		for (int i = 0; i < diskStores.length; i++) {
-			HWPartition[] partitions = diskStores[i].getPartitions();
-			for (int j = 0; j < partitions.length; j++) {
-				char p = partitions[j].getMountPoint().charAt(0);
-				if ('C' == p) {
-					result = diskStores[i].getSerial();
-					break;
-				}
-			}
-		}
-		return result;
+	public AuthorityEntity getEntity() {
+		return entity;
 	}
-
-	private String getCPUSer(SystemInfo systemInfo) {
-		return systemInfo.getHardware().getProcessor().getProcessorID();
-	}
-
 }

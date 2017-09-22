@@ -1,6 +1,15 @@
 package com.cas.lock.entiry;
 
-public class AuthorityEntity {
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class AuthorityEntity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8388545476374249262L;
 	// 注册码
 	private String regCode;
 	// （系统盘）硬盘序列号
@@ -15,6 +24,8 @@ public class AuthorityEntity {
 	private String endDate;
 	// 数字签名
 	private String sign;
+
+	private int node;
 
 	public String getRegCode() {
 		return regCode;
@@ -64,6 +75,14 @@ public class AuthorityEntity {
 		this.endDate = endDate;
 	}
 
+	public int getNode() {
+		return node;
+	}
+
+	public void setNode(int node) {
+		this.node = node;
+	}
+
 	public String getSign() {
 		return sign;
 	}
@@ -81,6 +100,7 @@ public class AuthorityEntity {
 				+ "产品代码： " + productID + " \r\n" //
 				+ "起始日期： " + fromDate + " \r\n" //
 				+ "失效日期： " + endDate + " \r\n"//
+				+ "节点数： " + node + " \r\n"//
 				+ "---结束授权证书信息---";//
 	}
 

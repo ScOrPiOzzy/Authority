@@ -8,7 +8,7 @@ import java.security.cert.Certificate;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.cas.encrypt.KeyStoreUtil;
+import com.cas.lock.encrypt.KeyStoreUtil;
 
 /**
  * @author Administrator 使用以下命令生成keystore文件 alias:别名csdn keypass:别名密码 123456
