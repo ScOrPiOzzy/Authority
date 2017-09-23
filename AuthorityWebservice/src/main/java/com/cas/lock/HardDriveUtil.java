@@ -1,28 +1,27 @@
 package com.cas.lock;
 
 import oshi.SystemInfo;
-import oshi.hardware.HWDiskStore;
-import oshi.hardware.HWPartition;
+import oshi.software.os.OSFileStore;
 
 public final class HardDriveUtil {
 	private HardDriveUtil() {
 	}
 
-	public static String getHDDSer(SystemInfo systemInfo) {
-		HWDiskStore[] diskStores = systemInfo.getHardware().getDiskStores();
-		String result = null;
-
-		for (int i = 0; i < diskStores.length; i++) {
-			HWPartition[] partitions = diskStores[i].getPartitions();
-			for (int j = 0; j < partitions.length; j++) {
-				char p = partitions[j].getMountPoint().charAt(0);
-				if ('C' == p) {
-					result = diskStores[i].getSerial();
-					break;
-				}
+	public static String getPortitionId(SystemInfo systemInfo, char mount) {
+		OSFileStore[] fileStore = systemInfo.getOperatingSystem().getFileSystem().getFileStores();
+		String partitionID = null;
+		for (int i = 0; i < fileStore.length; i++) {
+			if (fileStore[i].getMount().charAt(0) == mount) {
+				partitionID = fileStore[i].getUUID();
+				break;
 			}
 		}
-		return result;
+		if (partitionID == null) {
+			throw new RuntimeException("您的系统中并没有发现" + mount + "盘");
+		} else {
+			System.out.println("找到" + mount + "盘， UUID为：" + partitionID);
+		}
+		return partitionID;
 	}
 
 	public static String getCPUSer(SystemInfo systemInfo) {

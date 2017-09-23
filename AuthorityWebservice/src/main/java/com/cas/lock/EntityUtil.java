@@ -25,10 +25,6 @@ public final class EntityUtil {
 			br.readLine();
 			// 产品注册码
 			entity.setRegCode(br.readLine().split("：")[1]);
-			// 硬件A序列号
-			entity.setHddSer(br.readLine().split("：")[1]);
-			// 硬件B序列号
-			entity.setCpuSer(br.readLine().split("：")[1]);
 			// 产品代号
 			entity.setProductID(br.readLine().split("：")[1]);
 			// 生产日期
@@ -37,6 +33,10 @@ public final class EntityUtil {
 			entity.setEndDate(br.readLine().split("：")[1]);
 			// 节点数
 			entity.setNode(Integer.parseInt(br.readLine().split("：")[1]));
+			// 硬件A序列号
+			entity.setHddSer(br.readLine().split("：")[1]);
+			// 硬件B序列号
+			entity.setCpuSer(br.readLine().split("：")[1]);
 			// 数字签名
 			entity.setSign(br.readLine().split("：")[1]);
 		} catch (Exception e) {
@@ -52,14 +52,14 @@ public final class EntityUtil {
 			// 证书基本内容
 			out.println("公司：无锡凯数科技有限公司");
 			out.println("产品注册码：" + entity.getRegCode());
-			out.println("硬件A：" + entity.getHddSer());
-			out.println("硬件B：" + entity.getCpuSer());
 			out.println("产品代码：" + entity.getProductID());
 			out.println("生产日期：" + entity.getFromDate());
 			out.println("有效期至：" + entity.getEndDate());
 			out.println("节点数：" + entity.getNode());
+			out.println("SIGN-A：" + entity.getHddSer());
+			out.println("SIGN-B：" + entity.getCpuSer());
 			// siga:
-			out.println("SIGN-A：" + DigestUtils.sha256Hex(entity.toString()));
+			out.println("SIGN-C：" + DigestUtils.sha256Hex(entity.toString()));
 			// // 2、保存公司公钥
 			// out.println("PUB-KEY：" + Base64.encodeBase64String(pubKey.getEncoded()));
 		} catch (IOException e) {

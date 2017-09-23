@@ -85,7 +85,11 @@ public class RegisterEventHandler implements EventHandler<ActionEvent> {
 
 			// 记录硬件信息
 			SystemInfo info = new SystemInfo();
-			entity.setHddSer(HardDriveUtil.getHDDSer(info));
+			// 从本机获取硬盘信息
+			SystemInfo systemInfo = new SystemInfo();
+			String relativelyPath = System.getProperty("user.dir");
+			String partitionID = HardDriveUtil.getPortitionId(systemInfo, relativelyPath.charAt(0));
+			entity.setHddSer(partitionID);
 			entity.setCpuSer(HardDriveUtil.getCPUSer(info));
 
 			EntityUtil.saveEntity(entity, authorityFile);

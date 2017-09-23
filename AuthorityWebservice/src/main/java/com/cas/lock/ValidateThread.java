@@ -69,7 +69,11 @@ public class ValidateThread implements Callable<Integer> {
 		}
 		// 从本机获取硬盘信息
 		SystemInfo systemInfo = new SystemInfo();
-		String hddSer = HardDriveUtil.getHDDSer(systemInfo);
+		String relativelyPath = System.getProperty("user.dir");
+		String hddSer = HardDriveUtil.getPortitionId(systemInfo, relativelyPath.charAt(0));
+		if (hddSer == null) {
+			throw new RuntimeException("读取信息失败！");
+		}
 		// 从授权文件中获取硬盘信息
 		String hddSerA = entity.getHddSer();
 		if (!hddSerA.equals(hddSer)) {
