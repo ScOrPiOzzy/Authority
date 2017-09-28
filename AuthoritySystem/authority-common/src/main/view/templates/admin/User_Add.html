@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>添加客户信息</title>
+</head>
+<body>
+	<form th:action="addUser" method="post">
+		ID: <input type="text" name="id" /> <br />
+		UNIT: <input type="text" name="unit" /> <br />
+		<input type="submit"
+			text="提交" />
+	</form>
+</body>
+</html>

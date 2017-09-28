@@ -1,0 +1,27 @@
+package com.cas.authority.test;
+
+import javax.annotation.Resource;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.cas.authority.SpringBootMain;
+import com.cas.authority.service.IUserService;
+
+@SpringBootTest(classes = SpringBootMain.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+public class TestCustomerService {
+
+	@Resource
+	private IUserService customerService;
+
+	@Test
+	public void testCustomerList() throws Exception {
+		System.out.println(customerService.getUserList());
+	}
+
+}
