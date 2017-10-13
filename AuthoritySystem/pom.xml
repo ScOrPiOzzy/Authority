@@ -25,6 +25,13 @@
 				<version>1.5.7.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
+
+				<exclusions>
+					<exclusion>
+						<groupId>net.java.dev.jna</groupId>
+						<artifactId>jna-platform</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
@@ -48,7 +55,7 @@
 
 	<modules>
 		<module>authority-api</module>
-		<module>authority-client</module>
+<!-- 		<module>authority-client</module> -->
 		<module>authority-provider</module>
 	</modules>
 
