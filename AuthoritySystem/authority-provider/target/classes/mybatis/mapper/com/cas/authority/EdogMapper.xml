@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cas.authority.dao.EdogMapper">
+  <resultMap id="BaseResultMap" type="com.cas.authority.model.Edog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="serial" jdbcType="VARCHAR" property="serial" />
+    <result column="node" jdbcType="INTEGER" property="node" />
+    <result column="createTime" jdbcType="DATE" property="createtime" />
+    <result column="endDate" jdbcType="DATE" property="enddate" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+  </resultMap>
+</mapper>
