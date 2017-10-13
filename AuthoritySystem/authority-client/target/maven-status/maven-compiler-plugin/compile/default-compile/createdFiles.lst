@@ -1,6 +1,0 @@
-com\cas\authority\validate\ValidateThread.class
-com\cas\authority\util\HardDriveUtil.class
-com\cas\authority\action\RegisterAction.class
-com\cas\authority\validate\TimerClock.class
-com\cas\authority\validate\UpdateThread.class
-com\cas\authority\SimMain.class
