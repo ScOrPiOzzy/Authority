@@ -47,7 +47,7 @@
 	</dependencyManagement>
 
 	<modules>
-		<module>authority-common</module>
+		<module>authority-api</module>
 		<module>authority-client</module>
 		<module>authority-provider</module>
 	</modules>
