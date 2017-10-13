@@ -4,7 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cas.authority.Consts;
 import com.cas.authority.core.AbstractBaseController;
+import com.cas.authority.util.KeyStoreUtil;
+import com.cas.authority.util.RSAUtil;
 import com.cas.authority.vo.AuthorityEntity;
 
 @Controller
@@ -16,17 +19,18 @@ public class RegistController extends AbstractBaseController {
 	@RequestMapping(path = "regist")
 	@ResponseBody
 	public AuthorityEntity generateAuthorityFile(String regCode) {
-		// 收到客户请求的注册码
+		System.out.println("RegistController.generateAuthorityFile()");
+//		收到客户请求的注册码
 //		String ciphertext = regCode;
 //		System.err.println(ciphertext);
 		try {
-//			regCode = RSAUtil.descryptByPrivateKey(KeyStoreUtil.getPrivateKey(getClass().getClassLoader().getResourceAsStream(Consts.FILE_KYESTORE), "www.wxcas.com", "cas123", "cas123"), regCode);
+			regCode = RSAUtil.descryptByPrivateKey(KeyStoreUtil.getPrivateKey(getClass().getClassLoader().getResourceAsStream(Consts.FILE_KYESTORE), "www.wxcas.com", "cas123", "cas123"), regCode);
 			System.out.println("收到客户注册码:" + regCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// 开始验证注册码
+//		 开始验证注册码
 		boolean valid = validate(regCode);
 
 		AuthorityEntity entity = new AuthorityEntity();

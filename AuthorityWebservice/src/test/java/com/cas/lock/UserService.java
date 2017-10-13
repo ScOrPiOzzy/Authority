@@ -21,7 +21,6 @@ public class UserService {
 
 	/**
 	 * 增加
-	 * 
 	 * @param user
 	 */
 	@POST
@@ -33,7 +32,6 @@ public class UserService {
 
 	/**
 	 * 删除
-	 * 
 	 * @param id
 	 */
 	@DELETE
@@ -46,7 +44,6 @@ public class UserService {
 
 	/**
 	 * 修改
-	 * 
 	 * @param user
 	 */
 	@PUT
@@ -58,7 +55,6 @@ public class UserService {
 
 	/**
 	 * 根据id查询
-	 * 
 	 * @param id
 	 * @return
 	 */
@@ -73,7 +69,6 @@ public class UserService {
 
 	/**
 	 * 查询所有
-	 * 
 	 * @return
 	 */
 	@GET

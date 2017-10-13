@@ -9,7 +9,6 @@ import javax.ws.rs.core.Response;
 
 /**
  * 用户客户端，用来测试资源
- * 
  * @author waylau.com 2014-3-18
  */
 public class UserClient {

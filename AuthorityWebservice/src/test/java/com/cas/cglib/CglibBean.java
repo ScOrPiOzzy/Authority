@@ -30,11 +30,8 @@ public class CglibBean {
 
 	/**
 	 * 给bean属性赋值
-	 * 
-	 * @param property
-	 *            属性名
-	 * @param value
-	 *            值
+	 * @param property 属性名
+	 * @param value 值
 	 */
 	public void setValue(String property, Object value) {
 		beanMap.put(property, value);
@@ -42,9 +39,7 @@ public class CglibBean {
 
 	/**
 	 * 通过属性名得到属性值
-	 * 
-	 * @param property
-	 *            属性名
+	 * @param property 属性名
 	 * @return 值
 	 */
 	public Object getValue(String property) {
@@ -53,7 +48,6 @@ public class CglibBean {
 
 	/**
 	 * 得到该实体bean对象
-	 * 
 	 * @return
 	 */
 	public Object getObject() {

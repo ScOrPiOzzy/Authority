@@ -1,6 +1,6 @@
 package com.cas.encrypt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;

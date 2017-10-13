@@ -16,7 +16,6 @@ public class UserResource {
 
 	/**
 	 * 查询所有
-	 * 
 	 * @return
 	 */
 	@GET

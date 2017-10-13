@@ -3,5 +3,4 @@ package com.cas.authority.dao;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ProductMapper  {
-}
+public interface ProductMapper {}

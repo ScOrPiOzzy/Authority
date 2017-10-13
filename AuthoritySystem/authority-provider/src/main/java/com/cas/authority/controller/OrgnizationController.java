@@ -1,4 +1,5 @@
 package com.cas.authority.controller;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cas.authority.service.OrgnizationService;
 
 /**
-* Created by CodeGenerator on 2017/10/13.
-*/
+ * Created by CodeGenerator on 2017/10/13.
+ */
 @RestController
 @RequestMapping("/orgnization")
 public class OrgnizationController {
-    @Resource
-    private OrgnizationService orgnizationService;
+	@Resource
+	private OrgnizationService orgnizationService;
 
 //    @PostMapping("/add")
 //    public Result add(Orgnization orgnization) {

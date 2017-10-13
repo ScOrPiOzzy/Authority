@@ -20,9 +20,7 @@ import com.cas.lock.encrypt.AESUtil;
  * 软件运行时，记录时间。<br>
  * 运行过程中，可以半个小时记录一次。<br>
  * 软件关闭时，记录时间。<br>
- * 
  * @author admin
- *
  */
 public class TimerClock implements Runnable {
 	private Date fromDate;

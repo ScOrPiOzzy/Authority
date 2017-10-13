@@ -25,7 +25,6 @@ public final class RSAUtil {
 
 	/**
 	 * 使用公钥加密数据
-	 * 
 	 * @param publicKey
 	 * @param srcData
 	 * @return
@@ -46,7 +45,6 @@ public final class RSAUtil {
 
 	/**
 	 * 使用私钥解密数据
-	 * 
 	 * @param privateKey
 	 * @param data
 	 * @return

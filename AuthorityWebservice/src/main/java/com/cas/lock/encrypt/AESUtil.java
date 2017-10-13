@@ -14,11 +14,8 @@ public class AESUtil {
 
 	/**
 	 * 加密
-	 * 
-	 * @param content
-	 *            需要加密的内容
-	 * @param password
-	 *            加密密码
+	 * @param content 需要加密的内容
+	 * @param password 加密密码
 	 * @return
 	 */
 	public static byte[] encrypt(String content, String password) {
@@ -40,11 +37,8 @@ public class AESUtil {
 
 	/**
 	 * 解密
-	 * 
-	 * @param content
-	 *            待解密内容
-	 * @param password
-	 *            解密密钥
+	 * @param content 待解密内容
+	 * @param password 解密密钥
 	 * @return
 	 */
 	public static byte[] decrypt(byte[] content, String password) {

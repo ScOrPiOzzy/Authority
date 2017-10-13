@@ -1,6 +1,5 @@
 package com.cas.lock;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -20,7 +19,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
@@ -54,8 +52,7 @@ public class HelloService {
 	}
 
 	/*
-	 * get {} request
-	 * http://localhost:8080/AuthorityWebservice/rest/hello/age/houfeng
+	 * get {} request http://localhost:8080/AuthorityWebservice/rest/hello/age/houfeng
 	 */
 	@GET
 	@Path("age/{name}")
@@ -65,8 +62,7 @@ public class HelloService {
 	}
 
 	/*
-	 * get {} request
-	 * http://localhost:8080/AuthorityWebservice/rest/hello/223232323
+	 * get {} request http://localhost:8080/AuthorityWebservice/rest/hello/223232323
 	 */
 	@GET
 	@Path("{id}")

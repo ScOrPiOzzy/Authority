@@ -16,9 +16,7 @@ import oshi.SystemInfo;
 
 /**
  * 验证证书的有效性
- * 
  * @author 张振宇
- *
  */
 public class ValidateThread implements Callable<Integer> {
 
@@ -43,8 +41,7 @@ public class ValidateThread implements Callable<Integer> {
 		fis.close();
 		// 检查授权文件MD5，判断是否被篡改。
 		File receiptFile = new File(Consts.FILE_RECEIPT);
-		try (BufferedReader br = new BufferedReader(
-				new InputStreamReader(new BufferedInputStream(new FileInputStream(receiptFile))))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(receiptFile))))) {
 
 			// 第一行非空行的数据是授权文件的MD5校验值
 			String recordedMD5 = null;

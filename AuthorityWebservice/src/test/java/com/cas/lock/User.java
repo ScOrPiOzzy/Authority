@@ -4,8 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /*
  * 用户 bean
- * @author waylau.com
- * 2014-3-17
+ * @author waylau.com 2014-3-17
  */
 @XmlRootElement
 public class User {

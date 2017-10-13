@@ -17,7 +17,7 @@ public class TestStorage {
 
 		OSFileStore[] fileStores = systemInfo.getOperatingSystem().getFileSystem().getFileStores();
 		for (int i = 0; i < fileStores.length; i++) {
-			System.out.println(fileStores[i].getName() + " --> " +fileStores[i].getMount());
+			System.out.println(fileStores[i].getName() + " --> " + fileStores[i].getMount());
 		}
 	}
 }

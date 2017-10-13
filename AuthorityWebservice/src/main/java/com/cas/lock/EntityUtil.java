@@ -19,8 +19,7 @@ public final class EntityUtil {
 
 	public static AuthorityEntity parseEntity(File file) {
 		AuthorityEntity entity = new AuthorityEntity();
-		try (BufferedReader br = new BufferedReader(
-				new InputStreamReader(new BufferedInputStream(new FileInputStream(file))))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(file))))) {
 			// 公司信息
 			br.readLine();
 			// 产品注册码

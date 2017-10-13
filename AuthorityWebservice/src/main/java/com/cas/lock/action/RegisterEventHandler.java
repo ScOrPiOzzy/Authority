@@ -16,7 +16,6 @@ import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -33,9 +32,7 @@ import oshi.SystemInfo;
 
 /**
  * 用户注册
- * 
  * @author Administrator
- *
  */
 public class RegisterEventHandler implements EventHandler<ActionEvent> {
 

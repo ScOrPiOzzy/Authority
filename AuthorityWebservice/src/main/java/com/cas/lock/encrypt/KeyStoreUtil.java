@@ -34,7 +34,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 获得KeyStore
-	 * 
 	 * @version 2012-3-16
 	 * @param keyStorePath
 	 * @param password
@@ -54,15 +53,13 @@ public class KeyStoreUtil {
 
 	/**
 	 * 由KeyStore获得私钥
-	 * 
 	 * @param keyStorePath
 	 * @param alias
 	 * @param storePass
 	 * @return
 	 * @throws Exception
 	 */
-	public static PrivateKey getPrivateKey(String keyStorePath, String alias, String storePass, String keyPass)
-			throws Exception {
+	public static PrivateKey getPrivateKey(String keyStorePath, String alias, String storePass, String keyPass) throws Exception {
 		KeyStore ks = getKeyStore(keyStorePath, storePass);
 		PrivateKey key = (PrivateKey) ks.getKey(alias, keyPass.toCharArray());
 		return key;
@@ -70,15 +67,13 @@ public class KeyStoreUtil {
 
 	/**
 	 * 由KeyStore获得私钥
-	 * 
 	 * @param keyStorePath
 	 * @param alias
 	 * @param storePass
 	 * @return
 	 * @throws Exception
 	 */
-	public static PrivateKey getPrivateKey(InputStream ins, String alias, String storePass, String keyPass)
-			throws Exception {
+	public static PrivateKey getPrivateKey(InputStream ins, String alias, String storePass, String keyPass) throws Exception {
 		KeyStore ks = getKeyStore(ins, storePass);
 		PrivateKey key = (PrivateKey) ks.getKey(alias, keyPass.toCharArray());
 		return key;
@@ -86,13 +81,9 @@ public class KeyStoreUtil {
 
 	/**
 	 * 由Certificate获得公钥
-	 * 
-	 * @param keyStorePath
-	 *            KeyStore路径
-	 * @param alias
-	 *            别名
-	 * @param storePass
-	 *            KeyStore访问密码
+	 * @param keyStorePath KeyStore路径
+	 * @param alias 别名
+	 * @param storePass KeyStore访问密码
 	 * @return
 	 * @throws Exception
 	 */
@@ -104,11 +95,9 @@ public class KeyStoreUtil {
 
 	/**
 	 * 签名
-	 * 
 	 * @param keyStorePath
 	 * @param alias
 	 * @param password
-	 * 
 	 * @return
 	 * @throws Exception
 	 */
@@ -129,19 +118,13 @@ public class KeyStoreUtil {
 
 	/**
 	 * 获得SSLSocektFactory
-	 * 
-	 * @param password
-	 *            密码
-	 * @param keyStorePath
-	 *            密钥库路径
-	 * 
-	 * @param trustKeyStorePath
-	 *            信任库路径
+	 * @param password 密码
+	 * @param keyStorePath 密钥库路径
+	 * @param trustKeyStorePath 信任库路径
 	 * @return
 	 * @throws Exception
 	 */
-	private static SSLSocketFactory getSSLSocketFactory(String password, String keyStorePath, String trustKeyStorePath)
-			throws Exception {
+	private static SSLSocketFactory getSSLSocketFactory(String password, String keyStorePath, String trustKeyStorePath) throws Exception {
 		// 初始化密钥库
 		KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(SunX509);
 		KeyStore keyStore = getKeyStore(keyStorePath, password);
@@ -162,7 +145,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 由KeyStore获得私钥
-	 * 
 	 * @param keyStorePath
 	 * @param alias
 	 * @param password
@@ -177,7 +159,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 由Certificate获得公钥
-	 * 
 	 * @param certificatePath
 	 * @return
 	 * @throws Exception
@@ -190,7 +171,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 获得Certificate
-	 * 
 	 * @param certificatePath
 	 * @return
 	 * @throws Exception
@@ -207,7 +187,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 获得Certificate
-	 * 
 	 * @param keyStorePath
 	 * @param alias
 	 * @param password
@@ -309,7 +288,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 验证Certificate
-	 * 
 	 * @param certificatePath
 	 * @return
 	 */
@@ -319,7 +297,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 验证Certificate是否过期或无效
-	 * 
 	 * @param date
 	 * @param certificatePath
 	 * @return
@@ -339,7 +316,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 验证证书是否过期或无效
-	 * 
 	 * @param date
 	 * @param certificate
 	 * @return
@@ -357,7 +333,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 验证签名
-	 * 
 	 * @param data
 	 * @param sign
 	 * @param certificatePath
@@ -380,7 +355,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 验证Certificate
-	 * 
 	 * @param keyStorePath
 	 * @param alias
 	 * @param password
@@ -399,7 +373,6 @@ public class KeyStoreUtil {
 
 	/**
 	 * 验证Certificate
-	 * 
 	 * @param keyStorePath
 	 * @param alias
 	 * @param password
@@ -411,20 +384,13 @@ public class KeyStoreUtil {
 
 	/**
 	 * 为HttpsURLConnection配置SSLSocketFactory
-	 * 
-	 * @param conn
-	 *            HttpsURLConnection
-	 * @param password
-	 *            密码
-	 * @param keyStorePath
-	 *            密钥库路径
-	 * 
-	 * @param trustKeyStorePath
-	 *            信任库路径
+	 * @param conn HttpsURLConnection
+	 * @param password 密码
+	 * @param keyStorePath 密钥库路径
+	 * @param trustKeyStorePath 信任库路径
 	 * @throws Exception
 	 */
-	public static void configSSLSocketFactory(HttpsURLConnection conn, String password, String keyStorePath,
-			String trustKeyStorePath) throws Exception {
+	public static void configSSLSocketFactory(HttpsURLConnection conn, String password, String keyStorePath, String trustKeyStorePath) throws Exception {
 		conn.setSSLSocketFactory(getSSLSocketFactory(password, keyStorePath, trustKeyStorePath));
 	}
 

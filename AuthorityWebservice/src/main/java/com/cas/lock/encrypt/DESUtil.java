@@ -21,11 +21,8 @@ public class DESUtil {
 	public static final String CIPHER_ALGORITHM = "DES/ECB/NoPadding";
 
 	/**
-	 * 
 	 * 生成密钥key对象
-	 * 
-	 * @param KeyStr
-	 *            密钥字符串
+	 * @param KeyStr 密钥字符串
 	 * @return 密钥对象
 	 * @throws InvalidKeyException
 	 * @throws NoSuchAlgorithmException
@@ -42,10 +39,8 @@ public class DESUtil {
 	}
 
 	private static int parse(char c) {
-		if (c >= 'a')
-			return (c - 'a' + 10) & 0x0f;
-		if (c >= 'A')
-			return (c - 'A' + 10) & 0x0f;
+		if (c >= 'a') return (c - 'a' + 10) & 0x0f;
+		if (c >= 'A') return (c - 'A' + 10) & 0x0f;
 		return (c - '0') & 0x0f;
 	}
 
@@ -63,11 +58,8 @@ public class DESUtil {
 
 	/**
 	 * 加密数据
-	 * 
-	 * @param data
-	 *            待加密数据
-	 * @param key
-	 *            密钥
+	 * @param data 待加密数据
+	 * @param key 密钥
 	 * @return 加密后的数据
 	 */
 	public static String encrypt(String data, String key) throws Exception {
@@ -89,11 +81,8 @@ public class DESUtil {
 
 	/**
 	 * 解密数据
-	 * 
-	 * @param data
-	 *            待解密数据
-	 * @param key
-	 *            密钥
+	 * @param data 待解密数据
+	 * @param key 密钥
 	 * @return 解密后的数据
 	 */
 	public static String decrypt(String data, String key) throws Exception {

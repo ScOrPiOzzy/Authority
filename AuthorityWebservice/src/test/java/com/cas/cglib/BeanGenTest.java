@@ -7,8 +7,7 @@ public class BeanGenTest {
 		BeanGenerator generator = new BeanGenerator();
 		generator.addProperty("date", String.class);
 
-		
 		Object c = generator.create();
-		
+
 	}
 }

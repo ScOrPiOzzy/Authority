@@ -36,10 +36,7 @@ public class AuthorityService {
 		// String ciphertext = regCode;
 		// System.err.println(ciphertext);
 		try {
-			regCode = RSAUtil.descryptByPrivateKey(
-					KeyStoreUtil.getPrivateKey(AuthorityService.class.getResourceAsStream(Consts.FILE_KYESTORE),
-							"www.wxcas.com", "cas123", "cas123"),
-					regCode);
+			regCode = RSAUtil.descryptByPrivateKey(KeyStoreUtil.getPrivateKey(AuthorityService.class.getResourceAsStream(Consts.FILE_KYESTORE), "www.wxcas.com", "cas123", "cas123"), regCode);
 			System.out.println("收到客户注册码:" + regCode);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,12 +1,12 @@
 package com.cas.authority.service.impl;
 
-import com.cas.authority.dao.RecordMapper;
-import com.cas.authority.model.Record;
-import com.cas.authority.service.RecordService;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
+import com.cas.authority.dao.RecordMapper;
+import com.cas.authority.service.RecordService;
 
 /**
  * Created by CodeGenerator on 2017/10/13.

@@ -1,4 +1,5 @@
 package com.cas.authority.controller;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cas.authority.service.RecordService;
 
 /**
-* Created by CodeGenerator on 2017/10/13.
-*/
+ * Created by CodeGenerator on 2017/10/13.
+ */
 @RestController
 @RequestMapping("/record")
 public class RecordController {
-    @Resource
-    private RecordService recordService;
+	@Resource
+	private RecordService recordService;
 
 //    @PostMapping("/add")
 //    public Result add(Record record) {
