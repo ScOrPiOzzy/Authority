@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 
 public class User implements Serializable {
-
 	/**
 	 * 
 	 */

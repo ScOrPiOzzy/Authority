@@ -1,15 +1,10 @@
 package com.cas.authority.controller;
-import com.cas.authority.model.Record;
-import com.cas.authority.service.RecordService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.springframework.web.bind.annotation.PostMapping;
+import javax.annotation.Resource;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.util.List;
+import com.cas.authority.service.RecordService;
 
 /**
 * Created by CodeGenerator on 2017/10/13.

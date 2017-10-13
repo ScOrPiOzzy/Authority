@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cas.authority.core.AbstractBaseController;
 import com.cas.authority.vo.User;
 
 @Controller
-public class UserController {
+public class UserController extends AbstractBaseController {
 
 	@RequestMapping(value = "/requestForm", method = RequestMethod.GET)
 	public String addUserRequest() {
@@ -28,7 +29,6 @@ public class UserController {
 				ObjectError objectError = (ObjectError) iter.next();
 				System.out.println(objectError.getCode());
 			}
-
 			return result.getAllErrors();
 		}
 		return user;

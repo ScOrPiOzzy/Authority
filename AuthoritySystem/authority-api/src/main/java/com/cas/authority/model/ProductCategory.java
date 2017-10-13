@@ -1,7 +1,5 @@
 package com.cas.authority.model;
 
-import javax.persistence.*;
-
 public class ProductCategory {
     /**
      * 产品类别ID

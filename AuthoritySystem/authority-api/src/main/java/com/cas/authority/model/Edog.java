@@ -1,7 +1,6 @@
 package com.cas.authority.model;
 
 import java.util.Date;
-import javax.persistence.*;
 
 public class Edog {
 	private String id;

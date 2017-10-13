@@ -1,7 +1,5 @@
 package com.cas.authority.model;
 
-import javax.persistence.*;
-
 public class Saler {
     private String id;
 

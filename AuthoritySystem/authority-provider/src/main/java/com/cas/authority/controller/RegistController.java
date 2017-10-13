@@ -4,10 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cas.authority.Consts;
 import com.cas.authority.core.AbstractBaseController;
-import com.cas.authority.util.KeyStoreUtil;
-import com.cas.authority.util.RSAUtil;
 import com.cas.authority.vo.AuthorityEntity;
 
 @Controller
