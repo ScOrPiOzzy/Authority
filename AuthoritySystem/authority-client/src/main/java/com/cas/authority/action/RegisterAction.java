@@ -19,11 +19,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
 import com.cas.authority.Consts;
+import com.cas.authority.model.AuthorityEntity;
 import com.cas.authority.util.EntityUtil;
 import com.cas.authority.util.HardDriveUtil;
 import com.cas.authority.util.KeyStoreUtil;
-import com.cas.authority.util.RSAUtil;
-import com.cas.authority.vo.AuthorityEntity;
 
 import oshi.SystemInfo;
 
@@ -45,7 +44,15 @@ public class RegisterAction {
 		}
 
 		// 2、提供注册码
-		String regCode = getRegistCode();
+		String registCode = getRegistCode();
+		if (registCode == null || "".equals(registCode)) {
+			return;
+		}
+		// 2、提供注册码
+		String username = getUserName();
+		if (username == null || "".equals(username)) {
+			return;
+		}
 
 		PublicKey pubKey = null;
 		try {
@@ -59,12 +66,24 @@ public class RegisterAction {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(Consts.BASE_SERVER_URI + Consts.SERVER_URI_REG);
 		MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
-		formData.add("regCode", RSAUtil.encryptByPublicKey(pubKey, regCode));
+
+//		用户名称
+		formData.add("customName", username);
+//		产品ID
+		formData.add("productID", registCode);
+//		用户注册码
+		formData.add("code", registCode);
+//		用户电脑信息
+		formData.add("hddSer", username);
+		formData.add("cpuSer", registCode);
+
 		Response response = target.request().post(Entity.form(formData));
+
 		AuthorityEntity entity = response.readEntity(AuthorityEntity.class);
 		// 4、取得服务器的验证信息
 		if (entity == null) {
 			// 提示用户注册失败。
+			onRegistResult(false);
 		} else {
 			// 用户收到的证书信息：
 			System.out.println("用户收到的证书信息：" + entity);
@@ -90,11 +109,20 @@ public class RegisterAction {
 			} catch (IOException e) {
 				throw new RuntimeException("");
 			}
+			onRegistResult(true);
 		}
+	}
+
+	protected String getUserName() {
+		return "test_user";
 	}
 
 	protected String getRegistCode() {
 		return "123456789ABCDEFG";
+	}
+
+	protected void onRegistResult(boolean success) {
+
 	}
 
 	/**

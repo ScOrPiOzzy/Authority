@@ -18,4 +18,4 @@ spring:
       max-total: 5                                    # 最大连接数量
       max-wait-millis: 200                            # 等待连接获取的最大超时时间
   messages:
-    basename: i18n/messages,validation                # SpringBoot国际化处理
+    basename: i18n/messages,i18n/validation           # SpringBoot国际化处理

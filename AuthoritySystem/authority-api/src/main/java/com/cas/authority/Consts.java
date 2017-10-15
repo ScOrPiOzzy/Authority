@@ -4,6 +4,8 @@ public final class Consts {
 	private Consts() {
 	}
 
+	public static final String COMPANY_NAME = "无锡凯数科技有限公司";
+
 	public static final String FILE_RECEIPT = "./cas.receipt";
 	public static final String FILE_AUTHORITY = "./cas.authority";
 	public static final String FILE_CERTIFICATION = "./cas.cer";

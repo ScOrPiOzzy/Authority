@@ -14,7 +14,7 @@ public class Record {
 	/**
 	 * 客户编号
 	 */
-	private Integer cid;
+	private User user;
 
 	/**
 	 * 产品编号（作为授权证书中的内容）
@@ -81,22 +81,6 @@ public class Record {
 	 */
 	public void setDate(String date) {
 		this.date = date;
-	}
-
-	/**
-	 * 获取客户编号
-	 * @return cid - 客户编号
-	 */
-	public Integer getCid() {
-		return cid;
-	}
-
-	/**
-	 * 设置客户编号
-	 * @param cid 客户编号
-	 */
-	public void setCid(Integer cid) {
-		this.cid = cid;
 	}
 
 	/**
@@ -210,4 +194,13 @@ public class Record {
 	public void setRcode(String rcode) {
 		this.rcode = rcode;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }

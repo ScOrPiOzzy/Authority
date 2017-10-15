@@ -11,9 +11,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
 import com.cas.authority.Consts;
+import com.cas.authority.model.AuthorityEntity;
 import com.cas.authority.util.EntityUtil;
 import com.cas.authority.util.HardDriveUtil;
-import com.cas.authority.vo.AuthorityEntity;
 
 import oshi.SystemInfo;
 

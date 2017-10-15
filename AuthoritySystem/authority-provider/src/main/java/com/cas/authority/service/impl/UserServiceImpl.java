@@ -1,23 +1,15 @@
 package com.cas.authority.service.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.cas.authority.dao.IUserDao;
-import com.cas.authority.service.IUserService;
-import com.cas.authority.vo.User;
+import com.cas.authority.dao.UserMapper;
+import com.cas.authority.service.UserService;
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements UserService {
 	@Resource
-	private IUserDao userDao;
-
-	@Override
-	public List<User> getUserList() {
-		return userDao.findAll();
-	}
+	private UserMapper userMapper;
 
 }

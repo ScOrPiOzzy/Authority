@@ -30,17 +30,12 @@ public final class RSAUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String encryptByPublicKey(Key pubKey, String srcData) {
+	public static String encryptByPublicKey(Key pubKey, String srcData) throws Exception {
 		// 对数据加密
-		try {
-			Cipher cipher = Cipher.getInstance(ALGORITHM);
-			cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-			byte[] doFinal = cipher.doFinal(srcData.getBytes());
-			return Base64.encodeBase64String(doFinal);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		Cipher cipher = Cipher.getInstance(ALGORITHM);
+		cipher.init(Cipher.ENCRYPT_MODE, pubKey);
+		byte[] doFinal = cipher.doFinal(srcData.getBytes());
+		return Base64.encodeBase64String(doFinal);
 	}
 
 	/**
@@ -50,7 +45,7 @@ public final class RSAUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String descryptByPrivateKey(Key privateKey, String data) {
+	public static String descryptByPrivateKey(Key privateKey, String data) throws Exception {
 		// // BASE64转码
 		byte[] text = Base64.decodeBase64(data);
 		// PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(privateKey);
@@ -59,15 +54,10 @@ public final class RSAUtil {
 		// PrivateKey prvKey = kf.generatePrivate(spec);
 
 		// 对数据加密
-		try {
-			Cipher cipher = Cipher.getInstance(ALGORITHM);
-			cipher.init(Cipher.DECRYPT_MODE, privateKey);
+		Cipher cipher = Cipher.getInstance(ALGORITHM);
+		cipher.init(Cipher.DECRYPT_MODE, privateKey);
 
-			byte[] doFinal = cipher.doFinal(text);
-			return new String(doFinal);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+		byte[] doFinal = cipher.doFinal(text);
+		return new String(doFinal);
 	}
 }

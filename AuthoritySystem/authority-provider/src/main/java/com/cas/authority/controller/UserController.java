@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cas.authority.core.AbstractBaseController;
-import com.cas.authority.vo.User;
+import com.cas.authority.model.User;
 
 @Controller
 public class UserController extends AbstractBaseController {

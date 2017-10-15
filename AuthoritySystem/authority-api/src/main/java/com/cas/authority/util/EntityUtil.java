@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.cas.authority.vo.AuthorityEntity;
+import com.cas.authority.model.AuthorityEntity;
 
 public final class EntityUtil {
 	public static final String SPLIT_STR = ":";
@@ -22,10 +22,12 @@ public final class EntityUtil {
 	public static AuthorityEntity parseEntity(File file) {
 		AuthorityEntity entity = new AuthorityEntity();
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(file))))) {
-			// 公司信息
-			br.readLine();
+			// 公司名称
+			entity.setCompanyName(br.readLine().split(SPLIT_STR)[1]);
+			// 客户名称
+			entity.setCustomName(br.readLine().split(SPLIT_STR)[1]);
 			// 产品注册码
-			entity.setRegCode(br.readLine().split(SPLIT_STR)[1]);
+			entity.setCode(br.readLine().split(SPLIT_STR)[1]);
 			// 产品代号
 			entity.setProductID(br.readLine().split(SPLIT_STR)[1]);
 			// 生产日期
@@ -51,8 +53,9 @@ public final class EntityUtil {
 		try (PrintWriter out = new PrintWriter(new FileOutputStream(file));) {
 			// 会自动关闭流
 			// 证书基本内容
-			out.println("COMPANY" + SPLIT_STR + "无锡凯数科技有限公司");
-			out.println("REGISTER" + SPLIT_STR + entity.getRegCode());
+			out.println("COMPANY" + SPLIT_STR + entity.getCompanyName());
+			out.println("User" + SPLIT_STR + entity.getCustomName());
+			out.println("REGISTER" + SPLIT_STR + entity.getCode());
 			out.println("PRODUCT" + SPLIT_STR + entity.getProductID());
 			out.println("GENERATION DATE" + SPLIT_STR + entity.getFromDate());
 			out.println("EXPIRATION DATE" + SPLIT_STR + entity.getEndDate());
@@ -63,8 +66,6 @@ public final class EntityUtil {
 			out.println("SIGN-B" + SPLIT_STR + entity.getCpuSer());
 			// sig-c:
 			out.println("SIGN-C" + SPLIT_STR + DigestUtils.sha256Hex(entity.toString()));
-			// // 2、保存公司公钥
-			// out.println("PUB-KEY：" + Base64.encodeBase64String(pubKey.getEncoded()));
 		} catch (IOException e) {
 			throw new RuntimeException("");
 		}
