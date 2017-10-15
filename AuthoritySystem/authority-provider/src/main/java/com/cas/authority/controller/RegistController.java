@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cas.authority.Consts;
-import com.cas.authority.core.AbstractBaseController;
 import com.cas.authority.dao.RecordMapper;
 import com.cas.authority.model.AuthorityEntity;
-import com.cas.authority.util.KeyStoreUtil;
-import com.cas.authority.util.RSAUtil;
 
 @Controller
 @RequestMapping(value = "authority")

@@ -1,8 +1,11 @@
 package com.cas.authority.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.cas.authority.model.Record;
+import com.cas.authority.model.RecordDetail;
 import com.cas.authority.model.UserRegistEntity;
 
 @Mapper
@@ -11,4 +14,7 @@ public interface RecordMapper {
 
 	UserRegistEntity selectBy(String registCode, String userUnit);
 
+	List<Record> selectAll();
+
+	List<RecordDetail> selectAllDetail();
 }

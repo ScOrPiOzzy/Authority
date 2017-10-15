@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>订单编号</td>
+				<td>客户信息</td>
+				<td>产品名称</td>
+				<td>供货时间</td>
+				<td>订单金额</td>
+				<td>剩余欠款</td>
+				<td>销售人员</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="record:${recordList}">
+				<td th:text="${record.id}" />
+				<td th:text="${record.username}" />
+				<td th:text="${record.productName}" />
+				<td th:text="${record.date}" />
+				<td th:text="${record.price}" />
+				<td th:text="${record.debt}" />
+				<td th:text="${record.salerName}" />
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

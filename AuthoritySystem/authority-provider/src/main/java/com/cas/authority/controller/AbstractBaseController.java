@@ -1,4 +1,4 @@
-package com.cas.authority.core;
+package com.cas.authority.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
