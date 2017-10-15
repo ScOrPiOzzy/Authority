@@ -14,7 +14,7 @@ public class Record {
 	/**
 	 * 客户编号
 	 */
-	private User user;
+	private Integer cid;
 
 	/**
 	 * 产品编号（作为授权证书中的内容）
@@ -195,12 +195,12 @@ public class Record {
 		this.rcode = rcode;
 	}
 
-	public User getUser() {
-		return user;
+	public Integer getCid() {
+		return cid;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setCid(Integer cid) {
+		this.cid = cid;
 	}
 
 }
