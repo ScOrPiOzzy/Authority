@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.xml.bind.annotation.XmlRegistry;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,12 +15,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cas.authority.dao.RecordMapper;
 import com.cas.authority.model.AuthorityEntity;
+import com.cas.authority.model.Regist;
+import com.cas.authority.service.RecordService;
+import com.cas.authority.service.RegistService;
 
 @Controller
 @RequestMapping(value = "authority")
 public class RegistController extends AbstractBaseController {
 	@Resource
-	private RecordMapper recordMapper;
+	private RecordService recordService;
+	@Resource
+	private RegistService registService;
 
 	/**
 	 * 生成证书
@@ -67,9 +73,15 @@ public class RegistController extends AbstractBaseController {
 		}
 	}
 
+	@RequestMapping(value = "regist/add", method = RequestMethod.POST)
+	public String addRegist(@Valid Regist regist, BindingResult result) {
+		registService.insert(regist);
+		return "";
+	}
+
 	private boolean validate(AuthorityEntity entity) {
 //		查询数据库，是否存在
-		Object r = recordMapper.selectBy(entity.getCode(), entity.getCustomName());
+		Object r = recordService.getRecord(entity.getCode(), entity.getCustomName());
 		return r != null;
 	}
 }

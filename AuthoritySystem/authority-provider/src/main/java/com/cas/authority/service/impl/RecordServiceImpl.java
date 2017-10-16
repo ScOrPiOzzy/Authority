@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cas.authority.dao.RecordMapper;
 import com.cas.authority.model.Record;
 import com.cas.authority.model.RecordDetail;
+import com.cas.authority.model.UserRegistEntity;
 import com.cas.authority.service.RecordService;
 
 /**
@@ -29,5 +30,10 @@ public class RecordServiceImpl implements RecordService {
 	@Override
 	public List<Record> getAllRecordPO() {
 		return recordMapper.selectAll();
+	}
+
+	@Override
+	public UserRegistEntity getRecord(String registCode, String userUnit) {
+		return recordMapper.selectBy(registCode, userUnit);
 	}
 }
