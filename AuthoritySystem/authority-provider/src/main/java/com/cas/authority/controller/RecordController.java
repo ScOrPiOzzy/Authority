@@ -1,9 +1,15 @@
 package com.cas.authority.controller;
 
-import javax.annotation.Resource;
+import java.util.Iterator;
 
+import javax.annotation.Resource;
+import javax.validation.Valid;
+
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cas.authority.model.Record;
@@ -14,12 +20,21 @@ import com.cas.authority.service.RecordService;
  */
 @RestController
 @RequestMapping("/record")
-public class RecordController {
+public class RecordController extends AbstractBaseController{
 	@Resource
 	private RecordService recordService;
 
 	@PostMapping("add")
-	public Object add(Record record) {
+	@ResponseBody
+	public Object add(@Valid Record record, BindingResult result) {
+		if(result.hasErrors()) {
+			Iterator<ObjectError> iter = result.getAllErrors().iterator();
+			while (iter.hasNext()) {
+				ObjectError objectError = (ObjectError) iter.next();
+				System.out.println(objectError.getDefaultMessage());
+			}
+			return result.getAllErrors();
+		}
 		recordService.save(record);
 		return record;
 	}
