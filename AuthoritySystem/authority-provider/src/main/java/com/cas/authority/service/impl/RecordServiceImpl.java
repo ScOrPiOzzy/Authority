@@ -1,5 +1,6 @@
 package com.cas.authority.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +19,11 @@ import com.cas.authority.service.RecordService;
 @Service
 @Transactional
 public class RecordServiceImpl extends AbstractService<Record> implements RecordService {
+	@Override
+	public void save(Record model) {
+		model.setDate_create(new Date());
+		super.save(model);
+	}
 
 	@Override
 	public List<RecordDetail> findAllDetail() {

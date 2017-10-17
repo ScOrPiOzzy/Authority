@@ -27,7 +27,7 @@
 				<td th:text="${record.createDate}" />
 				<td th:text="${record.supplyDate}" />
 				<td th:text="${record.salerName}" />
-				<td><a th:href="'authority/regist_list?rid='+${record.id}" >查看注册码</a></td>
+				<td><a th:href="'/authority/regist_list/'+${record.id}" >查看注册码</a></td>
 			</tr>
 		</tbody>
 	</table>
