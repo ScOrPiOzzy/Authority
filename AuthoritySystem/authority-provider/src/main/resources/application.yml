@@ -5,6 +5,12 @@ mybatis:
   type-aliases-package: com.cas.authority.vo          # 定义所有操作类的别名所在包
   mapper-locations:
   - classpath:mybatis/mapper/**/*.xml                 #所有的mapper映射
+mapper:
+  mappers:
+  - com.cas.authority.dao.ProductMapper
+  - com.cas.authority.dao.RecordMapper
+  - com.cas.authority.dao.RegistMapper
+  - com.cas.authority.dao.UserMapper
 pagehelper:
   dialect: com.github.pagehelper.dialect.helper.MySqlDialect
 spring: 

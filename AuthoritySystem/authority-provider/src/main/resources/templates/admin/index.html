@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www/thymeleaf.org">
 <head>
-<meta charset="UTF-8" />
-<title>Insert title here</title>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
 </head>
 <body>
 	<table>
 		<thead>
 			<tr>
 				<td>订单编号</td>
-				<td>客户信息</td>
+				<td>客户名称</td>
 				<td>产品名称</td>
-				<td>供货时间</td>
 				<td>订单金额</td>
-				<td>剩余欠款</td>
+				<td>供货日期</td>
+				<td>创建日期</td>
 				<td>销售人员</td>
+				<td></td>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,21 +23,23 @@
 				<td th:text="${record.id}" />
 				<td th:text="${record.username}" />
 				<td th:text="${record.productName}" />
-				<td th:text="${record.date}" />
 				<td th:text="${record.price}" />
-				<td th:text="${record.debt}" />
+				<td th:text="${record.createDate}" />
+				<td th:text="${record.supplyDate}" />
 				<td th:text="${record.salerName}" />
+				<td><a th:href="'authority/regist_list?rid='+${record.id}" >查看注册码</a></td>
 			</tr>
 		</tbody>
 	</table>
-
-	<form action="regist/add">
-		<!-- 		`code`, `node`, `date_start`, `date_end` -->
-		code<input name="code" type="text" />
-		node<input name="node" type="text" />
-		date_start<input name="date_start" type="text" />
-		date_end<input name="date_end" type="text" />
-		<input type="text" />
+	
+	<form action="record/add" method="post">
+		产品编号：<input name="pid" type="text" /><br />
+		交易类型：<input name="type" type="text" /><br />
+		订单金额：<input name="price" type="text" /><br />
+		销售人员：<input name="sid" type="text" /><br />
+		客户编号：<input name="cid" type="text" /><br />
+		供货时间：<input name="date_supply" type="date" /><br />
+		<input type="submit" value="submit" />
 	</form>
 </body>
 </html>

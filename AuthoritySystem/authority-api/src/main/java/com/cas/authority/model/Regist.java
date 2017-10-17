@@ -2,8 +2,11 @@ package com.cas.authority.model;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+
 public class Regist {
 //	
+	@Id
 	private Integer id;
 //	注册码
 	private String code;
@@ -17,6 +20,8 @@ public class Regist {
 	private Date date_start;
 //	过期日期
 	private Date date_end;
+//	过期日期
+	private Integer record_id;
 
 	public Integer getId() {
 		return id;
@@ -72,6 +77,14 @@ public class Regist {
 
 	public void setDate_end(Date date_end) {
 		this.date_end = date_end;
+	}
+
+	public Integer getRecord_id() {
+		return record_id;
+	}
+
+	public void setRecord_id(Integer record_id) {
+		this.record_id = record_id;
 	}
 
 }

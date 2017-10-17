@@ -9,11 +9,9 @@ import com.cas.authority.model.UserRegistEntity;
 /**
  * Created by CodeGenerator on 2017/10/13.
  */
-public interface RecordService {
+public interface RecordService extends Service<Record> {
 
-	UserRegistEntity getRecord(String registCode, String userUnit);
+	List<RecordDetail> findAllDetail();
 
-	List<RecordDetail> getAllRecord();
-
-	List<Record> getAllRecordPO();
+	UserRegistEntity findRecord(String code, String customName);
 }

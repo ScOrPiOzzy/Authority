@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>编号</td>
+				<td>注册码</td>
+				<td>节点数</td>
+				<td>硬盘号</td>
+				<td>CPU序列号</td>
+				<td>起始日期</td>
+				<td>截止日期</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="reg,stat:${registList}">
+				<td th:text="${stat.index + 1}" />
+				<td th:text="${reg.code}" />
+				<td th:text="${reg.node}" />
+				<td th:text="${reg.ser_hdd}" />
+				<td th:text="${reg.ser_cpu}" />
+				<td th:text="${reg.date_start}" />
+				<td th:text="${reg.date_end}" />
+			</tr>
+		</tbody>
+	</table>
+	
+	<p>添加注册码</p>
+	<form action="/authority/add_register" method="post">
+		code:<input name="code" type="text" /><br />
+		node<input name="node" type="text" /><br />
+		date_start<input name="date_start" type="text" /><br />
+		date_end<input name="date_end" type="text" /><br />
+		<input type="submit" value="submit" />
+	</form>
+</body>
+</html>

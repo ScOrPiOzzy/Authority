@@ -9,4 +9,15 @@
 		<result column="weixin" jdbcType="VARCHAR" property="weixin" />
 		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
 	</resultMap>
+	
+<!--   	<insert id="insert" useGeneratedKeys="true"  parameterType="com.cas.authority.model.User"> -->
+<!-- 		<selectKey resultType="int" keyProperty="id" order="AFTER"> -->
+<!-- 			SELECT -->
+<!-- 			LAST_INSERT_ID() -->
+<!-- 		</selectKey> -->
+<!-- 		INSERT INTO `cas_authority`.`user` -->
+<!-- 			(`name`, `qq`, `weixin`, `mobile`) -->
+<!-- 		VALUES -->
+<!-- 			(#{name},#{qq},#{weixin},#{mobile}); -->
+<!-- 	</insert> -->
 </mapper>

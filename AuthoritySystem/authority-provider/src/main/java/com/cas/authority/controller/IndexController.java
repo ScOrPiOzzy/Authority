@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cas.authority.model.Record;
 import com.cas.authority.model.RecordDetail;
 import com.cas.authority.service.RecordService;
 import com.github.pagehelper.PageHelper;
@@ -28,7 +26,8 @@ public class IndexController extends AbstractBaseController {
 //		1、设置分页信息，包括当前页数和每页显示的总计数
 		PageHelper.startPage(1, 3, false);
 
-		List<RecordDetail> recordList = recordService.getAllRecord();
+//		List<RecordDetail> recordList = recordService.getAllRecord();
+		List<RecordDetail> recordList = recordService.findAllDetail();
 		
 //		PageBean<Record> pageData = new PageBean<>(1, 3, 1);
 		

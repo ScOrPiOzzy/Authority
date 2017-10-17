@@ -2,8 +2,6 @@ package com.cas.authority.service.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +9,7 @@ import com.cas.authority.dao.RecordMapper;
 import com.cas.authority.model.Record;
 import com.cas.authority.model.RecordDetail;
 import com.cas.authority.model.UserRegistEntity;
+import com.cas.authority.service.AbstractService;
 import com.cas.authority.service.RecordService;
 
 /**
@@ -18,22 +17,17 @@ import com.cas.authority.service.RecordService;
  */
 @Service
 @Transactional
-public class RecordServiceImpl implements RecordService {
-	@Resource
-	private RecordMapper recordMapper;
+public class RecordServiceImpl extends AbstractService<Record> implements RecordService {
 
 	@Override
-	public List<RecordDetail> getAllRecord() {
-		return recordMapper.selectAllDetail();
+	public List<RecordDetail> findAllDetail() {
+		RecordMapper m = (RecordMapper) mapper;
+		return m.selectAllDetail();
 	}
 
 	@Override
-	public List<Record> getAllRecordPO() {
-		return recordMapper.selectAll();
-	}
-
-	@Override
-	public UserRegistEntity getRecord(String registCode, String userUnit) {
-		return recordMapper.selectBy(registCode, userUnit);
+	public UserRegistEntity findRecord(String code, String customName) {
+		RecordMapper m = (RecordMapper) mapper;
+		return m.selectBy(code, customName);
 	}
 }

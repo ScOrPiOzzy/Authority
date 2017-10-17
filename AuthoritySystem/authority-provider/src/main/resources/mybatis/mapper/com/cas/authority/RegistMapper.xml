@@ -12,36 +12,40 @@
 		<result column="date_end" jdbcType="TIMESTAMP" property="date_end" />
 	</resultMap>
 
-	<insert id="insert" parameterType="com.cas.authority.model.Regist">
-		INSERT INTO `regist` (`code`, `node`, `ser_hdd`, `ser_cpu`, `date_start`, `date_end`)
-		values
-		<foreach collection="list" item="item" index="index" separator=",">
-			(#{code},#{node},#{ser_hdd},#{ser_cpu},#{date_start},#{date_end})
-		</foreach>
-	</insert>
+<!-- 	<insert id="insert" useGeneratedKeys="true"  parameterType="com.cas.authority.model.Regist"> -->
+<!-- 		<selectKey resultType="int" keyProperty="id" order="AFTER"> -->
+<!-- 			SELECT -->
+<!-- 			LAST_INSERT_ID() -->
+<!-- 		</selectKey> -->
+<!-- 		INSERT INTO `regist`  -->
+<!-- 			(`code`, `node`, `ser_hdd`, `ser_cpu`, `date_start`, `date_end`) -->
+<!-- 		VALUES -->
+<!-- 			(#{code},#{node},#{ser_hdd},#{ser_cpu},#{date_start},#{date_end}) -->
+<!-- 	</insert> -->
 
 	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
 		<selectKey resultType="long" keyProperty="id" order="AFTER">
 			SELECT
 			LAST_INSERT_ID()
 		</selectKey>
-		INSERT INTO `regist` (`code`, `node`, `ser_hdd`, `ser_cpu`, `date_start`, `date_end`)
-		values
+		INSERT INTO `regist` 
+			(`code`, `node`, `ser_hdd`, `ser_cpu`, `date_start`, `date_end`)
+		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.code},#{item.node},#{item.ser_hdd},#{item.ser_cpu},#{item.date_start},#{item.date_end})
 		</foreach>
 	</insert>
 	
-	<update id="update" parameterType="com.cas.authority.model.Regist">
-		UPDATE `regist`
-		SET
-			`code` = #{code},
-			`node` = #{node},
-			`ser_hdd` = #{ser_hdd},
-			`ser_cpu` = #{ser_cpu},
-			`date_start` = #{date_start},
-			`date_end` = #{date_end}
-		WHERE 
-			`id` = #{id};
-</update>
+<!-- 	<update id="update" parameterType="com.cas.authority.model.Regist"> -->
+<!-- 		UPDATE `regist` -->
+<!-- 		SET -->
+<!-- 			`code` = #{code}, -->
+<!-- 			`node` = #{node}, -->
+<!-- 			`ser_hdd` = #{ser_hdd}, -->
+<!-- 			`ser_cpu` = #{ser_cpu}, -->
+<!-- 			`date_start` = #{date_start}, -->
+<!-- 			`date_end` = #{date_end} -->
+<!-- 		WHERE  -->
+<!-- 			`id` = #{id}; -->
+<!-- 	</update> -->
 </mapper>

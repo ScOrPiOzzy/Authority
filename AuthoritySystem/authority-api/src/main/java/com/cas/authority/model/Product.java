@@ -1,16 +1,13 @@
 package com.cas.authority.model;
 
+import javax.persistence.Id;
+
 public class Product {
 	/**
 	 * 产品ID
 	 */
+	@Id
 	private Integer id;
-
-	/**
-	 * 产品版本
-	 */
-	private String version;
-
 	/**
 	 * 产品名称
 	 */
@@ -40,22 +37,6 @@ public class Product {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	/**
-	 * 获取产品版本
-	 * @return version - 产品版本
-	 */
-	public String getVersion() {
-		return version;
-	}
-
-	/**
-	 * 设置产品版本
-	 * @param version 产品版本
-	 */
-	public void setVersion(String version) {
-		this.version = version;
 	}
 
 	/**

@@ -1,55 +1,46 @@
 package com.cas.authority.model;
 
+import java.util.Date;
+
+import javax.persistence.Id;
+
 public class Record {
 	/**
 	 * 订单编号
 	 */
+	@Id
 	private Integer id;
 
 	/**
 	 * 供货时间（作为授权证书中的内容）
 	 */
-	private String date;
-
+	private Date date_supply;
 	/**
-	 * 客户编号
+	 * 记录的添加时间
 	 */
-	private Integer cid;
+	private Date date_create;
 
 	/**
 	 * 产品编号（作为授权证书中的内容）
 	 */
 	private Integer pid;
-
 	/**
 	 * 交易类型("0:押标","1:供货")
 	 */
 	private Integer type;
-
 	/**
 	 * 订单金额(单位：万元)
 	 */
 	private Float price;
-
-	/**
-	 * 加密锁
-	 */
-	private String eid;
-
-	/**
-	 * 剩余欠款
-	 */
-	private Float debt;
-
 	/**
 	 * 销售人员
 	 */
 	private String sid;
 
 	/**
-	 * 一个产品对于一个客户都有一个唯一的注册码
+	 * 客户编号
 	 */
-	private String rcode;
+	private Integer cid;
 
 	/**
 	 * 获取订单编号
@@ -71,16 +62,32 @@ public class Record {
 	 * 获取供货时间（作为授权证书中的内容）
 	 * @return date - 供货时间（作为授权证书中的内容）
 	 */
-	public String getDate() {
-		return date;
+	public Date getDate_create() {
+		return date_create;
 	}
 
 	/**
 	 * 设置供货时间（作为授权证书中的内容）
 	 * @param date 供货时间（作为授权证书中的内容）
 	 */
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate_create(Date date_create) {
+		this.date_create = date_create;
+	}
+
+	/**
+	 * 获取供货时间（作为授权证书中的内容）
+	 * @return date - 供货时间（作为授权证书中的内容）
+	 */
+	public Date getDate_supply() {
+		return date_supply;
+	}
+
+	/**
+	 * 设置供货时间（作为授权证书中的内容）
+	 * @param date 供货时间（作为授权证书中的内容）
+	 */
+	public void setDate_supply(Date date_supply) {
+		this.date_supply = date_supply;
 	}
 
 	/**
@@ -132,38 +139,6 @@ public class Record {
 	}
 
 	/**
-	 * 获取加密锁
-	 * @return eid - 加密锁
-	 */
-	public String getEid() {
-		return eid;
-	}
-
-	/**
-	 * 设置加密锁
-	 * @param eid 加密锁
-	 */
-	public void setEid(String eid) {
-		this.eid = eid;
-	}
-
-	/**
-	 * 获取剩余欠款
-	 * @return debt - 剩余欠款
-	 */
-	public Float getDebt() {
-		return debt;
-	}
-
-	/**
-	 * 设置剩余欠款
-	 * @param debt 剩余欠款
-	 */
-	public void setDebt(Float debt) {
-		this.debt = debt;
-	}
-
-	/**
 	 * 获取销售人员
 	 * @return sid - 销售人员
 	 */
@@ -177,22 +152,6 @@ public class Record {
 	 */
 	public void setSid(String sid) {
 		this.sid = sid;
-	}
-
-	/**
-	 * 获取一个产品对于一个客户都有一个唯一的注册码
-	 * @return rcode - 一个产品对于一个客户都有一个唯一的注册码
-	 */
-	public String getRcode() {
-		return rcode;
-	}
-
-	/**
-	 * 设置一个产品对于一个客户都有一个唯一的注册码
-	 * @param rcode 一个产品对于一个客户都有一个唯一的注册码
-	 */
-	public void setRcode(String rcode) {
-		this.rcode = rcode;
 	}
 
 	public Integer getCid() {

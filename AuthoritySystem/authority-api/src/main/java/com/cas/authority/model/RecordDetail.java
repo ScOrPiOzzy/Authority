@@ -2,16 +2,24 @@ package com.cas.authority.model;
 
 import java.util.Date;
 
+import javax.persistence.Id;
+
 public class RecordDetail {
 	/**
 	 * 订单编号
 	 */
+	@Id
 	private Integer id;
 
 	/**
 	 * 供货时间（作为授权证书中的内容）
 	 */
-	private Date date;
+	private Date createDate;
+
+	/**
+	 * 供货时间（作为授权证书中的内容）
+	 */
+	private Date supplyDate;
 
 	/**
 	 * 客户名称
@@ -29,11 +37,6 @@ public class RecordDetail {
 	private Float price;
 
 	/**
-	 * 剩余欠款
-	 */
-	private Float debt;
-
-	/**
 	 * 销售人员
 	 */
 	private String salerName;
@@ -46,12 +49,20 @@ public class RecordDetail {
 		this.id = id;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getSupplyDate() {
+		return supplyDate;
+	}
+
+	public void setSupplyDate(Date supplyDate) {
+		this.supplyDate = supplyDate;
 	}
 
 	public String getUsername() {
@@ -76,14 +87,6 @@ public class RecordDetail {
 
 	public void setPrice(Float price) {
 		this.price = price;
-	}
-
-	public Float getDebt() {
-		return debt;
-	}
-
-	public void setDebt(Float debt) {
-		this.debt = debt;
 	}
 
 	public String getSalerName() {

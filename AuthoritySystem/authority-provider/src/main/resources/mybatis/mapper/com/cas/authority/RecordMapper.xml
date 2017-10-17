@@ -4,15 +4,13 @@
 	<resultMap id="BaseResultMap" type="com.cas.authority.model.Record">
 		<!-- WARNING - @mbg.generated -->
 		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="date" jdbcType="VARCHAR" property="date" />
+		<result column="date_supply" jdbcType="TIMESTAMP" property="date" />
 		<result column="cid" jdbcType="INTEGER" property="cid" />
 		<result column="pid" jdbcType="INTEGER" property="pid" />
 		<result column="type" jdbcType="INTEGER" property="type" />
 		<result column="price" jdbcType="REAL" property="price" />
-		<result column="eid" jdbcType="VARCHAR" property="eid" />
-		<result column="debt" jdbcType="REAL" property="debt" />
 		<result column="sid" jdbcType="VARCHAR" property="sid" />
-		<result column="rcode" jdbcType="VARCHAR" property="rcode" />
+		<result column="date_create" jdbcType="TIMESTAMP" property="date" />
 	</resultMap>
 
 	<resultMap id="UserRegistCodeMap" type="com.cas.authority.model.UserRegistEntity">
@@ -24,28 +22,39 @@
 		SELECT r.code code, u.name name
 		FROM record c, user u, reg_code r
 		WHERE r.rid = c.id
-		AND u.id = c.cid
-		AND r.code = #{arg0}
-		AND u.name = #{arg1}
+			AND u.id = c.cid
+			AND r.code = #{arg0}
+			AND u.name = #{arg1}
 	</select>
 
 	<resultMap id="recordDetailMap" type="com.cas.authority.model.RecordDetail">
 		<result property="id" column="c_id" javaType="Integer" />
-		<result property="date" column="c_date" javaType="java.util.Date" />
+		<result property="createDate" column="c_date_create" javaType="java.util.Date" />
+		<result property="supplyDate" column="c_date_supply" javaType="java.util.Date" />
 		<result property="username" column="u_name" />
 		<result property="productName" column="p_name" />
 		<result property="price" column="c_price" javaType="Float" />
-		<result property="debt" column="c_debt" javaType="Float" />
 	</resultMap>
+
 	<select id="selectAllDetail" resultMap="recordDetailMap">
-		SELECT c.id c_id, c.date c_date, u.name u_name, p.name p_name, c.type c_type, c.price c_price,
-		c.debt c_debt, r.code r_code
-		FROM record c, user u, reg_code r, product p
-		WHERE r.rid = c.id
-		AND u.id = c.cid
-		AND p.id = c.pid
+		SELECT c.id c_id, c.date_supply c_date_supply, c.date_create c_date_create, u.name u_name, p.name p_name, c.type c_type, c.price c_price
+		FROM record c, user u, product p
+		WHERE u.id = c.cid
+			AND p.id = c.pid
 	</select>
-	<select id="selectAll" resultType="com.cas.authority.model.Record">
-		SELECT * FROM record
-	</select>
+
+<!-- 	<select id="selectAll" resultType="com.cas.authority.model.Record"> -->
+<!-- 		SELECT * FROM record -->
+<!-- 	</select> -->
+	
+<!-- 	<insert id="insert" useGeneratedKeys="true"  parameterType="com.cas.authority.model.Record" > -->
+<!-- 		<selectKey resultType="int" keyProperty="id" order="AFTER"> -->
+<!-- 			SELECT -->
+<!-- 			LAST_INSERT_ID() -->
+<!-- 		</selectKey> -->
+<!-- 		INSERT INTO `record` -->
+<!-- 			(`date_create`, `date_supply`, `type`, `price`, `sid`, `cid`, `pid`) -->
+<!-- 		VALUES -->
+<!-- 			(#{date_create},#{date_supply},#{type},#{price},#{sid},#{cid},#{pid}) -->
+<!-- 	</insert> -->
 </mapper>

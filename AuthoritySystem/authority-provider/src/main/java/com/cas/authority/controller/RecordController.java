@@ -2,9 +2,11 @@ package com.cas.authority.controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cas.authority.model.Record;
 import com.cas.authority.service.RecordService;
 
 /**
@@ -16,11 +18,11 @@ public class RecordController {
 	@Resource
 	private RecordService recordService;
 
-//    @PostMapping("/add")
-//    public Result add(Record record) {
-//        recordService.save(record);
-//        return ResultGenerator.genSuccessResult();
-//    }
+	@PostMapping("add")
+	public Object add(Record record) {
+		recordService.save(record);
+		return record;
+	}
 //
 //    @PostMapping("/delete")
 //    public Result delete(@RequestParam Integer id) {
