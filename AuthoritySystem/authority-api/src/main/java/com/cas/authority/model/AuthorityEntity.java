@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @XmlRootElement
 public class AuthorityEntity implements Serializable {
 	/**
@@ -27,8 +29,10 @@ public class AuthorityEntity implements Serializable {
 	// 产品代号
 	private String productID;
 	// 过期时间(格式：yyyy-MM-dd)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String fromDate;
 	// 过期时间(格式：yyyy-MM-dd)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String endDate;
 	// 数字签名
 	private String sign;

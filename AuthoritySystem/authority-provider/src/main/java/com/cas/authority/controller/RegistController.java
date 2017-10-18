@@ -69,7 +69,7 @@ public class RegistController extends AbstractBaseController {
 
 		UserRegistEntity record = recordService.findRecord(entity.getCode(), entity.getCustomName());
 		boolean valid = record != null && record.getRegistUsed() != 1;
-		if (valid ) {
+		if (valid) {
 //			服务器验证通过后，
 //			1、将客户端提交的数据保存
 			entity.getCpuSer();
@@ -99,19 +99,19 @@ public class RegistController extends AbstractBaseController {
 	@RequestMapping(value = "regist_list")
 	@ResponseBody
 	public Object showRegistList(HttpServletRequest request, Model model) {
-		int total = registService.getTotal();
-		System.err.println("total:" + total);
-		Condition condition = new Condition(Regist.class);
-		Criteria criteria = condition.createCriteria();
+		Condition condition_belong_record = new Condition(Regist.class);
+		Criteria criteria = condition_belong_record.createCriteria();
 		int recordId = Integer.parseInt(request.getParameter("recordId"));// 所属的销售记录
 		criteria.andEqualTo("record_id", recordId);
 
+		int total = registService.getTotalBy(condition_belong_record);
+		System.err.println("total:" + total);
 		int page = Integer.parseInt(request.getParameter("page"));// 当前页
 		int rows = Integer.parseInt(request.getParameter("rows"));// 每页条数
 //		List<User> data = userService.getCurrentPage((page - 1) * rows, rows);
 		System.out.println("===显示页码：" + page + ", 每页条数： " + rows);
 		PageHelper.startPage(page, rows, false);
-		List<Regist> registList = registService.findByCondition(condition);
+		List<Regist> registList = registService.findByCondition(condition_belong_record);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("data", registList);

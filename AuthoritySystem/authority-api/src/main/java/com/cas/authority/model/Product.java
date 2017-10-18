@@ -1,6 +1,10 @@
 package com.cas.authority.model;
 
+import java.util.Date;
+
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Product {
 	/**
@@ -21,7 +25,8 @@ public class Product {
 	/**
 	 * 发布时间
 	 */
-	private String releasedate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date releasedate;
 
 	/**
 	 * 获取产品ID
@@ -75,7 +80,7 @@ public class Product {
 	 * 获取发布时间
 	 * @return releaseDate - 发布时间
 	 */
-	public String getReleasedate() {
+	public Date getReleasedate() {
 		return releasedate;
 	}
 
@@ -83,7 +88,7 @@ public class Product {
 	 * 设置发布时间
 	 * @param releasedate 发布时间
 	 */
-	public void setReleasedate(String releasedate) {
+	public void setReleasedate(Date releasedate) {
 		this.releasedate = releasedate;
 	}
 }

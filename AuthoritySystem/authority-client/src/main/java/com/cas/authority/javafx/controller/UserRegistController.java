@@ -1,11 +1,15 @@
 package com.cas.authority.javafx.controller;
 
+import java.util.UUID;
+
 import com.cas.authority.action.RegisterAction;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 
 public class UserRegistController {
@@ -14,7 +18,26 @@ public class UserRegistController {
 	@FXML
 	private TextField username;
 	@FXML
-	private TextArea code;
+	private TextField code;
+
+	@FXML
+	public void initialize() {
+		code.focusedProperty().addListener((s, o, n) -> {
+			if(n.booleanValue()) {
+				Clipboard clipboard = Clipboard.getSystemClipboard();
+				String clipContent = clipboard.getString();
+				if (clipContent != null) {
+					clipContent = clipContent.trim();
+//					验证是否为UUID格式
+					try {
+						UUID.fromString(clipContent);
+						code.setText(clipContent);
+					} catch (Exception e2) {
+					}
+				}
+			}
+		});
+	}
 
 	@FXML
 	public void cancel() {

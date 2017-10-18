@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class RecordDetail {
 	/**
 	 * 订单编号
@@ -14,11 +16,13 @@ public class RecordDetail {
 	/**
 	 * 供货时间（作为授权证书中的内容）
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createDate;
 
 	/**
 	 * 供货时间（作为授权证书中的内容）
 	 */
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date supplyDate;
 
 	/**

@@ -3,6 +3,9 @@ package com.cas.authority.model;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Regist {
 //	
@@ -17,14 +20,23 @@ public class Regist {
 //	处理器序列号
 	private String ser_cpu;
 //	有效期起始日期
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date_start;
 //	过期日期
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date_end;
 //	过期日期
 	private Integer record_id;
 	
 	private Integer used;
 
+//	有效期
+	@Transient
+	private Integer validity;
+//	注册码数量
+	@Transient
+	private Integer amount;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -95,6 +107,22 @@ public class Regist {
 
 	public void setUsed(Integer used) {
 		this.used = used;
+	}
+
+	public Integer getValidity() {
+		return validity;
+	}
+
+	public void setValidity(Integer validity) {
+		this.validity = validity;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
 }

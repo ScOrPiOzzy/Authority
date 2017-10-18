@@ -75,6 +75,7 @@ function loadDataList(listdata) {
                     "<td>CPU序列号</td>"+
                     "<td>起始日期</td>"+
                     "<td>截止日期</td>"+
+                    "<td>状态</td>"+
                "</tr>";
     $("#listData").append(html);
     for (var i = 0; i < listdata.length; i++) {
@@ -85,8 +86,10 @@ function loadDataList(listdata) {
 	        "<td>"+n.node+"</td>"+
 	        "<td>"+n.ser_hdd+"</td>"+
 	        "<td>"+n.ser_cpu+"</td>"+
-	        "<td>"+n.date_start+"</td>"+
-	        "<td>"+n.date_end+"</td>"+
+//	        
+	        "<td>"+new Date(n.date_start).format("yyyy-MM-dd")+"</td>"+
+	        "<td>"+new Date(n.date_end).format("yyyy-MM-dd")+"</td>"+
+	        "<td>"+(n.used == 0 ? "---":"已激活")+"</td>"
         "</tr>";
         $("#listData").append(html);
     }

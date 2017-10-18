@@ -80,8 +80,8 @@ function loadDataList(listdata) {
 	        "<td>"+n.username+"</td>"+
 	        "<td>"+n.productName+"</td>"+
 	        "<td>"+n.price+"</td>"+
-	        "<td>"+n.createDate+"</td>"+
-	        "<td>"+n.supplyDate+"</td>"+
+	        "<td>"+new Date(n.createDate).format("yyyy-MM-dd")+"</td>"+
+	        "<td>"+new Date(n.supplyDate).format("yyyy-MM-dd")+"</td>"+
 	        "<td>"+n.salerName+"</td>"+
 	        "<td><a href='/authority/show/"+n.id+"' title='"+n.id+"' >查看注册码</a></td>"+
         "</tr>";
