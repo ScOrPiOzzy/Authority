@@ -10,6 +10,8 @@ import tk.mybatis.mapper.entity.Condition;
  * Service 层 基础接口，其他Service 接口 请继承该接口
  */
 public interface Service<T> {
+	int getTotal();
+	
 	void save(T model);// 持久化
 
 	void save(List<T> models);// 批量持久化

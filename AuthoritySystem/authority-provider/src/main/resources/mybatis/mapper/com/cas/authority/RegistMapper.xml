@@ -10,18 +10,19 @@
 		<result column="ser_cpu" jdbcType="VARCHAR" property="ser_cpu" />
 		<result column="date_start" jdbcType="TIMESTAMP" property="date_start" />
 		<result column="date_end" jdbcType="TIMESTAMP" property="date_end" />
+		<result column="used" jdbcType="TINYINT" property="used" />
 	</resultMap>
 
-<!-- 	<insert id="insert" useGeneratedKeys="true"  parameterType="com.cas.authority.model.Regist"> -->
-<!-- 		<selectKey resultType="int" keyProperty="id" order="AFTER"> -->
-<!-- 			SELECT -->
-<!-- 			LAST_INSERT_ID() -->
-<!-- 		</selectKey> -->
-<!-- 		INSERT INTO `regist`  -->
-<!-- 			(`code`, `node`, `ser_hdd`, `ser_cpu`, `date_start`, `date_end`) -->
-<!-- 		VALUES -->
-<!-- 			(#{code},#{node},#{ser_hdd},#{ser_cpu},#{date_start},#{date_end}) -->
-<!-- 	</insert> -->
+	<insert id="insertRetPK" useGeneratedKeys="true"  parameterType="com.cas.authority.model.Regist" keyProperty="id">
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO `regist` 
+			(`code`, `node`, `ser_hdd`, `ser_cpu`, `date_start`, `date_end`)
+		VALUES
+			(#{code},#{node},#{ser_hdd},#{ser_cpu},#{date_start},#{date_end})
+	</insert>
 
 	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
 		<selectKey resultType="long" keyProperty="id" order="AFTER">

@@ -22,9 +22,15 @@ public class RecordServiceImpl extends AbstractService<Record> implements Record
 	@Override
 	public void save(Record model) {
 		model.setDate_create(new Date());
-		super.save(model);
+		mapper.insertRetPK(model);
 	}
 
+	@Override
+	public RecordDetail findDetailBy(Integer id) {
+		RecordMapper m = (RecordMapper) mapper;
+		return m.selectDetailBy(id);
+	}
+	
 	@Override
 	public List<RecordDetail> findAllDetail() {
 		RecordMapper m = (RecordMapper) mapper;

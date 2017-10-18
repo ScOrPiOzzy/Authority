@@ -10,8 +10,10 @@ import com.cas.authority.model.UserRegistEntity;
 
 @Mapper
 public interface RecordMapper extends IMapper<Record> {
-	
+
 	UserRegistEntity selectBy(String registCode, String userUnit);
 
 	List<RecordDetail> selectAllDetail();
+
+	RecordDetail selectDetailBy(Integer id);
 }

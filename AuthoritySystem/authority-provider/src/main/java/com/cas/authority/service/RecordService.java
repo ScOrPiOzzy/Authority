@@ -10,6 +10,7 @@ import com.cas.authority.model.UserRegistEntity;
  * Created by CodeGenerator on 2017/10/13.
  */
 public interface RecordService extends Service<Record> {
+	RecordDetail findDetailBy(Integer id);
 
 	List<RecordDetail> findAllDetail();
 

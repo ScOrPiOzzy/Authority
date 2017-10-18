@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.security.PublicKey;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -22,7 +21,6 @@ import com.cas.authority.Consts;
 import com.cas.authority.model.AuthorityEntity;
 import com.cas.authority.util.EntityUtil;
 import com.cas.authority.util.HardDriveUtil;
-import com.cas.authority.util.KeyStoreUtil;
 
 import oshi.SystemInfo;
 
@@ -54,13 +52,13 @@ public class RegisterAction {
 			return;
 		}
 
-		PublicKey pubKey = null;
-		try {
-			pubKey = KeyStoreUtil.getPublicKey(Consts.FILE_CERTIFICATION);
-		} catch (Exception e) {
-			//
-			throw new RuntimeException("无效的证书文件");
-		}
+//		PublicKey pubKey = null;
+//		try {
+//			pubKey = KeyStoreUtil.getPublicKey(Consts.FILE_CERTIFICATION);
+//		} catch (Exception e) {
+//			//
+//			throw new RuntimeException("无效的证书文件");
+//		}
 
 		// 3、将注册码发送给公司服务器
 		Client client = ClientBuilder.newClient();
@@ -74,8 +72,11 @@ public class RegisterAction {
 //		用户注册码
 		formData.add("code", registCode);
 //		用户电脑信息
-		formData.add("hddSer", username);
-		formData.add("cpuSer", registCode);
+//		从本机获取硬盘信息
+		SystemInfo systemInfo = new SystemInfo();
+		String relativelyPath = System.getProperty("user.dir");
+		formData.add("hddSer", HardDriveUtil.getPortitionId(systemInfo, relativelyPath.charAt(0)));
+		formData.add("cpuSer", HardDriveUtil.getCPUSer(systemInfo));
 
 		Response response = target.request().post(Entity.form(formData));
 
@@ -87,15 +88,6 @@ public class RegisterAction {
 		} else {
 			// 用户收到的证书信息：
 			System.out.println("用户收到的证书信息：" + entity);
-
-			// 记录硬件信息
-			SystemInfo info = new SystemInfo();
-			// 从本机获取硬盘信息
-			SystemInfo systemInfo = new SystemInfo();
-			String relativelyPath = System.getProperty("user.dir");
-			String partitionID = HardDriveUtil.getPortitionId(systemInfo, relativelyPath.charAt(0));
-			entity.setHddSer(partitionID);
-			entity.setCpuSer(HardDriveUtil.getCPUSer(info));
 
 			EntityUtil.saveEntity(entity, authorityFile);
 

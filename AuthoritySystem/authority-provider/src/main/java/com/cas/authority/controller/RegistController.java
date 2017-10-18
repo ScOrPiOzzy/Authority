@@ -1,9 +1,12 @@
 package com.cas.authority.controller;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
@@ -11,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.cas.authority.model.AuthorityEntity;
 import com.cas.authority.model.Record;
 import com.cas.authority.model.Regist;
+import com.cas.authority.model.UserRegistEntity;
 import com.cas.authority.service.RecordService;
 import com.cas.authority.service.RegistService;
+import com.github.pagehelper.PageHelper;
 
 import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example.Criteria;
@@ -36,7 +43,7 @@ public class RegistController extends AbstractBaseController {
 	/**
 	 * 生成证书
 	 */
-	@RequestMapping(path = "/regist", method = RequestMethod.POST)
+	@PostMapping("regist")
 	@ResponseBody
 	public Object generateAuthorityFile(@Valid AuthorityEntity entity, BindingResult result) {
 		if (result.hasErrors()) {
@@ -45,7 +52,7 @@ public class RegistController extends AbstractBaseController {
 				ObjectError objectError = (ObjectError) iter.next();
 				System.err.println(objectError.getDefaultMessage());
 			}
-			return result.getAllErrors();
+			return null;
 		}
 
 //		收到客户请求的注册码
@@ -60,46 +67,63 @@ public class RegistController extends AbstractBaseController {
 //			return getMessage("regist.code.invalid.error");
 //		}
 
-//		开始验证注册码
-		boolean valid = validate(entity);
-
-		if (valid) {
+		UserRegistEntity record = recordService.findRecord(entity.getCode(), entity.getCustomName());
+		boolean valid = record != null && record.getRegistUsed() != 1;
+		if (valid ) {
 //			服务器验证通过后，
 //			1、将客户端提交的数据保存
-			entity.getHddSer();
 			entity.getCpuSer();
+			Regist reg = new Regist();
+			reg.setId(record.getRegistId());
+			reg.setSer_hdd(entity.getHddSer());
+			reg.setSer_cpu(entity.getCpuSer());
+			reg.setUsed(1);
 //			2、将有效期和节点数发送给用户
 			entity.setFromDate("2017-09-22");
 			entity.setEndDate("2018-09-22");
 			entity.setNode(5);
 
+			registService.update(reg);
 			return entity;
 		} else {
 			return null;
 		}
 	}
 
-	@RequestMapping(value = "/regist_list/{rid}", method = RequestMethod.GET)
-	public String showRegistList(@PathVariable(value = "rid") Integer recordId, Model model) {
-		Condition condition = new Condition(Regist.class);
-		Criteria criteria = condition.createCriteria();
-		System.out.println(recordId);
-		criteria.andEqualTo("record_id", recordId);
-		List<Regist> registList = registService.findByCondition(condition);
-		model.addAttribute("registList", registList);
+	@GetMapping("show/{rid}")
+	public String showRegistListPage(@PathVariable(value = "rid") Integer recordId, Model model) {
+		model.addAttribute("record_id", recordId);
 		return "admin/user_regist_list";
 	}
 
-	@RequestMapping(value = "/add_register", method = RequestMethod.POST)
+	@RequestMapping(value = "regist_list")
+	@ResponseBody
+	public Object showRegistList(HttpServletRequest request, Model model) {
+		int total = registService.getTotal();
+		System.err.println("total:" + total);
+		Condition condition = new Condition(Regist.class);
+		Criteria criteria = condition.createCriteria();
+		int recordId = Integer.parseInt(request.getParameter("recordId"));// 所属的销售记录
+		criteria.andEqualTo("record_id", recordId);
+
+		int page = Integer.parseInt(request.getParameter("page"));// 当前页
+		int rows = Integer.parseInt(request.getParameter("rows"));// 每页条数
+//		List<User> data = userService.getCurrentPage((page - 1) * rows, rows);
+		System.out.println("===显示页码：" + page + ", 每页条数： " + rows);
+		PageHelper.startPage(page, rows, false);
+		List<Regist> registList = registService.findByCondition(condition);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("data", registList);
+		map.put("total", total);
+		map.put("result", registList);
+		return map;
+	}
+
+	@PostMapping("/add_register")
 	@ResponseBody
 	public Object addRegist(@Valid Regist regist, BindingResult result) {
 		registService.save(regist);
 		return regist;
-	}
-
-	private boolean validate(AuthorityEntity entity) {
-//		查询数据库，是否存在
-		Object r = recordService.findRecord(entity.getCode(), entity.getCustomName());
-		return r != null;
 	}
 }

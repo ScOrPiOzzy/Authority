@@ -23,17 +23,17 @@ public class IndexController extends AbstractBaseController {
 //	@ResponseBody
 	public Object getIndex(Model model) {
 
-//		1、设置分页信息，包括当前页数和每页显示的总计数
-		PageHelper.startPage(1, 3, false);
-
-//		List<RecordDetail> recordList = recordService.getAllRecord();
-		List<RecordDetail> recordList = recordService.findAllDetail();
-		
-//		PageBean<Record> pageData = new PageBean<>(1, 3, 1);
-		
-		System.err.println(recordList.size());
-
-		model.addAttribute("recordList", recordList);
+////		1、设置分页信息，包括当前页数和每页显示的总计数
+//		PageHelper.startPage(1, 3, false);
+//
+////		List<RecordDetail> recordList = recordService.getAllRecord();
+//		List<RecordDetail> recordList = recordService.findAllDetail();
+//		
+////		PageBean<Record> pageData = new PageBean<>(1, 3, 1);
+//		
+//		System.err.println(recordList.size());
+//
+//		model.addAttribute("recordList", recordList);
 
 
 		return "admin/index";

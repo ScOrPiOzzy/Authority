@@ -13,16 +13,21 @@
 		<result column="date_create" jdbcType="TIMESTAMP" property="date" />
 	</resultMap>
 
-	<resultMap id="UserRegistCodeMap" type="com.cas.authority.model.UserRegistEntity">
+	<resultMap id="userRegistCodeMap" type="com.cas.authority.model.UserRegistEntity">
 		<result property="username" column="code" />
 		<result property="registCode" column="name" />
+		<result property="registId" column="r_id" />
+		<result property="registUsed" column="r_used" />
 	</resultMap>
 
-	<select id="selectBy" resultMap="UserRegistCodeMap">
-		SELECT r.code code, u.name name
-		FROM record c, user u, reg_code r
-		WHERE r.rid = c.id
-			AND u.id = c.cid
+	<select id="selectBy" resultMap="userRegistCodeMap">
+		SELECT
+			r.code code, u.name name, r.id r_id ,r.used r_used
+		FROM
+			record c, user u, regist r
+		WHERE
+			u.id = c.cid
+			AND r.record_id = c.id
 			AND r.code = #{arg0}
 			AND u.name = #{arg1}
 	</select>
@@ -43,18 +48,26 @@
 			AND p.id = c.pid
 	</select>
 
+	<select id="selectDetailBy" resultMap="recordDetailMap">
+		SELECT c.id c_id, c.date_supply c_date_supply, c.date_create c_date_create, u.name u_name, p.name p_name, c.type c_type, c.price c_price
+		FROM record c, user u, product p
+		WHERE u.id = c.cid
+			AND p.id = c.pid
+			AND c.id = #{arg0}
+	</select>
+
 <!-- 	<select id="selectAll" resultType="com.cas.authority.model.Record"> -->
 <!-- 		SELECT * FROM record -->
 <!-- 	</select> -->
 	
-<!-- 	<insert id="insert" useGeneratedKeys="true"  parameterType="com.cas.authority.model.Record" > -->
-<!-- 		<selectKey resultType="int" keyProperty="id" order="AFTER"> -->
-<!-- 			SELECT -->
-<!-- 			LAST_INSERT_ID() -->
-<!-- 		</selectKey> -->
-<!-- 		INSERT INTO `record` -->
-<!-- 			(`date_create`, `date_supply`, `type`, `price`, `sid`, `cid`, `pid`) -->
-<!-- 		VALUES -->
-<!-- 			(#{date_create},#{date_supply},#{type},#{price},#{sid},#{cid},#{pid}) -->
-<!-- 	</insert> -->
+	<insert id="insertRetPK" parameterType="com.cas.authority.model.Record" >
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO `record`
+			(`date_create`, `date_supply`, `type`, `price`, `sid`, `cid`, `pid`)
+		VALUES
+			(#{date_create},#{date_supply},#{type},#{price},#{sid},#{cid},#{pid})
+	</insert>
 </mapper>
