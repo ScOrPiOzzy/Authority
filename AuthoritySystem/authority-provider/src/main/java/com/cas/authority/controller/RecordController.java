@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
 
 import com.cas.authority.model.Record;
 import com.cas.authority.model.RecordDetail;

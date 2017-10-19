@@ -1,0 +1,30 @@
+1.4.1 Proper error handling when icon load fails (#29)
+
+1.4.0 Add beforeInitialView() lifecycle method.
+- Override this to add special code (initially meant to 
+  manipulate the platform's system tray).
+- Added getSystemTray in GUIState.
+
+1.3.30 Added showView(View, Modality) for multiple windows
+
+1.3.25 Show error dialog on failed start
+
+1.3.22 Interaction with other JVM languages
+- Make launchApp public.
+
+1.3.21 Add HostServices:
+- Make HostServices available in GUIState.
+
+1.3.9 Add splash screen:
+- Add a configurable splash screen while app starts app.
+
+1.2.x Add application icons:
+- Add a standard app icon set.
+- Initial window size and title is configurable by properties.
+
+1.1.0 Introduce Abstract Classes and annotations:
+- Use Adam Bien's and Thomas Darimont's abstract class for view.
+- Add annotations to configure view and controller classes.
+
+1.0.0 Spring Framework Integration:
+- Simple starter class to use spring CDI in JavaFX projects.

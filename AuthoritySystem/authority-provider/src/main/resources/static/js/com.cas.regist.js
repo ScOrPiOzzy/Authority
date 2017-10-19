@@ -2,10 +2,29 @@
 $(document).ready(function() {
     getDataList(0, null);
 });
+layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需执行这一句
+	var $ = layui.jquery, 
+	layer = layui.layer,
+	form = layui.form,
+	laydate = layui.laydate
+	; //独立版的layer无需执行这一句
+//	
+	form.render();
+	//监听提交  
+	form.on('submit(regist_form_filter)', function(data){
+	  submitForm();
+	  return false;
+	});
+
+	//执行一个laydate实例
+	laydate.render({
+	  elem: 'input[name="date_start"]' //指定元素
+	});
+});
 
 //异步提交表单
 var options={
-	url:"/authority/add_register", //form提交数据的地址
+	url:"/regist/add", //form提交数据的地址
 	type:"post", //form提交的方式(method:post/get)
 //	target:"#listData2", //服务器返回的响应数据显示在元素(Id)号确定
 //	beforeSubmit:function(){
@@ -13,8 +32,11 @@ var options={
 //	}, //提交前执行的回调函数
 	success:function(data) {
 //		insertData(data);
-		alert("添加成功");
+		layer.alert("添加成功");
 	}, //提交成功后执行的回调函数
+	error:function(){
+		layer.alert("提交失败");
+	},
 	dataType:"json", //服务器返回数据类型
 	clearForm:true, //提交成功后是否清空表单中的字段值
 	restForm:true, //提交成功后是否重置表单中的字段值，即恢复到页面加载时的状态
@@ -31,7 +53,7 @@ var initFlag = true;
 
 function getDataList(currPage, jg) {
     $.ajax({
-        url : "/authority/regist_list/",
+        url : "/regist/list/",
         type : "get",
         dataType : 'json',
         data : {
@@ -67,20 +89,22 @@ function getDataList(currPage, jg) {
 }
 function loadDataList(listdata) {
     //表头
-    var html ="<tr class='t-header'>"+
-                    "<td>NO.</td>"+
-                    "<td>注册码</td>"+
-                    "<td>节点数</td>"+
-                    "<td>硬盘号</td>"+
-                    "<td>CPU序列号</td>"+
-                    "<td>起始日期</td>"+
-                    "<td>截止日期</td>"+
-                    "<td>状态</td>"+
+    var html ="<thead><tr>"+
+                    "<th>NO.</th>"+
+                    "<th>注册码</th>"+
+                    "<th>节点数</th>"+
+                    "<th>硬盘号</th>"+
+                    "<th>CPU序列号</th>"+
+                    "<th>起始日期</th>"+
+                    "<th>截止日期</th>"+
+                    "<th>状态</th></thead>"+
                "</tr>";
     $("#listData").append(html);
+    
+    var html = "<tbody>";
     for (var i = 0; i < listdata.length; i++) {
     	var n = listdata[i];
-        var html = "<tr>"+
+        html = html + "<tr>"+
 	        "<td>"+(i + 1)+"</td>"+
 	        "<td>"+n.code+"</td>"+
 	        "<td>"+n.node+"</td>"+
@@ -91,7 +115,8 @@ function loadDataList(listdata) {
 	        "<td>"+new Date(n.date_end).format("yyyy-MM-dd")+"</td>"+
 	        "<td>"+(n.used == 0 ? "---":"已激活")+"</td>"
         "</tr>";
-        $("#listData").append(html);
     }
+    html = html + "</tbody>";
+    $("#listData").append(html);
 }
 //分页查询结束

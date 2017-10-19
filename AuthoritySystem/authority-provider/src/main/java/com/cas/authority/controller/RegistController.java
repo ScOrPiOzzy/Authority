@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cas.authority.model.AuthorityEntity;
-import com.cas.authority.model.Record;
 import com.cas.authority.model.Regist;
 import com.cas.authority.model.UserRegistEntity;
 import com.cas.authority.service.RecordService;
@@ -33,17 +30,23 @@ import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Controller
-@RequestMapping(value = "authority")
+@RequestMapping(value = "regist")
 public class RegistController extends AbstractBaseController {
 	@Resource
 	private RecordService recordService;
 	@Resource
 	private RegistService registService;
 
+	@GetMapping("time_mills")
+	@ResponseBody
+	public Long getTime() {
+		return System.currentTimeMillis();
+	}
+
 	/**
 	 * 生成证书
 	 */
-	@PostMapping("regist")
+	@PostMapping("active")
 	@ResponseBody
 	public Object generateAuthorityFile(@Valid AuthorityEntity entity, BindingResult result) {
 		if (result.hasErrors()) {
@@ -90,13 +93,13 @@ public class RegistController extends AbstractBaseController {
 		}
 	}
 
-	@GetMapping("show/{rid}")
+	@GetMapping("home/{rid}")
 	public String showRegistListPage(@PathVariable(value = "rid") Integer recordId, Model model) {
 		model.addAttribute("record_id", recordId);
-		return "admin/user_regist_list";
+		return "admin/regist_home";
 	}
 
-	@RequestMapping(value = "regist_list")
+	@RequestMapping(value = "list")
 	@ResponseBody
 	public Object showRegistList(HttpServletRequest request, Model model) {
 		Condition condition_belong_record = new Condition(Regist.class);
@@ -120,7 +123,7 @@ public class RegistController extends AbstractBaseController {
 		return map;
 	}
 
-	@PostMapping("/add_register")
+	@PostMapping("/add")
 	@ResponseBody
 	public Object addRegist(@Valid Regist regist, BindingResult result) {
 		registService.save(regist);

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+	<script type="text/javascript" src="/js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="/js/jquery.pagination.js" ></script>
+	<script type="text/javascript" src="/js/jquery.form.js" ></script>
+	<script type="text/javascript" src="/js/date.format.js" ></script>
+	<script type="text/javascript" src="/layui/layui.js" ></script>
+	<script type="text/javascript" src="/js/com.cas.regist.js" ></script>
+	<link rel="stylesheet" type="text/css" href="/css/pagination.css"  />
+	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css"  />
+</head>
+<body>
+	<table id="listData" class="layui-table" ></table>
+    <div id="Pagination" class="pagination" ></div>
+	<form id="regist_form" class="layui-form" lay-verify="value" >
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">节点数</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="node" required="required"  lay-verify="required|number" placeholder="请输入注册码支持的节点数" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">生效日期</label>
+		<div class="layui-input-inline">
+			<input name="date_start" type="text" class="layui-input" lay-verify="required" />
+		</div>
+	  </div>
+
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">有效期</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="validity" required="required"  lay-verify="required|number" placeholder="请输入注册码的有效期（单位：月）" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">注册码数量</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="amount" required="required"  lay-verify="required|number" placeholder="请输入生成注册码的数量" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+
+	  <input name="record_id" type="hidden" th:value="${record_id}" />
+
+      <div class="layui-form-item">
+	    <div class="layui-input-block">
+	      <button class="layui-btn lay-submit" lay-filter="regist_form_filter" lay-submit="submitForm()" >立即提交</button>
+	      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+	    </div>
+	  </div>
+	</form>
+	<input id="recordId" type="hidden" th:value="${record_id}"/>
+</body>
+</html>

@@ -54,7 +54,7 @@ public class TimerClock implements Runnable {
 		try {
 			// 尝试从公司服务器获取时间
 			Client client = ClientBuilder.newClient();
-			WebTarget target = client.target(Consts.BASE_SERVER_URI + "time");
+			WebTarget target = client.target(Consts.BASE_SERVER_URI + Consts.SERVER_URI_TIME_IN_MILLS);
 			Long d = target.request().get().readEntity(Long.class);
 			if (d != null) {
 				// 以公司服务器时间为准。
