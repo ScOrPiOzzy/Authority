@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +60,7 @@ public class RecordController extends AbstractBaseController {
 	 */
 	@GetMapping("page")
 	@ResponseBody
-	public Map<String, Object> page(HttpServletRequest request, HttpServletResponse response) {
+	public Map<String, Object> getPage(HttpServletRequest request) {
 		int total = recordService.getTotal();
 		System.err.println("total:"+total);
 		int page = Integer.parseInt(request.getParameter("page"));// 当前页
@@ -74,5 +75,16 @@ public class RecordController extends AbstractBaseController {
 		map.put("total", total);
 		map.put("result", result);
 		return map;
+	}
+	
+	@GetMapping("home")
+	public String getHome() {
+		return "admin/record_home";
+	}
+	
+	@GetMapping("pageUI")
+	public String getPageUI() {
+//		model.addAttribute("resp", getPage(request));
+		return "admin/record_list";
 	}
 }

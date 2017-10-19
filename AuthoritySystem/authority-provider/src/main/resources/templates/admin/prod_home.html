@@ -9,24 +9,51 @@
 	<script type="text/javascript" src="/js/date.format.js" ></script>
 	<script type="text/javascript" src="/js/com.cas.regist.js" ></script>
 	<link rel="stylesheet" type="text/css" href="/css/pagination.css"  />
+	
+	<script type="text/javascript" src="/layui/layui.js"  ></script>
+	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css"  />
 </head>
 <body>
 	<div id="listData" ></div>
 	<div id="Pagination" class="pagination" ></div>
-	<form id="regist_form">
-		<table>
-			<thead><tr><td>添加注册码</td></tr></thead>
-			<tbody>
-				<tr><td>节点数：</td><td><input name="node" type="text" /></td></tr>
-				<tr><td>生效日期：</td><td><input name="date_start" type="date" /></td></tr>
-				<tr><td>有效期：</td><td><input name="validity" type="text" />(单位：月)</td></tr>
-				<tr><td>注册码数量：</td><td><input name="amount" type="text" /></td></tr>
-				<tr><td><input name="record_id" type="hidden" th:value="${record_id}" /></td></tr>
-				<tr><td><input type="button" value="submit" onclick="submitForm()" /></td></tr>
-			</tbody>
-		</table>
+	<form id="regist_form" class="layui-form" lay-verify="value" >
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">节点数</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="node" required="required"  lay-verify="required|number" placeholder="请输入注册码支持的节点数" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">生效日期</label>
+		<div class="layui-input-inline">
+			<input name="date_start" type="text" class="layui-input" lay-verify="required" />
+		</div>
+	  </div>
+
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">有效期</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="validity" required="required"  lay-verify="required|number" placeholder="请输入注册码的有效期（单位：月）" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">注册码数量</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="amount" required="required"  lay-verify="required|number" placeholder="请输入生成注册码的数量" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+
+	  <input name="record_id" type="hidden" th:value="${record_id}" />
+
+      <div class="layui-form-item">
+	    <div class="layui-input-block">
+	      <button class="layui-btn lay-submit" lay-filter="regist_form_filter" lay-submit="submitForm()" >立即提交</button>
+	      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+	    </div>
+	  </div>
 	</form>
-	
 	<input id="recordId" type="hidden" th:value="${record_id}"/>
 </body>
 </html>

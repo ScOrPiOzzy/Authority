@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+	<script type="text/javascript" src="/js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="/js/jquery.pagination.js" ></script>
+	<script type="text/javascript" src="/js/jquery.form.js" ></script>
+	<script type="text/javascript" src="/layui/layui.js" ></script>
+	<script type="text/javascript" src="/js/date.format.js" ></script>
+	
+	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+</head>
+<body>
+	<table id="listData" class="layui-table" >
+		<thead>
+			<tr>
+				<th>NO.</th>
+                <th>客户名称</th>
+                <th>产品名称</th>
+                <th>订单金额</th>
+                <th>供货日期</th>
+                <th>创建日期</th>
+                <th>销售人员</th>
+                <th></th>
+            </tr>
+		</thead>
+		<tbody>
+			<tr th:each="r,stat:${resp.data}">
+	        	<td>${stat.index + 1}</td>
+		        <td>${r.username}</td>
+		        <td>${r.productName}</td>
+		        <td>${r.price}</td>
+		        <td>${#dates.format(r.createDate,"yyyy-MM-dd")}</td>
+		        <td>${#dates.format(r.supplyDate,"yyyy-MM-dd")}</td>
+		        <td>n.salerName</td>
+		        <td><a href="/regist/home/${r.id}" title="${r.id}" >查看注册码</a></td>
+        	</tr>
+		</tbody>
+	</table>
+</body>
+</html>

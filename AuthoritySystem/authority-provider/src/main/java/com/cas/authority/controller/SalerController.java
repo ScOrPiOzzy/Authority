@@ -18,7 +18,7 @@ import com.cas.authority.model.Saler;
 import com.cas.authority.service.SalerService;
 
 @Controller
-@RequestMapping("saler")
+@RequestMapping("/saler")
 public class SalerController extends AbstractBaseController {
 	@Resource
 	private SalerService salerService;

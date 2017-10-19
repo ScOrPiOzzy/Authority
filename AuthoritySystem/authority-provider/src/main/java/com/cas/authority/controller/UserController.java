@@ -18,7 +18,7 @@ import com.cas.authority.model.User;
 import com.cas.authority.service.UserService;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController extends AbstractBaseController {
 	@Resource
 	private UserService userService;

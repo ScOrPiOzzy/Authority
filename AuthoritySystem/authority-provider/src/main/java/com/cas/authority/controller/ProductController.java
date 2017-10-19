@@ -21,13 +21,19 @@ import com.cas.authority.service.ProductService;
  */
 @RestController
 @RequestMapping("/prod")
-public class ProductController {
+public class ProductController extends AbstractBaseController{
 	@Resource
 	private ProductService productService;
-//	prod_add
 
+	
+	@GetMapping("home")
+	public String getProdHome() {
+		return "admin/user_home";//"admin/prod_home";
+	}
+	
+	
 	@GetMapping("form")
-	public String getSalerForm() {
+	public String getProdForm() {
 		return "admin/prod_add_form";
 	}
 

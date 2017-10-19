@@ -30,7 +30,7 @@ import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Controller
-@RequestMapping(value = "regist")
+@RequestMapping("/regist")
 public class RegistController extends AbstractBaseController {
 	@Resource
 	private RecordService recordService;
