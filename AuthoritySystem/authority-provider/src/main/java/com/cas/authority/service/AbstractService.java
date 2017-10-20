@@ -2,6 +2,7 @@ package com.cas.authority.service;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.exceptions.TooManyResultsException;
@@ -74,14 +75,26 @@ public abstract class AbstractService<T> implements Service<T> {
 	}
 
 	public List<T> findByIds(String ids) {
-		return mapper.selectByIds(ids);
+		List<T> dataList = mapper.selectByIds(ids);
+		if (dataList == null) {
+			dataList = new ArrayList<>();
+		}
+		return dataList;
 	}
 
 	public List<T> findByCondition(Condition condition) {
-		return mapper.selectByCondition(condition);
+		List<T> dataList = mapper.selectByCondition(condition);
+		if (dataList == null) {
+			dataList = new ArrayList<>();
+		}
+		return dataList;
 	}
 
 	public List<T> findAll() {
-		return mapper.selectAll();
+		List<T> dataList = mapper.selectAll();
+		if (dataList == null) {
+			dataList = new ArrayList<>();
+		}
+		return dataList;
 	}
 }

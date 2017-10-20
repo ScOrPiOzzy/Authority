@@ -13,13 +13,20 @@
 	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css"  />
 </head>
 <body>
-	<table id="listData" class="layui-table" ></table>
-    <div id="Pagination" class="pagination" ></div>
+
+<div class="layui-container" style="margin:60px 20px">
 	<form id="regist_form" class="layui-form" lay-verify="value" >
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">节点数</label>
 	    <div class="layui-input-block">
 	      <input type="text" name="node" required="required"  lay-verify="required|number" placeholder="请输入注册码支持的节点数" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">注册码数量</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="amount" required="required"  lay-verify="required|number" placeholder="请输入生成注册码的数量" autocomplete="off" class="layui-input" />
 	    </div>
 	  </div>
 
@@ -36,23 +43,16 @@
 	      <input type="text" name="validity" required="required"  lay-verify="required|number" placeholder="请输入注册码的有效期（单位：月）" autocomplete="off" class="layui-input" />
 	    </div>
 	  </div>
-	  
-	  <div class="layui-form-item">
-	    <label class="layui-form-label">注册码数量</label>
-	    <div class="layui-input-block">
-	      <input type="text" name="amount" required="required"  lay-verify="required|number" placeholder="请输入生成注册码的数量" autocomplete="off" class="layui-input" />
-	    </div>
-	  </div>
 
-	  <input name="record_id" type="hidden" th:value="${record_id}" />
+	  <input id="recordId" name="record_id" type="hidden" th:value="${record_id}" />
 
-      <div class="layui-form-item">
+      <div class="layui-form-item" style="display: none;">
 	    <div class="layui-input-block">
-	      <button class="layui-btn lay-submit" lay-filter="regist_form_filter" lay-submit="submitForm()" >立即提交</button>
+	      <button id="btn_submit" class="layui-btn lay-submit" lay-submit="" lay-filter="regist_form_filter" >立即提交</button>
 	      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 	    </div>
 	  </div>
 	</form>
-	<input id="recordId" type="hidden" th:value="${record_id}"/>
+</div>
 </body>
 </html>

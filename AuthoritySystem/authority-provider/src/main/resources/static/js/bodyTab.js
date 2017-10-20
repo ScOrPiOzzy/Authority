@@ -1,12 +1,11 @@
 /*
-	@Author: 请叫我马哥
 	@Time: 2017-04
 	@Tittle: tab
 	@Description: 点击对应按钮添加新窗口
 */
 var tabFilter,menu=[],liIndex,curNav,delMenu;
 layui.define(["element","jquery"],function(exports){
-	var element = layui.element(),
+	var element = layui.element,
 		$ = layui.jquery,
 		layId,
 		Tab = function(){
@@ -82,7 +81,7 @@ layui.define(["element","jquery"],function(exports){
 					title += '<i class="layui-icon layui-unselect layui-tab-close" data-id="'+tabIdIndex+'">&#x1006;</i>';
 					element.tabAdd(tabFilter, {
 				        title : title,
-				        content :"<iframe th:src='"+_this.attr("data-url")+"' data-id='"+tabIdIndex+"'></frame>",
+				        content :"<iframe src='"+_this.attr("data-url")+"' data-id='"+tabIdIndex+"'></frame>",
 				        id : new Date().getTime()
 				    })
 

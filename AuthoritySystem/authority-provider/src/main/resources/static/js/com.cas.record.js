@@ -95,30 +95,26 @@ var initFlag = true;
 
 function getDataList(currPage, jg) {
     $.ajax({
-        url : "/record/page",
+        url : "/record/data_list",
         type : "get",
         dataType : 'json',
         data : {rows : rows,page : currPage + 1},
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
         success : function(response) {
-            if (response.result) {
-                if (response.data != null && response.data != ""&& response.total != undefined && response.total > 0) {
-                    if (initFlag) {
-                        $("#Pagination").pagination(
-                                response.total,
-                                {
-                                    items_per_page : rows,
-                                    num_edge_entries : 1,
-                                    num_display_entries : 8,
-                                    callback : getDataList//回调函数
-                                });
-                        initFlag = false;
-                    }
-                    $("#listData").html("");
-                    loadDataList(response.data);
-                } else {
-                    //暂无数据
+            if (response.data != null && response.data != ""&& response.total != undefined && response.total > 0) {
+                if (initFlag) {
+                    $("#Pagination").pagination(
+                            response.total,
+                            {
+                                items_per_page : rows,
+                                num_edge_entries : 1,
+                                num_display_entries : 8,
+                                callback : getDataList//回调函数
+                            });
+                    initFlag = false;
                 }
+                $("#listData").html("");
+                loadDataList(response.data);
             } else {
                 //暂无数据
             }
@@ -126,20 +122,7 @@ function getDataList(currPage, jg) {
     });
 }
 function loadDataList(listdata) {
-    //表头
-    var html ="<thead><tr>"+
-                    "<th>NO.</th>"+
-                    "<th>客户名称</th>"+
-                    "<th>产品名称</th>"+
-                    "<th>订单金额</th>"+
-                    "<th>供货日期</th>"+
-                    "<th>创建日期</th>"+
-                    "<th>销售人员</th>"+
-                    "<th></th>"+
-               "</tr></thead>";
-    $("#listData").append(html);
-    
-    var html = "<tbody>";
+    var html;
     for (var i = 0; i < listdata.length; i++) {
     	var n = listdata[i];
         html = html + "<tr>"+
@@ -150,10 +133,9 @@ function loadDataList(listdata) {
 	        "<td>"+new Date(n.createDate).format("yyyy-MM-dd")+"</td>"+
 	        "<td>"+new Date(n.supplyDate).format("yyyy-MM-dd")+"</td>"+
 	        "<td>"+n.salerName+"</td>"+
-	        "<td><a href='/regist/home/"+n.id+"' title='"+n.id+"' >查看注册码</a></td>"+
+	        "<td><a href='/regist/list/"+n.id+"' title='"+n.id+"' >查看注册码</a></td>"+
         "</tr>";
     }
-    html = html + "</tbody>";
     $("#listData").append(html);
 }
 //分页查询结束

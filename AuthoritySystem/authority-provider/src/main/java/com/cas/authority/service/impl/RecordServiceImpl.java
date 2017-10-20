@@ -1,5 +1,6 @@
 package com.cas.authority.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,11 +31,15 @@ public class RecordServiceImpl extends AbstractService<Record> implements Record
 		RecordMapper m = (RecordMapper) mapper;
 		return m.selectDetailBy(id);
 	}
-	
+
 	@Override
 	public List<RecordDetail> findAllDetail() {
 		RecordMapper m = (RecordMapper) mapper;
-		return m.selectAllDetail();
+		List<RecordDetail> data = m.selectAllDetail();
+		if (data == null) {
+			data = new ArrayList<>();
+		}
+		return data;
 	}
 
 	@Override

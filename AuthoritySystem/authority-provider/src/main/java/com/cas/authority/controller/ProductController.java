@@ -6,12 +6,12 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.cas.authority.model.Product;
 import com.cas.authority.service.ProductService;
@@ -19,7 +19,7 @@ import com.cas.authority.service.ProductService;
 /**
  * Created by CodeGenerator on 2017/10/13.
  */
-@RestController
+@Controller
 @RequestMapping("/prod")
 public class ProductController extends AbstractBaseController{
 	@Resource

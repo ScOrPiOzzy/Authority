@@ -1,12 +1,12 @@
 var navs = [{
 	"title" : "后台首页",
 	"icon" : "icon-computer",
-	"href" : "/record/pageUI1?page=1&rows=10",
+	"href" : "/record/page",
 	"spread" : false
 },{
-	"title" : "文章列表",
-	"icon" : "icon-text",
-	"href" : "page/news/newsList.html",
+	"title" : "用户管理",
+	"icon" : "icon-zhanghu",
+	"href" : "/user/list",
 	"spread" : false
 },{
 	"title" : "友情链接",

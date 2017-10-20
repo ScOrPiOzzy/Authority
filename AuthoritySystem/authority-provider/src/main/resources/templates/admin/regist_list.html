@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+	<script type="text/javascript" src="/js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="/js/jquery.pagination.js" ></script>
+	<script type="text/javascript" src="/js/jquery.form.js" ></script>
+	<script type="text/javascript" src="/js/date.format.js" ></script>
+	<script type="text/javascript" src="/layui/layui.js" ></script>
+	<script type="text/javascript" src="/js/com.cas.regist.js" ></script>
+	<link rel="stylesheet" type="text/css" href="/css/pagination.css"  />
+	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css"  />
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    getDataList(0, null);
+		});
+	</script>
+</head>
+<body>
+	<div id="_menu" class="layui-btn-group">
+	  <button class="layui-btn layui-btn-small" param="add">
+	    <i class="layui-icon">&#xe654;</i>
+	  </button>
+<!-- 	  <button class="layui-btn layui-btn-small" param="edit"> -->
+<!-- 	    <i class="layui-icon">&#xe642;</i> -->
+<!-- 	  </button> -->
+<!-- 	  <button class="layui-btn layui-btn-small"  param="del"> -->
+<!-- 	    <i class="layui-icon">&#xe640;</i> -->
+<!-- 	  </button> -->
+<!-- 	  <button class="layui-btn layui-btn-small"> -->
+<!-- 	  	<i class="layui-icon">&#xe602;</i> -->
+<!-- 	  </button> -->
+	</div>
+
+	<table class="layui-table" >
+		<thead>
+			<tr>
+				<th>NO.</th>
+				<th>注册码</th>
+				<th>节点数</th>
+				<th>硬盘号</th>
+				<th>CPU序列号</th>
+				<th>起始日期</th>
+				<th>截止日期</th>
+				<th>状态</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody id="listData"></tbody>
+	</table>
+
+    <div id="Pagination" class="pagination" ></div>
+
+	<input id="recordId" type="hidden" th:value="${record_id}"/>
+</body>
+</html>

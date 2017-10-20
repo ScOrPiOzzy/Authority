@@ -43,6 +43,12 @@ public class RegistController extends AbstractBaseController {
 		return System.currentTimeMillis();
 	}
 
+	@GetMapping("form/{record_id}")
+	public String getForm(@PathVariable("record_id") Integer rid, Model model) {
+		model.addAttribute("record_id", rid);
+		return "admin/regist_add_form";
+	}
+
 	/**
 	 * 生成证书
 	 */
@@ -93,13 +99,13 @@ public class RegistController extends AbstractBaseController {
 		}
 	}
 
-	@GetMapping("home/{rid}")
+	@GetMapping("list/{rid}")
 	public String showRegistListPage(@PathVariable(value = "rid") Integer recordId, Model model) {
 		model.addAttribute("record_id", recordId);
-		return "admin/regist_home";
+		return "admin/regist_list";
 	}
 
-	@RequestMapping(value = "list")
+	@RequestMapping("data_list")
 	@ResponseBody
 	public Object showRegistList(HttpServletRequest request, Model model) {
 		Condition condition_belong_record = new Condition(Regist.class);
@@ -119,7 +125,6 @@ public class RegistController extends AbstractBaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("data", registList);
 		map.put("total", total);
-		map.put("result", registList);
 		return map;
 	}
 

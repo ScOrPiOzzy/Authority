@@ -1,7 +1,4 @@
 //分页查询开始
-$(document).ready(function() {
-    getDataList(0, null);
-});
 layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需执行这一句
 	var $ = layui.jquery, 
 	layer = layui.layer,
@@ -12,13 +9,42 @@ layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需�
 	form.render();
 	//监听提交  
 	form.on('submit(regist_form_filter)', function(data){
-	  submitForm();
+//		layui验证通过
+	  $('#regist_form').ajaxSubmit(options);
+//	    阻止跳转
 	  return false;
 	});
 
 	//执行一个laydate实例
 	laydate.render({
+	  theme: "molv",
 	  elem: 'input[name="date_start"]' //指定元素
+	});
+
+	$('#_menu').on('click', 'button', function(){
+//		打开添加注册码层
+		layer.open({
+		  type: 2, // Page层类型
+		  area: ['500px', '430px'],
+		  resize : false,
+//			offset: ['100px', '50px'],
+		  title: '添加注册码',
+		  btn: ['添加'],//按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推
+		  shadeClose: true, //是否点击遮罩关闭
+		  scrollbar: false,
+		  shade: 0.6, // 遮罩透明度
+		  maxmin: false, // 允许全屏最小化
+		  anim: 1, // 0-6的动画形式，-1不开启
+		  skin: "layui-layer-molv",
+		  content: '/regist/form/' + $("#recordId").val(),
+		  closeBtn: 1,
+		  yes: function(index, layero){
+//		    var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+//		    console.log(body.html()) //得到iframe页的body内容
+		    var body = layer.getChildFrame('body', index);
+		    body.find('#btn_submit').click();
+		  }
+		});
 	});
 });
 
@@ -27,9 +53,8 @@ var options={
 	url:"/regist/add", //form提交数据的地址
 	type:"post", //form提交的方式(method:post/get)
 //	target:"#listData2", //服务器返回的响应数据显示在元素(Id)号确定
-//	beforeSubmit:function(){
-//		alert('准备提交 ');
-//	}, //提交前执行的回调函数
+	beforeSubmit:function(){
+	}, //提交前执行的回调函数
 	success:function(data) {
 //		insertData(data);
 		layer.alert("添加成功");
@@ -42,10 +67,6 @@ var options={
 	restForm:true, //提交成功后是否重置表单中的字段值，即恢复到页面加载时的状态
 	timeout:6000 //设置请求时间，超过该时间后，自动退出请求，单位(毫秒)。
 }
-function submitForm(){
-	$('#regist_form').ajaxSubmit(options);
-}
-
 
 var rows = 10;
 var page = 1;
@@ -53,34 +74,30 @@ var initFlag = true;
 
 function getDataList(currPage, jg) {
     $.ajax({
-        url : "/regist/list/",
+        url : "/regist/data_list/",
         type : "get",
         dataType : 'json',
         data : {
-        	recordId: $("#recordId").val() ,
+        	recordId: $("#recordId").val(),
         	rows : rows,
         	page : currPage + 1
         },
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
         success : function(response) {
-            if (response.result) {
-                if (response.data != null && response.data != ""&& response.total != undefined && response.total > 0) {
-                    if (initFlag) {
-                        $("#Pagination").pagination(
-                                response.total,
-                                {
-                                    items_per_page : rows,
-                                    num_edge_entries : 1,
-                                    num_display_entries : 8,
-                                    callback : getDataList//回调函数
-                                });
-                        initFlag = false;
-                    }
-                    $("#listData").html("");
-                    loadDataList(response.data);
-                } else {
-                    //暂无数据
+            if (response.data != null && response.data != ""&& response.total != undefined && response.total > 0) {
+                if (initFlag) {
+                    $("#Pagination").pagination(
+                            response.total,
+                            {
+                                items_per_page : rows,
+                                num_edge_entries : 1,
+                                num_display_entries : 8,
+                                callback : getDataList//回调函数
+                            });
+                    initFlag = false;
                 }
+                $("#listData").html("");
+                loadDataList(response.data);
             } else {
                 //暂无数据
             }
@@ -88,20 +105,7 @@ function getDataList(currPage, jg) {
     });
 }
 function loadDataList(listdata) {
-    //表头
-    var html ="<thead><tr>"+
-                    "<th>NO.</th>"+
-                    "<th>注册码</th>"+
-                    "<th>节点数</th>"+
-                    "<th>硬盘号</th>"+
-                    "<th>CPU序列号</th>"+
-                    "<th>起始日期</th>"+
-                    "<th>截止日期</th>"+
-                    "<th>状态</th></thead>"+
-               "</tr>";
-    $("#listData").append(html);
-    
-    var html = "<tbody>";
+    var html;
     for (var i = 0; i < listdata.length; i++) {
     	var n = listdata[i];
         html = html + "<tr>"+
@@ -116,7 +120,6 @@ function loadDataList(listdata) {
 	        "<td>"+(n.used == 0 ? "---":"已激活")+"</td>"
         "</tr>";
     }
-    html = html + "</tbody>";
     $("#listData").append(html);
 }
 //分页查询结束
