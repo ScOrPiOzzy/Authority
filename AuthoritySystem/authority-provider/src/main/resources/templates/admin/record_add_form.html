@@ -1,0 +1,75 @@
+<script type="text/javascript" src="/js/jquery-3.2.1.js" ></script>
+<script type="text/javascript" src="/js/jquery.pagination.js" ></script>
+<script type="text/javascript" src="/js/jquery.form.js" ></script>
+<script type="text/javascript" src="/layui/layui.js" ></script>
+<script type="text/javascript" src="/js/com.cas.record.js" ></script>
+<script type="text/javascript" src="/js/date.format.js" ></script>
+
+<link rel="stylesheet" type="text/css" href="/css/pagination.css"  />
+<link rel="stylesheet" type="text/css" href="/layui/css/layui.css"  />
+
+<script type="text/javascript">
+	$(document).ready(function() {
+	//  获取所有产品下拉框数据
+	    getProductList();
+	//  获取所有用户下拉框数据
+	    getSalerList();
+	//  获取所有用户下拉框数据
+	    getUserList();
+	});
+</script>
+
+<div class="layui-container" style="margin:60px 20px">
+	<form id="record_form" class="layui-form" lay-verify="value">
+	  <div class="layui-form-item">
+		<label class="layui-form-label">产品编号</label>
+		<div id="prod" class="layui-input-block">
+		</div>
+<!-- 		<label id="btn_prod_form" class="layui-btn" >添加产品</label> -->
+	  </div>
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">交易类型</label>
+		<div class="layui-input-block">
+			<input name="type" type="radio" value="0" title="压标项" />
+			<input name="type" type="radio" value="1" title="供货" checked="checked"/>
+		</div>
+	  </div>
+
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">订单金额</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="price" required="required|number"  lay-verify="required" placeholder="请输入金额（单位：万元）" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">销售人员</label>
+		<div id="saler" class="layui-input-block">
+		</div>
+<!-- 		<label id="btn_saler_form" class="layui-btn" >添加销售人员</label> -->
+	  </div>
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">用户名称</label>
+		<div id="user" class="layui-input-block">
+		</div>
+<!-- 		<label id="btn_user_form" class="layui-btn" >添加用户</label> -->
+	  </div>
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">供货时间</label>
+		<div class="layui-input-inline">
+  		  <input name="date_supply" type="text" class="layui-input" lay-verify="required" />
+		</div>
+	  </div>
+
+      <div class="layui-form-item" style="display: none;">
+	    <div class="layui-input-block">
+	      <button id="btn_submit" class="layui-btn lay-submit" lay-submit="" lay-filter="regist_form_filter" >立即提交</button>
+<!-- 	      <button type="reset" class="layui-btn layui-btn-primary">重置</button> -->
+	    </div>
+	  </div>
+<!-- 		 -->
+	</form>
+</div>

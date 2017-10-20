@@ -30,6 +30,11 @@ import com.github.pagehelper.PageHelper;
 public class RecordController extends AbstractBaseController {
 	@Resource
 	private RecordService recordService;
+	
+	@GetMapping("form")
+	public String getProdForm() {
+		return "admin/record_add_form";
+	}
 
 	@RequestMapping("page")
 	public String getPageUI() {
@@ -61,9 +66,9 @@ public class RecordController extends AbstractBaseController {
 	 * @param response
 	 * @return
 	 */
-	@GetMapping("data_list")
+	@GetMapping("page_list")
 	@ResponseBody
-	public Map<String, Object> getPageData(HttpServletRequest request) {
+	public Map<String, Object> getRecordPageList(HttpServletRequest request) {
 		int total = recordService.getTotal();
 		int page = Integer.parseInt(request.getParameter("page"));// 当前页
 		int rows = Integer.parseInt(request.getParameter("rows"));// 每页条数
@@ -73,6 +78,11 @@ public class RecordController extends AbstractBaseController {
 		map.put("data", data);
 		map.put("total", total);
 		return map;
+	}
+	@GetMapping("data_list")
+	@ResponseBody
+	public List<RecordDetail> getRecordDataList() {
+		return recordService.findAllDetail();
 	}
 
 }

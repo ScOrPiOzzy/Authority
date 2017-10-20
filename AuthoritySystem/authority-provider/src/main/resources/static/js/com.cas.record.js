@@ -1,15 +1,4 @@
 //分页查询开始
-$(document).ready(function() {
-//	获取所有销售记录
-    getDataList(0, null);
-//  获取所有产品下拉框数据
-    getProductList();
-//  获取所有用户下拉框数据
-    getSalerList();
-//  获取所有用户下拉框数据
-    getUserList();
-});
-
 layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需执行这一句
 	var $ = layui.jquery, 
 	layer = layui.layer,
@@ -19,51 +8,50 @@ layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需�
 
 	form.render();
 	//监听提交  
-	form.on('submit(record_form_filter)', function(data){
-		submitForm();
-		return false;
+	form.on('submit(regist_form_filter)', function(data){
+//	  layui验证通过
+	  $('#record_form').ajaxSubmit(options);
+//	    阻止跳转
+	  return false;
 	});
+
+//	form.render('select');
+	
 	//执行一个laydate实例
 	laydate.render({
+	  theme: "molv",
 	  elem: 'input[name="date_supply"]' //指定元素
 	});
-	$('#btn_prod_form').on('click', function(){
-		layer.open({
-			  type: 2 // Page层类型
-			  ,area: ['500px', '300px']
-			  ,title: '你好，layer。'
-			  ,shade: 0.6 // 遮罩透明度
-			  ,maxmin: true // 允许全屏最小化
-			  ,anim: 1 // 0-6的动画形式，-1不开启
-			  ,content: '/prod_add_form.html'
-			});
-  	});
-	$('#btn_saler_form').on('click', function(){
-// 			alert(1);
-		layer.open({
-			  type: 2 // Page层类型
-			  ,area: ['500px', '300px']
-			  ,title: '你好，layer。'
-			  ,shade: 0.6 // 遮罩透明度
-			  ,maxmin: true // 允许全屏最小化
-			  ,anim: 1 // 0-6的动画形式，-1不开启
-			  ,content: '/saler_add_form.html'
-			});
-  	});
-	$('#btn_saler_form').on('click', function(){
-// 			alert(1);
-		layer.open({
-			  type: 2 // Page层类型
-			  ,area: ['500px', '300px']
-			  ,title: '你好，layer。'
-			  ,shade: 0.6 // 遮罩透明度
-			  ,maxmin: true // 允许全屏最小化
-			  ,anim: 1 // 0-6的动画形式，-1不开启
-			  ,content: '/user_add_form.html'
-			});
-  	});
-});
 
+	$('#_menu').on('click', 'button', function(){
+//		打开添加注册码层
+		layer.open({
+		  type: 2, // Page层类型
+		  area: ['500px', '530px'],
+		  resize : false,
+//			offset: ['100px', '50px'],
+		  title: '添加销售记录',
+		  btn: ['添加'],//按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推
+		  shadeClose: true, //是否点击遮罩关闭
+		  scrollbar: false,
+		  shade: 0.6, // 遮罩透明度
+		  maxmin: false, // 允许全屏最小化
+		  anim: 1, // 0-6的动画形式，-1不开启
+		  skin: "layui-layer-molv",
+		  content: '/record/form/',
+		  closeBtn: 1,
+		  success: function(){
+			  form.render(); //更新全部
+		  },
+		  yes: function(index, layero){
+//		    var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+//		    console.log(body.html()) //得到iframe页的body内容
+		    var body = layer.getChildFrame('body', index);
+		    body.find('#btn_submit').click();
+		  }
+		});
+	});
+});
 
 //异步提交表单
 var options={
@@ -95,7 +83,7 @@ var initFlag = true;
 
 function getDataList(currPage, jg) {
     $.ajax({
-        url : "/record/data_list",
+        url : "/record/page_list",
         type : "get",
         dataType : 'json',
         data : {rows : rows,page : currPage + 1},
@@ -143,7 +131,7 @@ function loadDataList(listdata) {
 //开始请求销售人员列表
 function getSalerList(){
 	$.ajax({
-        url : "/saler/list",
+        url : "/saler/data_list",
         type : "get",
         dataType : 'json',
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
@@ -156,13 +144,15 @@ function getSalerList(){
             }
             html = html + "</select>";
             $("#saler").append(html);
+            
+            console.log(html);
         }
     });
 }
 //开始请求用户人员列表
 function getUserList(){
 	$.ajax({
-		url : "/user/list",
+		url : "/user/data_list",
 		type : "get",
 		dataType : 'json',
 		contentType : "application/x-www-form-urlencoded; charset=utf-8",
@@ -175,13 +165,15 @@ function getUserList(){
 			}
 			html = html + "</select>";
 			$("#user").append(html);
+			
+			console.log(html);
 		}
 	});
 }
 //开始请求产品列表
 function getProductList(){
 	$.ajax({
-		url : "/prod/list",
+		url : "/prod/data_list",
 		type : "get",
 		dataType : 'json',
 		contentType : "application/x-www-form-urlencoded; charset=utf-8",
@@ -194,6 +186,8 @@ function getProductList(){
 			}
 			html = html + "</select>";
 			$("#prod").append(html);
+			
+			console.log(html);
 		}
 	});
 }

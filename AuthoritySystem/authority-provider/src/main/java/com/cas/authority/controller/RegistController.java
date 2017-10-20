@@ -107,7 +107,17 @@ public class RegistController extends AbstractBaseController {
 
 	@RequestMapping("data_list")
 	@ResponseBody
-	public Object showRegistList(HttpServletRequest request, Model model) {
+	public Object showRegistDataList(HttpServletRequest request, Model model) {
+		Condition condition_belong_record = new Condition(Regist.class);
+		Criteria criteria = condition_belong_record.createCriteria();
+		int recordId = Integer.parseInt(request.getParameter("recordId"));// 所属的销售记录
+		criteria.andEqualTo("record_id", recordId);
+		return registService.findByCondition(condition_belong_record);
+	}
+
+	@RequestMapping("page_list")
+	@ResponseBody
+	public Object showRegistPageList(HttpServletRequest request, Model model) {
 		Condition condition_belong_record = new Condition(Regist.class);
 		Criteria criteria = condition_belong_record.createCriteria();
 		int recordId = Integer.parseInt(request.getParameter("recordId"));// 所属的销售记录

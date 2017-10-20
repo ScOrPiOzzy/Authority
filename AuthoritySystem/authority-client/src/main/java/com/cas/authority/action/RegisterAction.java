@@ -62,7 +62,7 @@ public class RegisterAction {
 
 		// 3、将注册码发送给公司服务器
 		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target(Consts.BASE_SERVER_URI);
+		WebTarget target = client.target(Consts.BASE_SERVER_URI + Consts.SERVER_URI_REG);
 		MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
 
 //		用户名称

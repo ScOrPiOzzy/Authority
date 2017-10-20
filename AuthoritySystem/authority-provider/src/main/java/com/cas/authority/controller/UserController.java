@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cas.authority.model.RecordDetail;
 import com.cas.authority.model.User;
 import com.cas.authority.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -27,6 +26,11 @@ public class UserController extends AbstractBaseController {
 	@Resource
 	private UserService userService;
 
+	@GetMapping("form")
+	public String getProdForm() {
+		return "admin/user_add_form";
+	}
+
 	@GetMapping("list")
 	public String getUserList() {
 		return "admin/user_list";
@@ -34,7 +38,13 @@ public class UserController extends AbstractBaseController {
 
 	@GetMapping("data_list")
 	@ResponseBody
-	public Object getUserDataList(HttpServletRequest request) {
+	public Object getUserDataList() {
+		return userService.findAll();
+	}
+
+	@GetMapping("page_list")
+	@ResponseBody
+	public Object getUserPageList(HttpServletRequest request) {
 		int total = userService.getTotal();
 		int page = Integer.parseInt(request.getParameter("page"));// 当前页
 		int rows = Integer.parseInt(request.getParameter("rows"));// 每页条数
@@ -56,6 +66,8 @@ public class UserController extends AbstractBaseController {
 				System.out.println(objectError.getCode());
 			}
 			return result.getAllErrors();
+		} else {
+			userService.save(user);
 		}
 		return user;
 	}

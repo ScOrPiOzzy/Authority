@@ -23,19 +23,15 @@ public class SalerController extends AbstractBaseController {
 	@Resource
 	private SalerService salerService;
 
-	@GetMapping("home")
-	public String getSalerForm() {
-		return "admin/saler_home";
+	@GetMapping("list")
+	public String getUserList() {
+		return "admin/saler_list";
 	}
 
-	@GetMapping("list")
+	@GetMapping("data_list")
 	@ResponseBody
 	public Object getSalerList() {
-		List<Saler> listdata = salerService.findAll();
-		if(listdata == null) {
-			return new ArrayList<>();
-		}
-		return listdata;
+		return salerService.findAll();
 	}
 
 	@PostMapping("add")

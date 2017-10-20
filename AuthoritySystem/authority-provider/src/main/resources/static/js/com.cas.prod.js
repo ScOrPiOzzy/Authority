@@ -17,17 +17,17 @@ layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需�
 	//执行一个laydate实例
 	laydate.render({
 	  theme: "molv",
-	  elem: 'input[name="date_start"]' //指定元素
+	  elem: 'input[name="releasedate"]' //指定元素
 	});
 
 	$('#_menu').on('click', 'button', function(){
 //		打开添加注册码层
 		layer.open({
 		  type: 2, // Page层类型
-		  area: ['500px', '550px'],
+		  area: ['500px', '430px'],
 		  resize : false,
 //			offset: ['100px', '50px'],
-		  title: '添加用户信息',
+		  title: '添加产品信息',
 		  btn: ['添加'],//按钮1的回调是yes，而从按钮2开始，则回调为btn2: function(){}，以此类推
 		  shadeClose: true, //是否点击遮罩关闭
 		  scrollbar: false,
@@ -35,7 +35,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需�
 		  maxmin: false, // 允许全屏最小化
 		  anim: 1, // 0-6的动画形式，-1不开启
 		  skin: "layui-layer-molv",
-		  content: '/user/form',
+		  content: '/prod/form/',
 		  closeBtn: 1,
 		  yes: function(index, layero){
 //		    var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
@@ -47,10 +47,9 @@ layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需�
 	});
 });
 
-
 //异步提交表单
 var options={
-	url:"/user/add", //form提交数据的地址
+	url:"/prod/add", //form提交数据的地址
 	type:"post", //form提交的方式(method:post/get)
 //	target:"#listData2", //服务器返回的响应数据显示在元素(Id)号确定
 	beforeSubmit:function(){
@@ -67,14 +66,14 @@ var options={
 	restForm:true, //提交成功后是否重置表单中的字段值，即恢复到页面加载时的状态
 	timeout:6000 //设置请求时间，超过该时间后，自动退出请求，单位(毫秒)。
 }
-
 //分页查询开始
 var rows = 10;
 var page = 1;
 var initFlag = true;
+
 function getDataList(currPage, jg) {
     $.ajax({
-        url : "/user/page_list",
+        url : "/prod/page_list",
         type : "get",
         dataType : 'json',
         data : {
@@ -113,9 +112,9 @@ function loadDataList(listdata) {
 			html = html + "<tr>"+
 			"<td>"+(i + 1)+"</td>"+
 			"<td>"+n.name+"</td>"+
-			"<td>"+n.mobile+"</td>"+
-			"<td>"+n.qq+"</td>"+
-			"<td>"+n.weixin+"</td>"
+			"<td>"+new Date(n.releasedate).format("yyyy-MM-dd")+"</td>"+
+			"<td>"+n.remark+"</td>"+
+			"<td></td>"
 			"</tr>";
 		}
     }

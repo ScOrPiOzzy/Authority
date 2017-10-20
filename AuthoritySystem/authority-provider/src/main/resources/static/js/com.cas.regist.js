@@ -74,7 +74,7 @@ var initFlag = true;
 
 function getDataList(currPage, jg) {
     $.ajax({
-        url : "/regist/data_list/",
+        url : "/regist/page_list/",
         type : "get",
         dataType : 'json',
         data : {
