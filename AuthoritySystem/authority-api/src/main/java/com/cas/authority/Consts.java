@@ -38,7 +38,7 @@ public final class Consts {
 	 */
 	public static final int AUTHORITY_FILE_UNPITCH = 600;
 
-	public static final String BASE_SERVER_URI = "http://localhost:80/regist/";
+	public static final String BASE_SERVER_URI = "http://192.168.1.23:80/regist/";
 
 	public static final String SERVER_URI_REG = "active";
 	public static final String SERVER_URI_TIME_IN_MILLS = "time_mills";
