@@ -5,7 +5,7 @@
 
 	<groupId>com.cas</groupId>
 	<artifactId>authority</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 
 	<name>AuthoritySystem</name>
@@ -13,9 +13,21 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.version>0.0.1-SNAPSHOT</project.version>
+		<project.version>1.0.0</project.version>
 	</properties>
-
+	<!-- 发布设置 -->
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>elevator project snapshots version</name>
+			<url>http://192.168.1.37:8081/repository/maven-snapshot/</url>
+		</snapshotRepository>
+		<repository>
+			<id>releases</id>
+			<name>elevator project releases version</name>
+			<url>http://192.168.1.37:8081/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -55,8 +67,29 @@
 
 	<modules>
 		<module>authority-api</module>
-<!-- 		<module>authority-client</module> -->
+		<!-- <module>authority-client</module> -->
 		<module>authority-provider</module>
 	</modules>
+
+	<build>
+		<plugins>
+			<!-- 发布源码插件 -->
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

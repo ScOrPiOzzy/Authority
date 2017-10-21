@@ -18,8 +18,6 @@ public final class HardDriveUtil {
 		}
 		if (partitionID == null) {
 			throw new RuntimeException("您的系统中并没有发现" + mount + "盘");
-		} else {
-			System.out.println("找到" + mount + "盘， UUID为：" + partitionID);
 		}
 		return partitionID;
 	}

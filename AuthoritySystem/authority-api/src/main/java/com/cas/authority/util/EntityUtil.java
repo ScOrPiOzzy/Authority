@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -19,9 +21,9 @@ public final class EntityUtil {
 	private EntityUtil() {
 	}
 
-	public static AuthorityEntity parseEntity(File file) {
+	public static AuthorityEntity parseEntity(InputStream inputStream) {
 		AuthorityEntity entity = new AuthorityEntity();
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(new BufferedInputStream(new FileInputStream(file))))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 			// 公司名称
 			entity.setCompanyName(br.readLine().split(SPLIT_STR)[1]);
 			// 客户名称
@@ -48,26 +50,24 @@ public final class EntityUtil {
 		return entity;
 	}
 
-	public static void saveEntity(AuthorityEntity entity, File file) {
+	public static void saveEntity(AuthorityEntity entity, OutputStream outputStream) {
 		// 4-1、保存证书
-		try (PrintWriter out = new PrintWriter(new FileOutputStream(file));) {
-			// 会自动关闭流
-			// 证书基本内容
-			out.println("COMPANY" + SPLIT_STR + entity.getCompanyName());
-			out.println("User" + SPLIT_STR + entity.getCustomName());
-			out.println("REGISTER" + SPLIT_STR + entity.getCode());
-			out.println("PRODUCT" + SPLIT_STR + entity.getProductID());
-			out.println("GENERATION DATE" + SPLIT_STR + entity.getFromDate());
-			out.println("EXPIRATION DATE" + SPLIT_STR + entity.getEndDate());
-			out.println("MAX CLIENT" + SPLIT_STR + entity.getNode());
-			// sig-a:
-			out.println("SIGN-A" + SPLIT_STR + entity.getHddSer());
-			// sig-b:
-			out.println("SIGN-B" + SPLIT_STR + entity.getCpuSer());
-			// sig-c:
-			out.println("SIGN-C" + SPLIT_STR + DigestUtils.sha256Hex(entity.toString()));
-		} catch (IOException e) {
-			throw new RuntimeException("");
-		}
+		PrintWriter out = new PrintWriter(outputStream);
+		// 证书基本内容
+		out.println("COMPANY" + SPLIT_STR + entity.getCompanyName());
+		out.println("User" + SPLIT_STR + entity.getCustomName());
+		out.println("REGISTER" + SPLIT_STR + entity.getCode());
+		out.println("PRODUCT" + SPLIT_STR + entity.getProductID());
+		out.println("GENERATION DATE" + SPLIT_STR + entity.getFromDate());
+		out.println("EXPIRATION DATE" + SPLIT_STR + entity.getEndDate());
+		out.println("MAX CLIENT" + SPLIT_STR + entity.getNode());
+		// sig-a:
+		out.println("SIGN-A" + SPLIT_STR + entity.getHddSer());
+		// sig-b:
+		out.println("SIGN-B" + SPLIT_STR + entity.getCpuSer());
+		// sig-c:
+		out.println("SIGN-C" + SPLIT_STR + DigestUtils.sha256Hex(entity.toString()));
+		
+		out.flush();
 	}
 }

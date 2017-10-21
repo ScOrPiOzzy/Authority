@@ -6,12 +6,12 @@ public final class Consts {
 
 	public static final String COMPANY_NAME = "无锡凯数科技有限公司";
 
-	public static final String FILE_RECEIPT = "./cas.receipt";
-	public static final String FILE_AUTHORITY = "./cas.authority";
-	public static final String FILE_CERTIFICATION = "./cas.cer";
-	public static final String FILE_KYESTORE = "./cas.keystore";
-	public static final String FILE_TIMESTAMP = "./cas.timestamp";
-	public static final String FILE_ACCOUNT = "./cas.account";
+//	public static final String FILE_RECEIPT = "cas.receipt";
+	public static final String FILE_AUTHORITY = "cas.authority";
+	public static final String FILE_CERTIFICATION = "cas.cer";
+	public static final String FILE_KYESTORE = "cas.keystore";
+	public static final String FILE_TIMESTAMP = "cas.timestamp";
+	public static final String FILE_ACCOUNT = "cas.account";
 
 	/**
 	 * 有效的授权文件。

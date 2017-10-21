@@ -6,10 +6,8 @@ import com.cas.authority.action.RegisterAction;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 
 public class UserRegistController {
@@ -47,6 +45,10 @@ public class UserRegistController {
 	@FXML
 	public void register() {
 		new RegisterAction() {
+			protected String getProductID() {
+				return "1";
+			};
+			
 			@Override
 			protected String getRegistCode() {
 				return code.getText();

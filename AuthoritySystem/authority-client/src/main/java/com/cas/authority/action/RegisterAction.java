@@ -1,10 +1,9 @@
 package com.cas.authority.action;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.jar.JarEntry;
+import java.util.jar.JarOutputStream;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,9 +12,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.IOUtils;
 
 import com.cas.authority.Consts;
 import com.cas.authority.model.AuthorityEntity;
@@ -31,15 +27,15 @@ import oshi.SystemInfo;
 public class RegisterAction {
 
 	public void execute() {
-//		1、准备创建证书
-		File authorityFile = new File(Consts.FILE_AUTHORITY);
-		if (authorityFile.exists()) {
-//			如果不用重新注册，则返回
-			if (!reRegistration()) {
-				return;
-			}
-//			重新注册
-		}
+////		1、准备创建证书
+//		File authorityFile = new File(Consts.FILE_AUTHORITY);
+//		if (authorityFile.exists()) {
+////			如果不用重新注册，则返回
+//			if (!reRegistration()) {
+//				return;
+//			}
+////			重新注册
+//		}
 
 		// 2、提供注册码
 		String registCode = getRegistCode();
@@ -68,7 +64,7 @@ public class RegisterAction {
 //		用户名称
 		formData.add("customName", username);
 //		产品ID
-		formData.add("productID", registCode);
+		formData.add("productID", getProductID());
 //		用户注册码
 		formData.add("code", registCode);
 //		用户电脑信息
@@ -86,23 +82,47 @@ public class RegisterAction {
 			// 提示用户注册失败。
 			onRegistResult(false);
 		} else {
-			// 用户收到的证书信息：
+			// 4-1、 用户收到的证书信息：
 			System.out.println("用户收到的证书信息：" + entity);
+			try {
+//				定义一个jaroutputstream流
+				String basePath = System.getProperty("user.dir") + "\\lib\\";
+				File file = new File(basePath);
+				if (!file.exists()) {
+					file.mkdirs();
+				}
 
-			EntityUtil.saveEntity(entity, authorityFile);
+				JarOutputStream stream = new JarOutputStream(new FileOutputStream(basePath + "\\license.jar"));
+				JarEntry entry = new JarEntry(Consts.FILE_AUTHORITY);
+//				表示将该entry写入jar文件中 也就是创建该文件
+				stream.putNextEntry(entry);
+				EntityUtil.saveEntity(entity, stream);
+				stream.closeEntry();
+				
+				onRegistResult(true);
 
-			// 4-2、保存收据receipt
-			File receipt = new File(Consts.FILE_RECEIPT);
-			try (PrintWriter out = new PrintWriter(new FileOutputStream(receipt));) {
-				// 1、保存授权文件MD5校验码
-				String authorityFileMD5 = DigestUtils.md5Hex(IOUtils.toByteArray(new FileInputStream(authorityFile)));
-				System.out.println("authorityFile MD5 : " + authorityFileMD5);
-				out.println(authorityFileMD5);
-			} catch (IOException e) {
-				throw new RuntimeException("");
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			onRegistResult(true);
+//			// 4-2、保存收据receipt
+//			entry = new JarEntry(Consts.FILE_RECEIPT);
+////			表示将该entry写入jar文件中 也就是创建该文件
+//			stream.putNextEntry(entry);
+//			
+//			try (PrintWriter out = new PrintWriter(new FileOutputStream(receipt));) {
+//				// 1、保存授权文件MD5校验码
+//				String authorityFileMD5 = DigestUtils.md5Hex(IOUtils.toByteArray(new FileInputStream(authorityFile)));
+//				System.out.println("authorityFile MD5 : " + authorityFileMD5);
+//				out.println(authorityFileMD5);
+//			} catch (IOException e) {
+//				throw new RuntimeException("");
+//			}
 		}
+	}
+
+	protected String getProductID() {
+		return "-1";
 	}
 
 	protected String getUserName() {

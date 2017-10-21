@@ -1,7 +1,5 @@
 package com.cas.test;
 
-import static org.junit.Assert.*;
-
 import java.util.UUID;
 
 import org.junit.Test;
@@ -22,6 +20,5 @@ public class OsgiTest {
 	@Test
 	public void testUUID() throws Exception {
 		System.out.println(UUID.fromString("56d16a78-0b58-416b-bb73-82b030f92df1"));
-		
 	}
 }
