@@ -6,13 +6,16 @@ import java.util.Locale;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
 public abstract class AbstractBaseController {
-
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Resource
 	private MessageSource messageSource; // 自动注入对象
 

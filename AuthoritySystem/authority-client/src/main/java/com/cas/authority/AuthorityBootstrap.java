@@ -1,5 +1,10 @@
 package com.cas.authority;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -7,18 +12,29 @@ import java.util.concurrent.Future;
 import com.cas.authority.javafx.RegistApplication;
 import com.cas.authority.validate.ValidateThread;
 
-
 import javafx.application.Application;
+
 public class AuthorityBootstrap {
 
 	public static void main(String[] args) {
-//		AuthorityBootstrap authorityBootstrap = new AuthorityBootstrap();
-//		authorityBootstrap.validate();
-		Application.launch(RegistApplication.class);
+		AuthorityBootstrap authorityBootstrap = new AuthorityBootstrap();
+		authorityBootstrap.validate();
+//		Application.launch(RegistApplication.class);
 	}
 
 	public void validate() {
-		String productID = "2";
+		File file = new File("app.version");
+		Properties prop = new Properties();
+		try {
+			prop.load(new FileInputStream(file));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String productID = prop.getProperty("product_id", "no version");
+		if ("no version".equals(productID)) {
+			return;
+		}
+
 		ValidateThread thread = new ValidateThread(productID);
 		ExecutorService pool = Executors.newSingleThreadExecutor();
 		Future<Integer> task = pool.submit(thread);
@@ -35,10 +51,10 @@ public class AuthorityBootstrap {
 	}
 
 	protected void failure(Integer code) {
-		System.err.println("无效的证书文件。 错误代码:" + code);
+		System.err.println("错误代码:" + code);
 
 //		启动注册程序
-//		Application.lunch(RegistApplication.class);
+		Application.launch(RegistApplication.class);
 	}
 
 	protected void success() {

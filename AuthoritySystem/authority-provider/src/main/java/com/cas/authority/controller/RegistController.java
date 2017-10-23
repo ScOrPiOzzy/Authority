@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cas.authority.Consts;
 import com.cas.authority.model.AuthorityEntity;
 import com.cas.authority.model.Regist;
 import com.cas.authority.model.UserRegistEntity;
@@ -65,8 +66,7 @@ public class RegistController extends AbstractBaseController {
 		}
 
 //		收到客户请求的注册码
-		String regCode = entity.getCode();
-		System.out.println("收到客户注册码:" + regCode);
+		logger.info("收到客户注册信息：用户名" + entity.getCustomName() + "，注册码:" + entity.getCode());
 //		if (regCode == null || "".equals(regCode)) {
 //			return null;
 //		}
@@ -88,6 +88,7 @@ public class RegistController extends AbstractBaseController {
 			reg.setSer_cpu(entity.getCpuSer());
 			reg.setUsed(1);
 //			2、将有效期和节点数发送给用户
+			entity.setCompanyName(Consts.COMPANY_NAME);
 			entity.setFromDate("2017-09-22");
 			entity.setEndDate("2018-09-22");
 			entity.setNode(5);
@@ -124,11 +125,11 @@ public class RegistController extends AbstractBaseController {
 		criteria.andEqualTo("record_id", recordId);
 
 		int total = registService.getTotalBy(condition_belong_record);
-		System.err.println("total:" + total);
+//		System.err.println("total:" + total);
 		int page = Integer.parseInt(request.getParameter("page"));// 当前页
 		int rows = Integer.parseInt(request.getParameter("rows"));// 每页条数
 //		List<User> data = userService.getCurrentPage((page - 1) * rows, rows);
-		System.out.println("===显示页码：" + page + ", 每页条数： " + rows);
+//		System.out.println("===显示页码：" + page + ", 每页条数： " + rows);
 		PageHelper.startPage(page, rows, false);
 		List<Regist> registList = registService.findByCondition(condition_belong_record);
 

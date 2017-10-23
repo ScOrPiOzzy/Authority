@@ -3,6 +3,12 @@ package com.cas.authority;
 public final class Consts {
 	private Consts() {
 	}
+	
+//	public static final String BASE_SERVER_URI = "http://58.214.15.134:8200/regist/";
+	public static final String BASE_SERVER_URI = "http://192.168.1.23:80/regist/";
+	
+	public static final String SERVER_URI_REG = "active";
+	public static final String SERVER_URI_TIME_IN_MILLS = "time_mills";
 
 	public static final String COMPANY_NAME = "无锡凯数科技有限公司";
 
@@ -37,10 +43,5 @@ public final class Consts {
 	 * 授权文件失效，原因是产品与授权产品不匹配。
 	 */
 	public static final int AUTHORITY_FILE_UNPITCH = 600;
-
-	public static final String BASE_SERVER_URI = "http://192.168.1.23:80/regist/";
-
-	public static final String SERVER_URI_REG = "active";
-	public static final String SERVER_URI_TIME_IN_MILLS = "time_mills";
 
 }

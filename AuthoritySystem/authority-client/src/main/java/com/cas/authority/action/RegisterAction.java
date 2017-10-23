@@ -13,18 +13,23 @@ import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.cas.authority.Consts;
 import com.cas.authority.model.AuthorityEntity;
 import com.cas.authority.util.EntityUtil;
 import com.cas.authority.util.HardDriveUtil;
 
 import oshi.SystemInfo;
+import oshi.util.platform.windows.WmiUtil;
 
 /**
  * 用户注册
  * @author Administrator
  */
 public class RegisterAction {
+    private static final Logger LOG = LoggerFactory.getLogger(WmiUtil.class);
 
 	public void execute() {
 ////		1、准备创建证书
@@ -59,6 +64,9 @@ public class RegisterAction {
 		// 3、将注册码发送给公司服务器
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(Consts.BASE_SERVER_URI + Consts.SERVER_URI_REG);
+		System.out.println(target.getUri());
+        LOG.info(target.getUri().toString());
+
 		MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
 
 //		用户名称
