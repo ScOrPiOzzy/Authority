@@ -10,16 +10,6 @@
 		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
 		<result column="email" jdbcType="VARCHAR" property="email" />
 		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="role" jdbcType="INTEGER" property="role" />
 	</resultMap>
-	
-<!--   	<insert id="insert" useGeneratedKeys="true"  parameterType="com.cas.authority.model.User"> -->
-<!-- 		<selectKey resultType="int" keyProperty="id" order="AFTER"> -->
-<!-- 			SELECT -->
-<!-- 			LAST_INSERT_ID() -->
-<!-- 		</selectKey> -->
-<!-- 		INSERT INTO `cas_authority`.`user` -->
-<!-- 			(`name`, `qq`, `weixin`, `mobile`) -->
-<!-- 		VALUES -->
-<!-- 			(#{name},#{qq},#{weixin},#{mobile}); -->
-<!-- 	</insert> -->
 </mapper>

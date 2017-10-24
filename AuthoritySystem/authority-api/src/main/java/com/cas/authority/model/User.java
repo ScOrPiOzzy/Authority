@@ -5,6 +5,8 @@ import javax.persistence.Id;
 public class User {
 	@Id
 	private Integer id;
+	
+	private Integer role;
 
 	private String name;
 
@@ -102,6 +104,14 @@ public class User {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Integer getRole() {
+		return role;
+	}
+
+	public void setRole(Integer role) {
+		this.role = role;
 	}
 	
 }

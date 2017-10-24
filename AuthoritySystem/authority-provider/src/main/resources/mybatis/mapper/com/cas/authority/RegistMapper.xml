@@ -36,17 +36,4 @@
 			(#{item.code},#{item.node},#{item.ser_hdd},#{item.ser_cpu},#{item.date_start},#{item.date_end})
 		</foreach>
 	</insert>
-	
-<!-- 	<update id="update" parameterType="com.cas.authority.model.Regist"> -->
-<!-- 		UPDATE `regist` -->
-<!-- 		SET -->
-<!-- 			`code` = #{code}, -->
-<!-- 			`node` = #{node}, -->
-<!-- 			`ser_hdd` = #{ser_hdd}, -->
-<!-- 			`ser_cpu` = #{ser_cpu}, -->
-<!-- 			`date_start` = #{date_start}, -->
-<!-- 			`date_end` = #{date_end} -->
-<!-- 		WHERE  -->
-<!-- 			`id` = #{id}; -->
-<!-- 	</update> -->
 </mapper>

@@ -2,23 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cas.authority.dao.ProductMapper">
 	<resultMap id="BaseResultMap" type="com.cas.authority.model.Product">
-	  <!--
-	    WARNING - @mbg.generated
-	  -->
 	  <id column="id" jdbcType="INTEGER" property="id" />
 	  <result column="name" jdbcType="VARCHAR" property="name" />
 	  <result column="remark" jdbcType="VARCHAR" property="remark" />
 	  <result column="releaseDate" jdbcType="TIMESTAMP" property="releasedate" />
 	</resultMap>
-  
-<!-- 	<insert id="insert" useGeneratedKeys="true"  parameterType="com.cas.authority.model.Product"> -->
-<!-- 		<selectKey resultType="int" keyProperty="id" order="AFTER"> -->
-<!-- 			SELECT -->
-<!-- 			LAST_INSERT_ID() -->
-<!-- 		</selectKey> -->
-<!-- 		INSERT INTO `product` -->
-<!-- 			(`name`, `remark`, `releaseDate`) -->
-<!-- 		VALUES -->
-<!-- 			(#{name},#{remark},#{releaseDate}); -->
-<!-- 	</insert> -->
 </mapper>
