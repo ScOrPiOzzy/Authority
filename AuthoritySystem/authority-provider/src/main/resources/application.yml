@@ -1,5 +1,5 @@
 server:
-  port: 80                                          # 修改服务器访问端口为：8200
+  port: 8200                                          # 修改服务器访问端口为：8200
 mybatis:
   config-location: classpath:mybatis/mybatis.cfg.xml  # MyBatis配置文件路径
   type-aliases-package: com.cas.authority.vo          # 定义所有操作类的别名所在包
@@ -17,7 +17,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource      # 配置当前要使用的数据源的操作类型
     driver-class-name: org.gjt.mm.mysql.Driver        # 配置MySQL的驱动程序类
-    url: jdbc:mysql://localhost:3306/cas_authority?useUnicode=true&characterEncoding=UTF-8    # 数据库连接地址
+    url: jdbc:mysql://localhost:3306/db_cas_authority?useUnicode=true&characterEncoding=UTF-8    # 数据库连接地址
     username: root                                    # 数据库用户名
     password: mysqladmin                              # 数据库连接密码
     dbcp2:                                            # 数据库连接池的配置 
