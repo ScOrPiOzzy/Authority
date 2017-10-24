@@ -22,6 +22,8 @@ import com.cas.authority.model.RecordDetail;
 import com.cas.authority.service.RecordService;
 import com.github.pagehelper.PageHelper;
 
+import tk.mybatis.mapper.entity.Condition;
+
 /**
  * Created by CodeGenerator on 2017/10/13.
  */

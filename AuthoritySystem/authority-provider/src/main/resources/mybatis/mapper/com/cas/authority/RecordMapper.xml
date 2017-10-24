@@ -37,21 +37,25 @@
 		<result property="createDate" column="c_date_create" javaType="java.util.Date" />
 		<result property="supplyDate" column="c_date_supply" javaType="java.util.Date" />
 		<result property="username" column="u_name" />
+		<result property="salerName" column="s_name" />
 		<result property="productName" column="p_name" />
 		<result property="price" column="c_price" javaType="Float" />
 	</resultMap>
 
 	<select id="selectAllDetail" resultMap="recordDetailMap">
-		SELECT c.id c_id, c.date_supply c_date_supply, c.date_create c_date_create, u.name u_name, p.name p_name, c.type c_type, c.price c_price
-		FROM record c, user u, product p
+		SELECT c.id c_id, c.date_supply c_date_supply, c.date_create c_date_create, u.name u_name, s.name s_name, p.name p_name, c.type c_type, c.price c_price
+		FROM record c, user u, user s, product p
 		WHERE u.id = c.cid
+			AND s.id = c.sid
 			AND p.id = c.pid
+		ORDER BY c_date_create DESC
 	</select>
 
 	<select id="selectDetailBy" resultMap="recordDetailMap">
-		SELECT c.id c_id, c.date_supply c_date_supply, c.date_create c_date_create, u.name u_name, p.name p_name, c.type c_type, c.price c_price
-		FROM record c, user u, product p
+		SELECT c.id c_id, c.date_supply c_date_supply, c.date_create c_date_create, u.name u_name, s.name s_name, p.name p_name, c.type c_type, c.price c_price
+		FROM record c, user u, user s, product p
 		WHERE u.id = c.cid
+			AND s.id = c.sid
 			AND p.id = c.pid
 			AND c.id = #{arg0}
 	</select>

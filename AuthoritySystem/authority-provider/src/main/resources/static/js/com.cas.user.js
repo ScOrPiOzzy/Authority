@@ -110,12 +110,23 @@ function loadDataList(listdata) {
     }else{
 		for (var i = 0; i < listdata.length; i++) {
 			var n = listdata[i];
+			var roleName;
+			if(n.role == 0){
+				roleName = "客户";
+			}else if(n.role == 1){
+				roleName = "销售";
+			}else if(n.role == 2){
+				roleName = "发布人";
+			}else if(n.role == 3){
+				roleName = "管理员";
+			}
 			html = html + "<tr>"+
 			"<td>"+(i + 1)+"</td>"+
 			"<td>"+n.name+"</td>"+
 			"<td>"+n.mobile+"</td>"+
 			"<td>"+n.qq+"</td>"+
-			"<td>"+n.weixin+"</td>"
+			"<td>"+n.weixin+"</td>" +
+			"<td>"+roleName+"</td>" +
 			"</tr>";
 		}
     }

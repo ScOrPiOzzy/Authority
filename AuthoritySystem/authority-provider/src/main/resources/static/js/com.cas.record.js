@@ -131,7 +131,7 @@ function loadDataList(listdata) {
 //开始请求销售人员列表
 function getSalerList(){
 	$.ajax({
-        url : "/saler/data_list",
+        url : "/user/data_saler_list",
         type : "get",
         dataType : 'json',
         contentType : "application/x-www-form-urlencoded; charset=utf-8",
@@ -152,7 +152,7 @@ function getSalerList(){
 //开始请求用户人员列表
 function getUserList(){
 	$.ajax({
-		url : "/user/data_list",
+		url : "/user/data_custom_list",
 		type : "get",
 		dataType : 'json',
 		contentType : "application/x-www-form-urlencoded; charset=utf-8",

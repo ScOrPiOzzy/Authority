@@ -20,6 +20,9 @@ import com.cas.authority.model.User;
 import com.cas.authority.service.UserService;
 import com.github.pagehelper.PageHelper;
 
+import tk.mybatis.mapper.entity.Condition;
+import tk.mybatis.mapper.entity.Example.Criteria;
+
 @Controller
 @RequestMapping("/user")
 public class UserController extends AbstractBaseController {
@@ -38,8 +41,44 @@ public class UserController extends AbstractBaseController {
 
 	@GetMapping("data_list")
 	@ResponseBody
-	public Object getUserDataList() {
+	public List<User> getUserDataList() {
 		return userService.findAll();
+	}
+
+	@GetMapping("data_custom_list")
+	@ResponseBody
+	public List<User> getCustomDataList() {
+		Condition condition_saler = new Condition(User.class);
+		Criteria criteria = condition_saler.createCriteria();
+		criteria.andEqualTo("role", "0");
+		return userService.findByCondition(condition_saler);
+	}
+
+	@GetMapping("data_saler_list")
+	@ResponseBody
+	public List<User> getSalerDataList() {
+		Condition condition_saler = new Condition(User.class);
+		Criteria criteria = condition_saler.createCriteria();
+		criteria.andEqualTo("role", "1");
+		return userService.findByCondition(condition_saler);
+	}
+
+	@GetMapping("data_dev_list")
+	@ResponseBody
+	public List<User> getDevDataList() {
+		Condition condition_saler = new Condition(User.class);
+		Criteria criteria = condition_saler.createCriteria();
+		criteria.andEqualTo("role", "2");
+		return userService.findByCondition(condition_saler);
+	}
+
+	@GetMapping("data_mgr_list")
+	@ResponseBody
+	public Object getMgrDataList() {
+		Condition condition_saler = new Condition(User.class);
+		Criteria criteria = condition_saler.createCriteria();
+		criteria.andEqualTo("role", "3");
+		return userService.findByCondition(condition_saler);
 	}
 
 	@GetMapping("page_list")

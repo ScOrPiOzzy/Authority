@@ -28,6 +28,15 @@ layui.use('layer', function(){ //独立版的layer无需执行这一句
 	      <input type="text" name="name" required="required"  lay-verify="required" placeholder="请输入用户名称" autocomplete="off" class="layui-input" />
 	    </div>
 	  </div>
+	  
+	  <div class="layui-form-item">
+		<label class="layui-form-label">角色</label>
+		<div class="layui-input-block">
+			<input name="role" type="radio" value="0" title="客户" checked="checked"/>
+			<input name="role" type="radio" value="1" title="销售"/>
+			<input name="role" type="radio" value="2" title="发布者" />
+		</div>
+	  </div>
 
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">QQ</label>
