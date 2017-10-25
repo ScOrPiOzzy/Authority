@@ -1,4 +1,3 @@
-//分页查询开始
 layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需执行这一句
 	var $ = layui.jquery, 
 	layer = layui.layer,
@@ -15,9 +14,8 @@ layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需�
 	  return false;
 	});
 
-//	form.render('select');
-	
-	//执行一个laydate实例
+	form.render('select');
+	//执行""一个laydate实例
 	laydate.render({
 	  theme: "molv",
 	  elem: 'input[name="date_supply"]' //指定元素
@@ -52,7 +50,7 @@ layui.use(['form', 'layedit', 'laydate'], function(){ //独立版的layer无需�
 		});
 	});
 });
-
+//分页查询开始
 //异步提交表单
 var options={
 	url:"/record/add", //form提交数据的地址
@@ -144,8 +142,6 @@ function getSalerList(){
             }
             html = html + "</select>";
             $("#saler").append(html);
-            
-            console.log(html);
         }
     });
 }
@@ -165,8 +161,6 @@ function getUserList(){
 			}
 			html = html + "</select>";
 			$("#user").append(html);
-			
-			console.log(html);
 		}
 	});
 }
@@ -186,8 +180,6 @@ function getProductList(){
 			}
 			html = html + "</select>";
 			$("#prod").append(html);
-			
-			console.log(html);
 		}
 	});
 }

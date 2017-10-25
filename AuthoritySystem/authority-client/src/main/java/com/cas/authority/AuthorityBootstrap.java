@@ -40,6 +40,9 @@ public class AuthorityBootstrap {
 		Future<Integer> task = pool.submit(thread);
 		try {
 			Integer result = task.get();
+			
+			pool.shutdown();
+			
 			if (result != Consts.AUTHORITY_FILE_AVAILABLE) {
 				failure(result);
 			} else {

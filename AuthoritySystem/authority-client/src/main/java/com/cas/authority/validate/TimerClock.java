@@ -37,7 +37,7 @@ public class TimerClock implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO 读取文件中记录的时间戳
+		// 读取文件中记录的时间戳
 		File file = new File(Consts.FILE_TIMESTAMP);
 		try (DataInputStream dis = new DataInputStream(new FileInputStream(file))) {
 			String timestamp = dis.readUTF();
@@ -45,7 +45,6 @@ public class TimerClock implements Runnable {
 			timestamp = new String(AESUtil.decrypt(Base64.decodeBase64(timestamp), "cas123_time"));
 			lastDate.setTime(Long.parseLong(timestamp));
 		} catch (Exception e) {
-			// lastDate.setTime(System.currentTimeMillis() - 2000);
 			e.printStackTrace();
 		}
 
@@ -79,8 +78,6 @@ public class TimerClock implements Runnable {
 				byte[] encript = AESUtil.encrypt(String.valueOf(System.currentTimeMillis()), "cas123_time");
 				// 转码操作
 				dis.writeUTF(new String(Base64.encodeBase64(encript)));
-
-				System.out.println("记录时间");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -4,8 +4,8 @@ public final class Consts {
 	private Consts() {
 	}
 	
-//	public static final String BASE_SERVER_URI = "http://58.214.15.134:8200/regist/";
-	public static final String BASE_SERVER_URI = "http://192.168.1.23:8200/regist/";
+	public static final String BASE_SERVER_URI = "http://58.214.15.134:8200/regist/";
+//	public static final String BASE_SERVER_URI = "http://192.168.1.23:8200/regist/";
 	
 	public static final String SERVER_URI_REG = "active";
 	public static final String SERVER_URI_TIME_IN_MILLS = "time_mills";

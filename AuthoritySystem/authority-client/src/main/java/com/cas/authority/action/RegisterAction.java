@@ -106,10 +106,8 @@ public class RegisterAction {
 				stream.putNextEntry(entry);
 				EntityUtil.saveEntity(entity, stream);
 				stream.closeEntry();
-				
-				onRegistResult(true);
-
 				stream.close();
+				onRegistResult(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
