@@ -5,7 +5,7 @@ import javax.persistence.Id;
 public class User {
 	@Id
 	private Integer id;
-	
+
 	private Integer role;
 
 	private String name;
@@ -15,10 +15,14 @@ public class User {
 	private String weixin;
 
 	private String mobile;
-	
+
 	private String email;
-	
+
 	private String address;
+
+	private String account;
+
+	private String passwd;
 
 	/**
 	 * @return id
@@ -113,5 +117,21 @@ public class User {
 	public void setRole(Integer role) {
 		this.role = role;
 	}
-	
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
 }

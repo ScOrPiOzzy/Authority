@@ -11,6 +11,7 @@
 		<result column="price" jdbcType="REAL" property="price" />
 		<result column="sid" jdbcType="VARCHAR" property="sid" />
 		<result column="date_create" jdbcType="TIMESTAMP" property="date" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
 	</resultMap>
 
 	<resultMap id="userRegistCodeMap" type="com.cas.authority.model.UserRegistEntity">

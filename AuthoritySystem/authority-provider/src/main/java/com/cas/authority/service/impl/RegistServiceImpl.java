@@ -33,7 +33,7 @@ public class RegistServiceImpl extends AbstractService<Regist> implements Regist
 		model.setUsed(0);
 		if (amount > 1) {
 //			以model为模板 再生成amount-1数量的注册码
-			List<Regist> regList = new ArrayList<>();
+			List<Regist> regList = new ArrayList<Regist>();
 			regList.add(model);
 			for (int i = 1; i < amount; i++) {
 				Regist reg = new Regist();

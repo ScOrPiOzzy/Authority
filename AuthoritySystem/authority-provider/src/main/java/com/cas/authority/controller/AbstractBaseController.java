@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 
 public abstract class AbstractBaseController {
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
+
 	@Resource
 	private MessageSource messageSource; // 自动注入对象
 

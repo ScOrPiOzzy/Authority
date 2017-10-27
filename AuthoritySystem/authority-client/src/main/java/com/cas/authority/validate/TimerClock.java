@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 
 import javax.ws.rs.client.Client;
@@ -39,13 +40,23 @@ public class TimerClock implements Runnable {
 	public void run() {
 		// 读取文件中记录的时间戳
 		File file = new File(Consts.FILE_TIMESTAMP);
-		try (DataInputStream dis = new DataInputStream(new FileInputStream(file))) {
+		DataInputStream dis = null;
+		try {
+			dis = new DataInputStream(new FileInputStream(file));
 			String timestamp = dis.readUTF();
 			// 转码
 			timestamp = new String(AESUtil.decrypt(Base64.decodeBase64(timestamp), "cas123_time"));
 			lastDate.setTime(Long.parseLong(timestamp));
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (dis != null) {
+				try {
+					dis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		// 即将保存当前时间点
@@ -74,12 +85,22 @@ public class TimerClock implements Runnable {
 		} else {
 			// 日期没问题
 			// TODO 将当前时间加密并保存到文件中(ASE加密)
-			try (DataOutputStream dis = new DataOutputStream(new FileOutputStream(file))) {
+			DataOutputStream dos = null;
+			try {
+				dos = new DataOutputStream(new FileOutputStream(file));
 				byte[] encript = AESUtil.encrypt(String.valueOf(System.currentTimeMillis()), "cas123_time");
 				// 转码操作
-				dis.writeUTF(new String(Base64.encodeBase64(encript)));
+				dos.writeUTF(new String(Base64.encodeBase64(encript)));
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				if (dos != null) {
+					try {
+						dos.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}

@@ -27,7 +27,7 @@ public class Record {
 	/**
 	 * 产品编号（作为授权证书中的内容）
 	 */
-	private Integer pid;
+	private String pid;
 	/**
 	 * 交易类型("0:押标","1:供货")
 	 */
@@ -45,6 +45,11 @@ public class Record {
 	 * 客户编号
 	 */
 	private Integer cid;
+
+	/**
+	 * 客户编号
+	 */
+	private String remark;
 
 	/**
 	 * 获取订单编号
@@ -98,7 +103,7 @@ public class Record {
 	 * 获取产品编号（作为授权证书中的内容）
 	 * @return pid - 产品编号（作为授权证书中的内容）
 	 */
-	public Integer getPid() {
+	public String getPid() {
 		return pid;
 	}
 
@@ -106,7 +111,7 @@ public class Record {
 	 * 设置产品编号（作为授权证书中的内容）
 	 * @param pid 产品编号（作为授权证书中的内容）
 	 */
-	public void setPid(Integer pid) {
+	public void setPid(String pid) {
 		this.pid = pid;
 	}
 
@@ -164,6 +169,14 @@ public class Record {
 
 	public void setCid(Integer cid) {
 		this.cid = cid;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 }

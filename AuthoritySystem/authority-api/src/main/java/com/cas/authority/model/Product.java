@@ -11,7 +11,7 @@ public class Product {
 	 * 产品ID
 	 */
 	@Id
-	private Integer id;
+	private String id;
 	/**
 	 * 产品名称
 	 */
@@ -28,19 +28,11 @@ public class Product {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releasedate;
 
-	/**
-	 * 获取产品ID
-	 * @return id - 产品ID
-	 */
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	/**
-	 * 设置产品ID
-	 * @param id 产品ID
-	 */
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

@@ -12,5 +12,4 @@ import com.cas.authority.service.ProductService;
  */
 @Service
 @Transactional
-public class ProductServiceImpl extends AbstractService<Product> implements ProductService {
-}
+public class ProductServiceImpl extends AbstractService<Product> implements ProductService {}

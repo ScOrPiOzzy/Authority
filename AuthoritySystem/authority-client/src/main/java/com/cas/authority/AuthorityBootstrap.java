@@ -1,18 +1,10 @@
 package com.cas.authority;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import com.cas.authority.javafx.RegistApplication;
 import com.cas.authority.validate.ValidateThread;
-
-import javafx.application.Application;
 
 public class AuthorityBootstrap {
 
@@ -23,26 +15,26 @@ public class AuthorityBootstrap {
 	}
 
 	public void validate() {
-		File file = new File("app.version");
-		Properties prop = new Properties();
-		try {
-			prop.load(new FileInputStream(file));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		String productID = prop.getProperty("product_id", "no version");
-		if ("no version".equals(productID)) {
-			return;
-		}
+//		File file = new File("app.version");
+//		Properties prop = new Properties();
+//		try {
+//			prop.load(new FileInputStream(file));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		String productID = prop.getProperty("product_id", "no version");
+//		if ("no version".equals(productID)) {
+//			return;
+//		}
 
-		ValidateThread thread = new ValidateThread(productID);
+		ValidateThread thread = new ValidateThread("2222");
 		ExecutorService pool = Executors.newSingleThreadExecutor();
 		Future<Integer> task = pool.submit(thread);
 		try {
 			Integer result = task.get();
-			
+
 			pool.shutdown();
-			
+
 			if (result != Consts.AUTHORITY_FILE_AVAILABLE) {
 				failure(result);
 			} else {
@@ -57,7 +49,7 @@ public class AuthorityBootstrap {
 		System.err.println("错误代码:" + code);
 
 //		启动注册程序
-		Application.launch(RegistApplication.class);
+//		Application.launch(RegistApplication.class);
 	}
 
 	protected void success() {

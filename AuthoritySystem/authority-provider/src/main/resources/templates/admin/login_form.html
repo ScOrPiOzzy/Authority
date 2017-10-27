@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www/thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>后台登录</title>
+	<script type="text/javascript" src="/js/jquery-3.2.1.js" ></script>
+	<script type="text/javascript" src="/js/jquery.pagination.js" ></script>
+	<script type="text/javascript" src="/js/jquery.form.js" ></script>
+	<script type="text/javascript" src="/layui/layui.js" ></script>
+	<script type="text/javascript" src="/js/date.format.js" ></script>
+
+	<link rel="icon" href="/images/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="/layui/css/layui.css" />
+	<script type="text/javascript">
+	layui.use(['form'], function(){ //独立版的layer无需执行这一句
+		var $ = layui.jquery, 
+		layer = layui.layer,
+		form = layui.form
+		; //独立版的layer无需执行这一句
+		//监听提交  
+		form.on('submit(login_form_filter)', function(data){
+//		  layui验证通过
+		  $('#login_form').ajaxSubmit(options);
+//		    阻止跳转
+		  return false;
+		});
+	});
+	var options={
+			url:"/login", //form提交数据的地址
+			type:"post", //form提交的方式(method:post/get)
+//			target:"#listData2", //服务器返回的响应数据显示在元素(Id)号确定
+//			beforeSubmit:function(){
+//				alert('准备提交 ');
+//			}, //提交前执行的回调函数
+			dataType:"json", //服务器返回数据类型
+			success:function(data) {
+				if(data==null){
+					layer.laert('登录失败');
+				}else{
+					layer.laert('登录成功');
+				}
+			}, //提交成功后执行的回调函数
+			error: function(e) {
+				
+			},
+			timeout:6000 //设置请求时间，超过该时间后，自动退出请求，单位(毫秒)。
+		}	</script>
+</head>
+<body>
+<div >
+    <form id="login_form" class="clear box layui-main login">
+
+      <div class="layui-form-item">
+	    <label class="layui-form-label">用户名</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="account" required="required"  lay-verify="required" placeholder="用户名" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+
+	  <div class="layui-form-item">
+	    <label class="layui-form-label">密码</label>
+	    <div class="layui-input-block">
+	      <input type="text" name="passwd" required="required"  lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input" />
+	    </div>
+	  </div>
+	  
+     <div class="layui-form-item" >
+	    <div class="layui-input-block">
+	      <button id="btn_submit" class="layui-btn lay-submit" lay-submit="" lay-filter="login_form_filter" >立即登录</button>
+	    </div>
+	 </div>
+<!--         <div class="layui-input-inline"> -->
+<!--             <button type="button" class="layui-btn layui-btn-primary">QQ登录</button> -->
+<!--         </div> -->
+<!--         <p><a href="javascript:;" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p> -->
+    </form>
+</div>
+</body>
+</html>

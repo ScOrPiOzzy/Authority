@@ -1,10 +1,6 @@
 package com.cas.authority.util;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,7 +19,9 @@ public final class EntityUtil {
 
 	public static AuthorityEntity parseEntity(InputStream inputStream) {
 		AuthorityEntity entity = new AuthorityEntity();
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(inputStream));
 			// 公司名称
 			entity.setCompanyName(br.readLine().split(SPLIT_STR)[1]);
 			// 客户名称
@@ -46,6 +44,14 @@ public final class EntityUtil {
 			entity.setSign(br.readLine().split(SPLIT_STR)[1]);
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return entity;
 	}
@@ -67,7 +73,7 @@ public final class EntityUtil {
 		out.println("SIGN-B" + SPLIT_STR + entity.getCpuSer());
 		// sig-c:
 		out.println("SIGN-C" + SPLIT_STR + DigestUtils.sha256Hex(entity.toString()));
-		
+
 		out.flush();
 	}
 }

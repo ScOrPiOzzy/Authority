@@ -69,7 +69,7 @@ public abstract class AbstractService<T> implements Service<T> {
 			field.setAccessible(true);
 			field.set(model, value);
 			return mapper.selectOne(model);
-		} catch (ReflectiveOperationException e) {
+		} catch (Exception e) {
 			throw new ServiceException(e.getMessage(), e);
 		}
 	}
@@ -77,7 +77,7 @@ public abstract class AbstractService<T> implements Service<T> {
 	public List<T> findByIds(String ids) {
 		List<T> dataList = mapper.selectByIds(ids);
 		if (dataList == null) {
-			dataList = new ArrayList<>();
+			dataList = new ArrayList<T>();
 		}
 		return dataList;
 	}
@@ -85,7 +85,7 @@ public abstract class AbstractService<T> implements Service<T> {
 	public List<T> findByCondition(Condition condition) {
 		List<T> dataList = mapper.selectByCondition(condition);
 		if (dataList == null) {
-			dataList = new ArrayList<>();
+			dataList = new ArrayList<T>();
 		}
 		return dataList;
 	}
@@ -93,7 +93,7 @@ public abstract class AbstractService<T> implements Service<T> {
 	public List<T> findAll() {
 		List<T> dataList = mapper.selectAll();
 		if (dataList == null) {
-			dataList = new ArrayList<>();
+			dataList = new ArrayList<T>();
 		}
 		return dataList;
 	}

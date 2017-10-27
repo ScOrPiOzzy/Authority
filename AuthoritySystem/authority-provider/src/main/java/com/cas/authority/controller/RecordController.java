@@ -22,8 +22,6 @@ import com.cas.authority.model.RecordDetail;
 import com.cas.authority.service.RecordService;
 import com.github.pagehelper.PageHelper;
 
-import tk.mybatis.mapper.entity.Condition;
-
 /**
  * Created by CodeGenerator on 2017/10/13.
  */
@@ -32,7 +30,7 @@ import tk.mybatis.mapper.entity.Condition;
 public class RecordController extends AbstractBaseController {
 	@Resource
 	private RecordService recordService;
-	
+
 	@GetMapping("form")
 	public String getProdForm() {
 		return "admin/record_add_form";
@@ -81,6 +79,7 @@ public class RecordController extends AbstractBaseController {
 		map.put("total", total);
 		return map;
 	}
+
 	@GetMapping("data_list")
 	@ResponseBody
 	public List<RecordDetail> getRecordDataList() {

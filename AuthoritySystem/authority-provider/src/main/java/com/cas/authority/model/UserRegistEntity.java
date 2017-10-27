@@ -38,5 +38,4 @@ public class UserRegistEntity {
 		this.registUsed = registUsed;
 	}
 
-
 }

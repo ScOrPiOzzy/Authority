@@ -29,7 +29,7 @@ import oshi.util.platform.windows.WmiUtil;
  * @author Administrator
  */
 public class RegisterAction {
-    private static final Logger LOG = LoggerFactory.getLogger(WmiUtil.class);
+	private static final Logger LOG = LoggerFactory.getLogger(WmiUtil.class);
 
 	public void execute() {
 ////		1、准备创建证书
@@ -65,9 +65,9 @@ public class RegisterAction {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target(Consts.BASE_SERVER_URI + Consts.SERVER_URI_REG);
 		System.out.println(target.getUri());
-        LOG.info(target.getUri().toString());
+		LOG.info(target.getUri().toString());
 
-		MultivaluedMap<String, String> formData = new MultivaluedHashMap<>();
+		MultivaluedMap<String, String> formData = new MultivaluedHashMap<String, String>();
 
 //		用户名称
 		formData.add("customName", username);

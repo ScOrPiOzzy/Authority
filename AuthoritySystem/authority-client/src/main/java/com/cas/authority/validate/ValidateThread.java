@@ -29,7 +29,7 @@ public class ValidateThread implements Callable<Integer> {
 	@Override
 	public Integer call() throws Exception {
 		InputStream ins = getClass().getClassLoader().getResourceAsStream(Consts.FILE_AUTHORITY);
-		
+
 //		判断授权文件是否存在
 		if (ins == null) {
 			return Consts.AUTHORITY_FILE_NOT_FOUNT;

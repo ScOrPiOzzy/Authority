@@ -27,7 +27,7 @@ public class Regist {
 	private Date date_end;
 //	过期日期
 	private Integer record_id;
-	
+
 	private Integer used;
 
 //	有效期
@@ -36,7 +36,7 @@ public class Regist {
 //	注册码数量
 	@Transient
 	private Integer amount;
-	
+
 	public Integer getId() {
 		return id;
 	}

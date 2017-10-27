@@ -37,7 +37,7 @@ public class RecordServiceImpl extends AbstractService<Record> implements Record
 		RecordMapper m = (RecordMapper) mapper;
 		List<RecordDetail> data = m.selectAllDetail();
 		if (data == null) {
-			data = new ArrayList<>();
+			data = new ArrayList<RecordDetail>();
 		}
 		return data;
 	}
